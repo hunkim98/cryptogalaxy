@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Galaxy from "./components/Galaxy";
+import { CryptoContextProvider } from "./context/CryptoContext";
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
       {/* <header>
         <h1>Crypto Galaxy</h1>
       </header> */}
-      <Galaxy />
+      <CryptoContextProvider>
+        <Galaxy />
+      </CryptoContextProvider>
     </div>
   );
 }

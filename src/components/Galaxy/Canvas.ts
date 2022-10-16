@@ -1,15 +1,38 @@
+import { Planet } from "./Planet";
+import { Sun } from "./Sun";
+
 export class GalaxyCanvas {
+  private fps = 24;
   element: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   width: number = 0;
   height: number = 0;
+  sun: Sun;
+  planets: Array<Planet>;
+  requestAnimationFrameId: number;
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
-    this.initialize();
-  }
 
-  initialize() {}
+    this.sun = new Sun(element);
+    this.planets = [];
+    this.initialize();
+    this.render();
+    this.requestAnimationFrameId = requestAnimationFrame(this.render);
+  }
+  updateFrame = () => {
+    // this.drawAll();
+    this.render();
+    setTimeout(() => {
+      this.requestAnimationFrameId = requestAnimationFrame(
+        this.updateFrame.bind(this)
+      );
+    }, 1000 / this.fps);
+  };
+
+  initialize() {
+    this.planets = [new Planet(this.element, this.sun.radius + 50, 1, 20)];
+  }
 
   setWidth(width: number, devicePixelRatio?: number) {
     this.width = width;
@@ -21,7 +44,6 @@ export class GalaxyCanvas {
     this.height = height;
     this.element.height = devicePixelRatio ? height * devicePixelRatio : height;
     this.element.style.height = `${height}px`;
-    this.ctx.fillStyle = "black";
   }
 
   setSize(width: number, height: number, devicePixelRatio?: number) {
@@ -29,9 +51,29 @@ export class GalaxyCanvas {
     this.setHeight(height, devicePixelRatio);
   }
 
-  render() {
+  drawBackground() {
     this.ctx.fillStyle = "black";
     this.ctx.fillRect(0, 0, this.width, this.height);
+  }
+
+  render = () => {
+    this.clear();
+    this.drawScene();
+    setTimeout(() => {
+      requestAnimationFrame(this.render.bind(this));
+    }, 1000 / this.fps);
+  };
+
+  drawScene() {
+    this.drawBackground();
+    this.drawGalaxyComponents();
+  }
+
+  drawGalaxyComponents() {
+    this.sun.draw();
+    for (const planet of this.planets) {
+      planet.draw();
+    }
   }
 
   clear() {
