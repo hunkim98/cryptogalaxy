@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/cryptogalaxy/static/css/main.a617e044.chunk.css",
+    "main.js": "/cryptogalaxy/static/js/main.360ec32b.chunk.js",
+    "main.js.map": "/cryptogalaxy/static/js/main.360ec32b.chunk.js.map",
+    "runtime-main.js": "/cryptogalaxy/static/js/runtime-main.9369d965.js",
+    "runtime-main.js.map": "/cryptogalaxy/static/js/runtime-main.9369d965.js.map",
+    "static/js/2.b195921e.chunk.js": "/cryptogalaxy/static/js/2.b195921e.chunk.js",
+    "static/js/2.b195921e.chunk.js.map": "/cryptogalaxy/static/js/2.b195921e.chunk.js.map",
+    "static/js/3.72fc9b28.chunk.js": "/cryptogalaxy/static/js/3.72fc9b28.chunk.js",
+    "static/js/3.72fc9b28.chunk.js.map": "/cryptogalaxy/static/js/3.72fc9b28.chunk.js.map",
+    "index.html": "/cryptogalaxy/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/cryptogalaxy/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.b195921e.chunk.js.LICENSE.txt": "/cryptogalaxy/static/js/2.b195921e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9369d965.js",
+    "static/js/2.b195921e.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.360ec32b.chunk.js"
+  ]
+}
