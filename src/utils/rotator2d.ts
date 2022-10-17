@@ -2,7 +2,7 @@ import { Matrix2x2 } from "./math/Matrix2x2";
 import { Matrix3x3 } from "./math/Matrix3x3";
 import { Vector2 } from "./math/Vector2";
 
-export class Rotator {
+export class Rotator2D {
   degree: number;
   static getClampedValue(InDegree: number) {
     let angle = InDegree % 360;
@@ -15,14 +15,14 @@ export class Rotator {
     this.degree = InDegree;
   }
   clamp() {
-    this.degree = Rotator.getClampedValue(this.degree);
+    this.degree = Rotator2D.getClampedValue(this.degree);
   }
   toRadian() {
     this.clamp();
     return (this.degree * Math.PI) / 180;
   }
   update(newDegree: number) {
-    this.degree = Rotator.getClampedValue(newDegree);
+    this.degree = Rotator2D.getClampedValue(newDegree);
   }
   getRotateMatrix() {
     const cos = Math.cos(this.toRadian());

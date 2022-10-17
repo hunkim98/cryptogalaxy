@@ -1,11 +1,11 @@
 import { convertCartesianToScreenPoint } from "../../utils/cartesian";
 import { Vector2 } from "../../utils/math/Vector2";
-import { Rotator } from "../../utils/rotator2d";
+import { Rotator2D } from "../../utils/rotator2d";
 import { Spaceship } from "./Spaceship";
 
 export class Planet {
   canvas: HTMLCanvasElement;
-  rotator: Rotator;
+  rotator: Rotator2D;
   radius: number;
   position: Vector2;
   speed: number;
@@ -19,7 +19,7 @@ export class Planet {
   ) {
     this.canvas = canvas;
     this.speed = speed;
-    this.rotator = new Rotator(Math.random() * 360);
+    this.rotator = new Rotator2D(Math.random() * 360);
     this.distanceFromSun = distanceFromSun;
     this.radius = radius;
     this.spaceShips = [];
