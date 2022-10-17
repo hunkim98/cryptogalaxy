@@ -2,6 +2,7 @@
   "name": "cryptogalaxy",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hunkim98.github.io/cryptogalaxy",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0"
+    "@types/axios": "^0.14.0",
+    "gh-pages": "^4.0.0"
   }
 }
