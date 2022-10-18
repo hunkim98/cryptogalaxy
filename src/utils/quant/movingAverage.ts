@@ -1,7 +1,7 @@
-import DayCandle from "upbit-api/container/candles/DayCandle";
+import { ICandleDayReturnProps } from "node-upbit/lib/@types/quotation";
 
 export const calcIncreaseRatioOfMA = (
-  candles: Array<DayCandle>,
+  candles: Array<ICandleDayReturnProps>,
   interval: number
 ) => {
   if (candles.length < interval) {
@@ -11,10 +11,14 @@ export const calcIncreaseRatioOfMA = (
   return (MAArray[MAArray.length - 1] - MAArray[0]) / MAArray[0];
 };
 
-export const returnMAArray = (candles: Array<DayCandle>, interval: number) => {
+export const returnMAArray = (
+  candles: Array<ICandleDayReturnProps>,
+  interval: number
+) => {
+  console.log(candles, "hihi");
   const dateAscendingCandle =
-    new Date(candles[0].candleDateTimeUTC).getTime() -
-      new Date(candles[0].candleDateTimeUTC).getTime() >
+    new Date(candles[0].candle_date_time_utc).getTime() -
+      new Date(candles[0].candle_date_time_utc).getTime() >
     0
       ? [...candles].reverse()
       : candles;
@@ -22,7 +26,7 @@ export const returnMAArray = (candles: Array<DayCandle>, interval: number) => {
   const maArray: Array<number> = [];
   const totalCount = dateAscendingCandle.length;
   const prevClosingPrices = dateAscendingCandle.map(
-    (el) => el.prevClosingPrice
+    (el) => el.prev_closing_price
   );
   for (let i = 0; i < totalCount - (interval - 1); i++) {
     const temp_array = prevClosingPrices.slice(i, i + (interval - 1));
