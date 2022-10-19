@@ -18,6 +18,7 @@ export class Sun {
 
     const ctx = this.canvas.getContext("2d")!;
     ctx.save();
+
     ctx.beginPath();
     ctx.arc(drawPosition.x, drawPosition.y, this.radius, 0, 2 * Math.PI, false);
     ctx.fillStyle = this.color;

@@ -6,7 +6,11 @@ import {
 } from "node-upbit/lib/@types/quotation";
 
 // const PROXY_API_URL = "https://upbit-next-proxy.vercel.app/api/";
-const PROXY_API_URL = "/api/";
+
+const isDevMode = process.env.NODE_ENV === "development";
+const PROXY_API_URL = isDevMode
+  ? "/api/"
+  : "https://upbit-next-proxy.vercel.app/api/";
 
 export const getDayCandles = async (market: string, count: number) => {
   const res = await axios.get(
