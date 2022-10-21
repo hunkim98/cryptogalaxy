@@ -1,3 +1,18 @@
+import { Vector2 } from "utils/math/Vector2";
+import { Continent } from "./Continent";
+import { ContinentA } from "./Continents/ContinentA";
+import {
+  Continent1,
+  Continent10,
+  Continent2,
+  Continent3,
+  Continent4,
+  Continent5,
+  Continent6,
+  Continent7,
+  Continent8,
+  Continent9,
+} from "./Continents/Examples";
 import { Planet } from "./Planet";
 import { Sun } from "./Sun";
 
@@ -8,17 +23,28 @@ export class GalaxyCanvas {
   width: number = 0;
   height: number = 0;
   sun: Sun;
-  planets: Array<Planet>;
+  planets: Array<Planet> = [];
   requestAnimationFrameId: number;
+  continents: Continent[] = [];
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
 
     this.sun = new Sun(element);
-    this.planets = [];
     this.initialize();
     this.render();
     this.requestAnimationFrameId = requestAnimationFrame(this.render);
+
+    this.continents.push(new Continent(element, Continent1, 100));
+    this.continents.push(new Continent(element, Continent2, 100));
+    this.continents.push(new Continent(element, Continent3, 100));
+    this.continents.push(new Continent(element, Continent4, 100));
+    this.continents.push(new Continent(element, Continent5, 100));
+    this.continents.push(new Continent(element, Continent6, 100));
+    this.continents.push(new Continent(element, Continent7, 100));
+    this.continents.push(new Continent(element, Continent8, 100));
+    this.continents.push(new Continent(element, Continent9, 100));
+    this.continents.push(new Continent(element, Continent10, 100));
   }
   updateFrame = () => {
     // this.drawAll();
@@ -69,10 +95,20 @@ export class GalaxyCanvas {
     this.drawGalaxyComponents();
   }
 
+  drawDummy() {}
+
   drawGalaxyComponents() {
     this.sun.draw();
     for (const planet of this.planets) {
       planet.draw();
+    }
+    for (let i = 0; i < this.continents.length; i++) {
+      this.continents[i].draw(new Vector2(150 * (i - 2), 150), {
+        r: 55,
+        g: 0,
+        b: 200,
+        a: 1,
+      });
     }
   }
 

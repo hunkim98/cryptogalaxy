@@ -15,7 +15,6 @@ export const returnMAArray = (
   candles: Array<ICandleDayReturnProps>,
   interval: number
 ) => {
-  console.log(candles, "hihi");
   const dateAscendingCandle =
     new Date(candles[0].candle_date_time_utc).getTime() -
       new Date(candles[0].candle_date_time_utc).getTime() >

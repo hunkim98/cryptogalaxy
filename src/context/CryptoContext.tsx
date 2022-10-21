@@ -22,22 +22,30 @@ export type CryptoDataFields = {
 const allowedCoins = ["KRW-BTC"];
 
 const CryptoContextProvider: React.FC<Props> = ({ children }) => {
-  const [cryptoData, setCryptoData] = useState<Map<string, CryptoDataFields>>();
+  const [cryptoData, setCryptoData] = useState<Map<string, CryptoDataFields>>(
+    new Map()
+  );
   useEffect(() => {
     getDayCandles("KRW-BTC", 60).then((res) => {
       const data = res;
       const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-      setCryptoData(new Map([["KRW-BTC", { increaseRatio }]]));
+      setCryptoData(
+        (prev) => new Map([...prev, ["KRW-BTC", { increaseRatio }]])
+      );
     });
     getDayCandles("KRW-ETH", 60).then((res) => {
       const data = res;
       const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-      setCryptoData(new Map([["KRW-ETH", { increaseRatio }]]));
+      setCryptoData(
+        (prev) => new Map([...prev, ["KRW-ETH", { increaseRatio }]])
+      );
     });
     getDayCandles("KRW-ETH", 60).then((res) => {
       const data = res;
       const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-      setCryptoData(new Map([["KRW-DOGE", { increaseRatio }]]));
+      setCryptoData(
+        (prev) => new Map([...prev, ["KRW-DOGE", { increaseRatio }]])
+      );
     });
     getTicker("KRW-BTC").then((res) => {
       console.log(res);

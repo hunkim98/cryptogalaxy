@@ -17,9 +17,24 @@ const Galaxy: React.FC<Props> = () => {
     const galaxyCanvas = new GalaxyCanvas(canvasRef.current);
     galaxyCanvasRef.current = galaxyCanvas;
     return () => {
-      galaxyCanvas.clear();
+      if (galaxyCanvasRef.current) {
+        galaxyCanvasRef.current.clear();
+      }
     };
   }, []);
+
+  useEffect(() => {
+    if (!cryptoData || !galaxyCanvasRef.current) {
+      return;
+    }
+    for (const crypto of cryptoData) {
+      console.log(crypto, "hihihi");
+      if (crypto[0] === "KRW-BTC") {
+        //krw-btc is sun
+        galaxyCanvasRef.current.sun.setBrightness(crypto[1].increaseRatio);
+      }
+    }
+  }, [cryptoData]);
 
   useEffect(() => {
     const onResize = () => {
@@ -38,18 +53,6 @@ const Galaxy: React.FC<Props> = () => {
       window.removeEventListener("resize", onResize);
     };
   }, []);
-
-  useEffect(() => {
-    if (cryptoData) {
-      if (cryptoData.get("KRW-BTC")) {
-        galaxyCanvasRef.current?.sun.updateBrightness(
-          cryptoData.get("KRW-BTC")!.increaseRatio
-        );
-      }
-    }
-  }, [cryptoData]);
-
-  console.log("canvas rendered");
 
   return (
     <div
