@@ -1,3 +1,4 @@
+import { changeRelativeValueToRealValue, clamp } from "utils/clamp";
 import { Vector2 } from "utils/math/Vector2";
 import { Continent } from "./Continent";
 import { ContinentA } from "./Continents/ContinentA";
@@ -25,26 +26,28 @@ export class GalaxyCanvas {
   sun: Sun;
   planets: Array<Planet> = [];
   requestAnimationFrameId: number;
-  continents: Continent[] = [];
+  MIN_PLANET_SIZE = 20;
+  MAX_PLANET_SIZE = 80;
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
 
     this.sun = new Sun(element);
-    this.initialize();
+
     this.render();
     this.requestAnimationFrameId = requestAnimationFrame(this.render);
-
-    this.continents.push(new Continent(element, Continent1, 100));
-    this.continents.push(new Continent(element, Continent2, 100));
-    this.continents.push(new Continent(element, Continent3, 100));
-    this.continents.push(new Continent(element, Continent4, 100));
-    this.continents.push(new Continent(element, Continent5, 100));
-    this.continents.push(new Continent(element, Continent6, 100));
-    this.continents.push(new Continent(element, Continent7, 100));
-    this.continents.push(new Continent(element, Continent8, 100));
-    this.continents.push(new Continent(element, Continent9, 100));
-    this.continents.push(new Continent(element, Continent10, 100));
+    this.planets = [];
+    // this.continents.push(new Continent(element, Continent1, 100));
+    // this.continents.push(new Continent(element, Continent2, 100));
+    // this.continents.push(new Continent(element, Continent3, 100));
+    // this.continents.push(new Continent(element, Continent4, 100));
+    // this.continents.push(new Continent(element, Continent5, 100));
+    // this.continents.push(new Continent(element, Continent6, 100));
+    // this.continents.push(new Continent(element, Continent7, 100));
+    // this.continents.push(new Continent(element, Continent8, 100));
+    // this.continents.push(new Continent(element, Continent9, 100));
+    // this.continents.push(new Continent(element, Continent10, 100));
+    this.initialize();
   }
   updateFrame = () => {
     // this.drawAll();
@@ -56,8 +59,25 @@ export class GalaxyCanvas {
     }, 1000 / this.fps);
   };
 
+  clampPlanetSunDistance(value: number) {
+    const minDistance = this.sun.radius + 10;
+    const maxDistance = 500 + this.sun.radius;
+    const distance = changeRelativeValueToRealValue(
+      value, //value from 0 to 1
+      minDistance,
+      maxDistance
+    );
+    return distance;
+  }
+
+  addPlanet(name: string, increaseRatio: number) {
+    const distance = this.clampPlanetSunDistance(increaseRatio);
+    const planet = new Planet(this.element, distance, 0.1, 20, name);
+    this.planets.push(planet);
+  }
+
   initialize() {
-    this.planets = [new Planet(this.element, this.sun.radius + 50, 1, 20)];
+    // this.planets.push(new Planet(this.element, this.sun.radius + 50, 1, 80));
   }
 
   setWidth(width: number, devicePixelRatio?: number) {
@@ -102,17 +122,14 @@ export class GalaxyCanvas {
     for (const planet of this.planets) {
       planet.draw();
     }
-    for (let i = 0; i < this.continents.length; i++) {
-      this.continents[i].draw(new Vector2(150 * (i - 2), 150), {
-        r: 55,
-        g: 0,
-        b: 200,
-        a: 1,
-      });
-    }
   }
 
   clear() {
     this.ctx.clearRect(0, 0, this.width, this.height);
+  }
+
+  destroy() {
+    this.clear();
+    this.planets = [];
   }
 }
