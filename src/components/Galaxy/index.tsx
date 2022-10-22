@@ -33,7 +33,13 @@ const Galaxy: React.FC<Props> = () => {
         //krw-btc is sun
         galaxyCanvasRef.current.sun.setBrightness(crypto[1].increaseRatio);
       } else {
-        galaxyCanvasRef.current.addPlanet(crypto[0], crypto[1].increaseRatio);
+        if (
+          !galaxyCanvasRef.current.planets
+            .map((planet) => planet.name)
+            .includes(crypto[0])
+        ) {
+          galaxyCanvasRef.current.addPlanet(crypto[0], crypto[1].increaseRatio);
+        }
       }
     }
   }, [cryptoData]);
