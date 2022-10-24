@@ -17,7 +17,7 @@ export const returnMAArray = (
 ) => {
   const dateAscendingCandle =
     new Date(candles[0].candle_date_time_utc).getTime() -
-      new Date(candles[0].candle_date_time_utc).getTime() >
+      new Date(candles[candles.length - 1].candle_date_time_utc).getTime() >
     0
       ? [...candles].reverse()
       : candles;

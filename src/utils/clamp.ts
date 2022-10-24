@@ -4,11 +4,20 @@ export const clamp = (value: number, min: number, max: number) => {
 
 export const changeRelativeValueToRealValue = (
   value: number,
-  min: number,
-  max: number
+  inputMin: number,
+  inputMax: number,
+  returnMin: number,
+  returnMax: number
 ) => {
-  if (value < -1 || value > 1) {
-    throw new Error("Value must be between -1 and 1");
+  let relativeValue = value;
+  if (relativeValue > inputMax) {
+    relativeValue = inputMax;
   }
-  return ((value + 1) * (max - min)) / 2 + min;
+  if (relativeValue < inputMin) {
+    relativeValue = inputMin;
+  }
+  // this relativeInputValue will be a value between 0 and 1 always
+  const relativeInputValue = (relativeValue - inputMin) / (inputMax - inputMin);
+
+  return relativeInputValue * (returnMax - returnMin) + returnMin;
 };

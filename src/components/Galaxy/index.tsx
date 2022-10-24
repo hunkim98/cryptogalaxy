@@ -28,7 +28,6 @@ const Galaxy: React.FC<Props> = () => {
       return;
     }
     for (const crypto of cryptoData) {
-      console.log(crypto, "hihihi");
       if (crypto[0] === "KRW-BTC") {
         //krw-btc is sun
         galaxyCanvasRef.current.sun.setBrightness(crypto[1].increaseRatio);
@@ -36,9 +35,14 @@ const Galaxy: React.FC<Props> = () => {
         if (
           !galaxyCanvasRef.current.planets
             .map((planet) => planet.name)
-            .includes(crypto[0])
+            .includes(crypto[0]) &&
+          crypto[1].coefficient
         ) {
-          galaxyCanvasRef.current.addPlanet(crypto[0], crypto[1].increaseRatio);
+          galaxyCanvasRef.current.addPlanet(
+            crypto[0],
+            crypto[1].increaseRatio,
+            crypto[1].coefficient
+          );
         }
       }
     }

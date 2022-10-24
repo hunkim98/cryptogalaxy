@@ -1,19 +1,4 @@
 import { changeRelativeValueToRealValue, clamp } from "utils/clamp";
-import { Vector2 } from "utils/math/Vector2";
-import { Continent } from "./Continent";
-import { ContinentA } from "./Continents/ContinentA";
-import {
-  Continent1,
-  Continent10,
-  Continent2,
-  Continent3,
-  Continent4,
-  Continent5,
-  Continent6,
-  Continent7,
-  Continent8,
-  Continent9,
-} from "./Continents/Examples";
 import { Planet } from "./Planet";
 import { Sun } from "./Sun";
 
@@ -59,20 +44,32 @@ export class GalaxyCanvas {
     }, 1000 / this.fps);
   };
 
-  clampPlanetSunDistance(value: number) {
+  addPlanet(
+    name: string,
+    increaseRatio: number,
+    correlationCoefficient: number
+  ) {
+    console.log("hihihi");
+    console.log(correlationCoefficient, name);
     const minDistance = this.sun.radius + 10;
     const maxDistance = 500 + this.sun.radius;
     const distance = changeRelativeValueToRealValue(
-      value, //value from 0 to 1
+      correlationCoefficient,
+      -0.1,
+      0.3,
       minDistance,
       maxDistance
     );
-    return distance;
-  }
-
-  addPlanet(name: string, increaseRatio: number) {
-    const distance = this.clampPlanetSunDistance(increaseRatio);
-    const planet = new Planet(this.element, distance, 0.1, 20, name);
+    const maxSpeed = 0.3;
+    const minSpeed = 0.02;
+    const speed = changeRelativeValueToRealValue(
+      increaseRatio,
+      0,
+      1,
+      minSpeed,
+      maxSpeed
+    );
+    const planet = new Planet(this.element, distance, speed, 20, name);
     this.planets.push(planet);
   }
 

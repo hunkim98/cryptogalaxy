@@ -124,6 +124,14 @@ export class Planet {
     );
     this.ctx.fillStyle = "white";
     this.ctx.fill();
+
+    this.ctx.textAlign = "center";
+    this.ctx.textBaseline = "middle";
+    this.ctx.fillText(
+      this.name,
+      drawPosition.x,
+      drawPosition.y + this.radius + 15
+    );
     this.ctx.closePath();
     this.ctx.restore();
 
