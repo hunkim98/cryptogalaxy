@@ -21,3 +21,24 @@ export const changeRelativeValueToRealValue = (
 
   return relativeInputValue * (returnMax - returnMin) + returnMin;
 };
+
+export const changeRelativeValueToRealValueInversed = (
+  value: number,
+  inputMin: number,
+  inputMax: number,
+  returnMin: number,
+  returnMax: number
+) => {
+  let relativeValue = value;
+  if (relativeValue > inputMax) {
+    relativeValue = inputMax;
+  }
+  if (relativeValue < inputMin) {
+    relativeValue = inputMin;
+  }
+  // this relativeInputValue will be a value between 0 and 1 always
+  const relativeInputValue =
+    1 - (relativeValue - inputMin) / (inputMax - inputMin);
+
+  return relativeInputValue * (returnMax - returnMin) + returnMin;
+};

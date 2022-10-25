@@ -1,4 +1,8 @@
-import { changeRelativeValueToRealValue, clamp } from "utils/clamp";
+import {
+  changeRelativeValueToRealValue,
+  changeRelativeValueToRealValueInversed,
+  clamp,
+} from "utils/clamp";
 import { Planet } from "./Planet";
 import { Sun } from "./Sun";
 
@@ -49,19 +53,21 @@ export class GalaxyCanvas {
     increaseRatio: number,
     correlationCoefficient: number
   ) {
-    console.log("hihihi");
-    console.log(correlationCoefficient, name);
+    console.log(correlationCoefficient, increaseRatio, name);
     const minDistance = this.sun.radius + 10;
-    const maxDistance = 500 + this.sun.radius;
-    const distance = changeRelativeValueToRealValue(
+    const maxDistance = 400 + this.sun.radius;
+    const distance = changeRelativeValueToRealValueInversed(
+      // the bigger the correlation coefficient
+      // the more similar is it to the sun
       correlationCoefficient,
       -0.1,
-      0.3,
+      0.2,
       minDistance,
       maxDistance
     );
     const maxSpeed = 0.3;
     const minSpeed = 0.02;
+
     const speed = changeRelativeValueToRealValue(
       increaseRatio,
       0,

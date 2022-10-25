@@ -27,7 +27,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
     new Map()
   );
   useEffect(() => {
-    getDayCandles("KRW-BTC", 60)
+    getDayCandles("KRW-BTC", 30)
       .then((res) => {
         const data = res;
         const increaseRatio = calcIncreaseRatioOfMA(data, 20);
@@ -38,47 +38,43 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       })
       // we need btc data first to calculate others
       .then((btcCandles) => {
-        getDayCandles("KRW-ETH", 60).then((res) => {
+        getDayCandles("KRW-ETH", 30).then((res) => {
           const data = res;
           const increaseRatio = calcIncreaseRatioOfMA(data, 20);
           const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          console.log(coefficient, "coe ");
           setCryptoData(
             (prev) =>
               new Map([...prev, ["KRW-ETH", { increaseRatio, coefficient }]])
           );
         });
-        getDayCandles("KRW-BTG", 60).then((res) => {
+        getDayCandles("KRW-BTG", 30).then((res) => {
           const data = res;
           const increaseRatio = calcIncreaseRatioOfMA(data, 20);
           const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          console.log(coefficient, "coe ");
           setCryptoData(
             (prev) =>
               new Map([...prev, ["KRW-BTG", { increaseRatio, coefficient }]])
           );
         });
-        getDayCandles("KRW-BTG", 60).then((res) => {
+        getDayCandles("KRW-BTG", 30).then((res) => {
           const data = res;
           const increaseRatio = calcIncreaseRatioOfMA(data, 20);
           const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          console.log(coefficient, "coe ");
           setCryptoData(
             (prev) =>
               new Map([...prev, ["KRW-BTG", { increaseRatio, coefficient }]])
           );
         });
-        getDayCandles("KRW-XRP", 60).then((res) => {
+        getDayCandles("KRW-XRP", 30).then((res) => {
           const data = res;
           const increaseRatio = calcIncreaseRatioOfMA(data, 20);
           const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          console.log(coefficient, "coe ");
           setCryptoData(
             (prev) =>
               new Map([...prev, ["KRW-XRP", { increaseRatio, coefficient }]])
           );
         });
-        getDayCandles("KRW-ETH", 60).then((res) => {
+        getDayCandles("KRW-ETH", 30).then((res) => {
           const data = res;
           const increaseRatio = calcIncreaseRatioOfMA(data, 20);
           const coefficient = calcCorrelationCoefficient(btcCandles, data);
