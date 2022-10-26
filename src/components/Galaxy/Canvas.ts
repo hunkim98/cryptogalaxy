@@ -15,8 +15,8 @@ export class GalaxyCanvas {
   sun: Sun;
   planets: Array<Planet> = [];
   requestAnimationFrameId: number;
-  MIN_PLANET_SIZE = 20;
-  MAX_PLANET_SIZE = 80;
+  MIN_PLANET_SIZE = 15;
+  MAX_PLANET_SIZE = 100;
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
@@ -51,7 +51,8 @@ export class GalaxyCanvas {
   addPlanet(
     name: string,
     increaseRatio: number,
-    correlationCoefficient: number
+    correlationCoefficient: number,
+    volume: number
   ) {
     console.log(correlationCoefficient, increaseRatio, name);
     const minDistance = this.sun.radius + 10;
@@ -75,7 +76,15 @@ export class GalaxyCanvas {
       minSpeed,
       maxSpeed
     );
-    const planet = new Planet(this.element, distance, speed, 20, name);
+
+    const size = changeRelativeValueToRealValue(
+      volume,
+      100_000_000,
+      1_000_000_000_000,
+      this.MIN_PLANET_SIZE,
+      this.MAX_PLANET_SIZE
+    );
+    const planet = new Planet(this.element, distance, speed, size, name);
     this.planets.push(planet);
   }
 

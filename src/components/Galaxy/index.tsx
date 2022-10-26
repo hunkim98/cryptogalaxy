@@ -36,12 +36,14 @@ const Galaxy: React.FC<Props> = () => {
           !galaxyCanvasRef.current.planets
             .map((planet) => planet.name)
             .includes(crypto[0]) &&
-          crypto[1].coefficient
+          crypto[1].coefficient &&
+          crypto[1].volume
         ) {
           galaxyCanvasRef.current.addPlanet(
             crypto[0],
             crypto[1].increaseRatio,
-            crypto[1].coefficient
+            crypto[1].coefficient,
+            crypto[1].volume
           );
         }
       }

@@ -1,4 +1,5 @@
 import { getDayCandles, getTicker } from "api/upbit";
+import { ICandleDayReturnProps } from "node-upbit/lib/@types/quotation";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { calcCorrelationCoefficient } from "utils/quant/correlation";
 import { calcIncreaseRatioOfMA } from "utils/quant/movingAverage";
@@ -18,6 +19,7 @@ const CryptoContext = createContext<CryptoContextElements>(
 export type CryptoDataFields = {
   increaseRatio: number;
   coefficient?: number;
+  volume?: number;
 };
 
 const allowedCoins = ["KRW-BTC"];
@@ -25,6 +27,27 @@ const allowedCoins = ["KRW-BTC"];
 const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   const [cryptoData, setCryptoData] = useState<Map<string, CryptoDataFields>>(
     new Map()
+  );
+  const retrieveOtherCryptoData = useCallback(
+    async (
+      market: string,
+      dayCount: number,
+      btcDayCandles: ICandleDayReturnProps[]
+    ) => {
+      const otherCryptoDayCandles = await getDayCandles(market, dayCount);
+      const volume = otherCryptoDayCandles[0].candle_acc_trade_price;
+      const increaseRatio = calcIncreaseRatioOfMA(otherCryptoDayCandles, 20);
+      const coefficient = calcCorrelationCoefficient(
+        btcDayCandles,
+        otherCryptoDayCandles
+      );
+      setCryptoData((prev) => {
+        const newMap = new Map(prev);
+        newMap.set(market, { increaseRatio, coefficient, volume });
+        return newMap;
+      });
+    },
+    []
   );
   useEffect(() => {
     getDayCandles("KRW-BTC", 30)
@@ -38,51 +61,12 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       })
       // we need btc data first to calculate others
       .then((btcCandles) => {
-        getDayCandles("KRW-ETH", 30).then((res) => {
-          const data = res;
-          const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-          const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          setCryptoData(
-            (prev) =>
-              new Map([...prev, ["KRW-ETH", { increaseRatio, coefficient }]])
-          );
-        });
-        getDayCandles("KRW-BTG", 30).then((res) => {
-          const data = res;
-          const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-          const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          setCryptoData(
-            (prev) =>
-              new Map([...prev, ["KRW-BTG", { increaseRatio, coefficient }]])
-          );
-        });
-        getDayCandles("KRW-BTG", 30).then((res) => {
-          const data = res;
-          const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-          const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          setCryptoData(
-            (prev) =>
-              new Map([...prev, ["KRW-BTG", { increaseRatio, coefficient }]])
-          );
-        });
-        getDayCandles("KRW-XRP", 30).then((res) => {
-          const data = res;
-          const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-          const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          setCryptoData(
-            (prev) =>
-              new Map([...prev, ["KRW-XRP", { increaseRatio, coefficient }]])
-          );
-        });
-        getDayCandles("KRW-ETH", 30).then((res) => {
-          const data = res;
-          const increaseRatio = calcIncreaseRatioOfMA(data, 20);
-          const coefficient = calcCorrelationCoefficient(btcCandles, data);
-          setCryptoData(
-            (prev) =>
-              new Map([...prev, ["KRW-DOGE", { increaseRatio, coefficient }]])
-          );
-        });
+        retrieveOtherCryptoData("KRW-ETH", 30, btcCandles);
+        retrieveOtherCryptoData("KRW-ETC", 30, btcCandles);
+        retrieveOtherCryptoData("KRW-MLK", 30, btcCandles);
+        retrieveOtherCryptoData("KRW-BTG", 30, btcCandles);
+        retrieveOtherCryptoData("KRW-XRP", 30, btcCandles);
+        retrieveOtherCryptoData("KRW-DOGE", 30, btcCandles);
       });
 
     getTicker("KRW-BTC").then((res) => {
