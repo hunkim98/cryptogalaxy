@@ -29,7 +29,7 @@ export const returnMAArray = (
   );
   for (let i = 0; i < totalCount - (interval - 1); i++) {
     const temp_array = prevClosingPrices.slice(i, i + (interval - 1));
-    const average = temp_array.reduce((a, b) => a + b, 0);
+    const average = temp_array.reduce((a, b) => a + b, 0) / temp_array.length;
     maArray.push(average);
   }
   return maArray;

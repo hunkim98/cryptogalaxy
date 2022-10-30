@@ -1,3 +1,4 @@
+import { changeRelativeValueToRealValue } from "utils/clamp";
 import { convertCartesianToScreenPoint } from "../../utils/cartesian";
 import { Vector2 } from "../../utils/math/Vector2";
 import { Rotator2D } from "../../utils/rotator2d";
@@ -17,12 +18,19 @@ export class Planet {
   continents: Array<Continent>;
   continentOrigins: Array<Vector2>;
   ctx: CanvasRenderingContext2D;
+  price: number;
+  support: Array<number>;
+  resistance: Array<number>;
+  greenness: number | null = null;
   constructor(
     canvas: HTMLCanvasElement,
     distanceFromSun: number,
     speed: number,
     radius: number,
-    name: string
+    name: string,
+    price: number,
+    support: Array<number>,
+    resistance: Array<number>
   ) {
     this.name = name;
     this.canvas = canvas;
@@ -32,6 +40,9 @@ export class Planet {
     this.radius = radius;
     this.spaceShips = [];
     this.ctx = this.canvas.getContext("2d")!;
+    this.price = price;
+    this.resistance = resistance;
+    this.support = support;
     const positionAffineVector = new Vector2(distanceFromSun, 0).toAffine(true);
     const rotateAffineMatrix = this.rotator.getRotateAffineMatrix();
     const shuffledContinents = ContinentSamples.sort(() => 0.5 - Math.random());
@@ -46,6 +57,49 @@ export class Planet {
       new Vector2(0, -this.radius),
       new Vector2(0, this.radius),
     ];
+    console.log(support, resistance, this.name);
+    if (support.length === 0 && resistance.length === 0) {
+      this.greenness = 0;
+    } else if (support.length === 0 && resistance.length !== 0) {
+      this.greenness = 30;
+    } else if (resistance.length === 0 && support.length !== 0) {
+      this.greenness = 255;
+    } else {
+      console.log(
+        support[support.length - 1],
+        price,
+        resistance[resistance.length - 1],
+        this.name
+      );
+      let finalSupportPrice = support[support.length - 1];
+      let finalResistancePrice = resistance[resistance.length - 1];
+      while (price > finalResistancePrice && resistance.length > 0) {
+        resistance.pop();
+        finalResistancePrice = resistance[resistance.length - 1];
+      }
+      while (price < finalSupportPrice && support.length > 0) {
+        support.pop();
+        finalSupportPrice = support[support.length - 1];
+      }
+      if (resistance.length === 0) {
+        this.greenness = 255;
+      }
+      if (support.length === 0) {
+        this.greenness = 10;
+      }
+
+      if (support.length !== 0 && resistance.length !== 0) {
+        this.greenness = changeRelativeValueToRealValue(
+          price,
+          finalSupportPrice,
+          finalResistancePrice,
+
+          10,
+          255
+        );
+      }
+      console.log(this.greenness, "greenness!!");
+    }
     const leftOriginCount =
       this.continents.length - this.continentOrigins.length;
     for (let i = 0; i < leftOriginCount; i++) {
@@ -65,9 +119,9 @@ export class Planet {
       this.ctx.arc(origin.x, origin.y, this.radius, 0, 2 * Math.PI, false);
       this.ctx.clip();
       continent.draw(origin.add(continentOrigin), {
-        r: 0,
-        g: 255,
-        b: 50,
+        r: this.greenness ? 255 - this.greenness : 0,
+        g: this.greenness ?? 0,
+        b: 0,
         a: 1,
       });
       this.ctx.restore();
@@ -122,7 +176,9 @@ export class Planet {
       2 * Math.PI,
       false
     );
-    this.ctx.fillStyle = `rgba(${0}, ${50}, ${255}, ${1})`;
+    this.ctx.fillStyle = `rgba(${
+      this.greenness ? 255 - this.greenness : 0
+    }, ${0}, ${this.greenness ?? 0}, ${1})`;
     this.ctx.fill();
 
     this.ctx.textAlign = "center";

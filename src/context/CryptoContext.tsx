@@ -6,6 +6,7 @@ import { calcIncreaseRatioOfMA } from "utils/quant/movingAverage";
 import CoinGecko from "coingecko-api";
 import axios from "axios";
 import { CoinGeckoMarketResponse } from "types/coingecko.res";
+import { calcSupportResistance } from "utils/quant/support-resistance";
 
 interface Props {
   children: React.ReactNode;
@@ -21,6 +22,9 @@ const CryptoContext = createContext<CryptoContextElements>(
 
 export type CryptoDataFields = {
   increaseRatio: number;
+  support?: Array<number>;
+  resistance?: Array<number>;
+  currentPrice?: number;
   coefficient?: number;
   volume?: number;
 };
@@ -45,14 +49,29 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       if (!coinMarket) return;
       const volume = coinMarket.market_cap;
       const otherCryptoDayCandles = await getDayCandles(market, dayCount);
-      const increaseRatio = calcIncreaseRatioOfMA(otherCryptoDayCandles, 20);
+      const increaseRatio = calcIncreaseRatioOfMA(
+        otherCryptoDayCandles.slice(-btcDayCandles.length),
+        20
+      );
       const coefficient = calcCorrelationCoefficient(
         btcDayCandles,
+        otherCryptoDayCandles.slice(-btcDayCandles.length)
+      );
+      console.log(increaseRatio, coefficient, symbol);
+      const { support, resistance } = calcSupportResistance(
         otherCryptoDayCandles
       );
+      const ticker = await getTicker(market);
       setCryptoData((prev) => {
         const newMap = new Map(prev);
-        newMap.set(market, { increaseRatio, coefficient, volume });
+        newMap.set(market, {
+          increaseRatio,
+          coefficient,
+          volume,
+          currentPrice: ticker.trade_price,
+          support,
+          resistance,
+        });
         return newMap;
       });
     },
@@ -75,12 +94,12 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       })
       // we need btc data first to calculate others
       .then(({ btcCandles, coinMarketData }) => {
-        retrieveOtherCryptoData("KRW-ETH", 30, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-ETC", 30, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-MLK", 30, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-BTG", 30, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-XRP", 30, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-DOGE", 30, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-ETH", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-ETC", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-APT", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-SAND", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-XRP", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-DOGE", 200, btcCandles, coinMarketData);
       });
 
     getTicker("KRW-BTC").then((res) => {

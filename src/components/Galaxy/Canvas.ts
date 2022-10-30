@@ -52,7 +52,10 @@ export class GalaxyCanvas {
     name: string,
     increaseRatio: number,
     correlationCoefficient: number,
-    volume: number
+    volume: number,
+    price: number,
+    support: Array<number>,
+    resistance: Array<number>
   ) {
     console.log(correlationCoefficient, increaseRatio, name);
     const minDistance = this.sun.radius + 10;
@@ -79,13 +82,22 @@ export class GalaxyCanvas {
 
     const size = changeRelativeValueToRealValue(
       volume,
-      615291230759, // xdc market cap
+      615_291_230_759, // xdc market cap
       93_930_235_541_513, //btc market cap - 500_000_000_000_000
 
       this.MIN_PLANET_SIZE,
       this.MAX_PLANET_SIZE
     );
-    const planet = new Planet(this.element, distance, speed, size, name);
+    const planet = new Planet(
+      this.element,
+      distance,
+      speed,
+      size,
+      name,
+      price,
+      support,
+      resistance
+    );
     this.planets.push(planet);
   }
 
