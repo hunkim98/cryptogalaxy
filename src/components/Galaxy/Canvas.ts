@@ -79,8 +79,9 @@ export class GalaxyCanvas {
 
     const size = changeRelativeValueToRealValue(
       volume,
-      100_000_000,
-      1_000_000_000_000,
+      615291230759, // xdc market cap
+      93_930_235_541_513, //btc market cap - 500_000_000_000_000
+
       this.MIN_PLANET_SIZE,
       this.MAX_PLANET_SIZE
     );
@@ -110,12 +111,13 @@ export class GalaxyCanvas {
   }
 
   drawBackground() {
-    this.ctx.fillStyle = "black";
-    this.ctx.fillRect(0, 0, this.width, this.height);
+    // this.ctx.fillStyle = "black";
+    // this.ctx.fillRect(0, 0, this.width, this.height);
   }
 
   render = () => {
     this.clear();
+    this.drawBackground();
     this.drawScene();
     setTimeout(() => {
       requestAnimationFrame(this.render.bind(this));
@@ -123,7 +125,6 @@ export class GalaxyCanvas {
   };
 
   drawScene() {
-    this.drawBackground();
     this.drawGalaxyComponents();
   }
 

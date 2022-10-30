@@ -7,7 +7,12 @@ import { CryptoContextProvider } from "./context/CryptoContext";
 function App() {
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        backgroundColor: "black",
+      }}
     >
       {/* <header>
         <h1>Crypto Galaxy</h1>

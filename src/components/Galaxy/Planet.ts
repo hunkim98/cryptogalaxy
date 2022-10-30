@@ -65,9 +65,9 @@ export class Planet {
       this.ctx.arc(origin.x, origin.y, this.radius, 0, 2 * Math.PI, false);
       this.ctx.clip();
       continent.draw(origin.add(continentOrigin), {
-        r: 255,
-        g: 0,
-        b: 255,
+        r: 0,
+        g: 255,
+        b: 50,
         a: 1,
       });
       this.ctx.restore();
@@ -122,11 +122,12 @@ export class Planet {
       2 * Math.PI,
       false
     );
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = `rgba(${0}, ${50}, ${255}, ${1})`;
     this.ctx.fill();
 
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
+    this.ctx.fillStyle = "white";
     this.ctx.fillText(
       this.name,
       drawPosition.x,

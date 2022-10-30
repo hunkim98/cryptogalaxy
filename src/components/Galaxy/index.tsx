@@ -74,6 +74,8 @@ const Galaxy: React.FC<Props> = () => {
         width: "100%",
         height: "100%",
         position: "fixed",
+        background:
+          "linear-gradient(111.08deg, rgba(0, 0, 0, 0.8) 5.71%, rgba(0, 15, 45, 0.8) 54.7%, rgba(0, 0, 0, 0.8) 98.84%)",
       }}
       ref={divRef}
     >

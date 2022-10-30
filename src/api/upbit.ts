@@ -1,4 +1,5 @@
 import axios from "axios";
+import CoinGecko from "coingecko-api";
 import {
   ICandleDayReturnProps,
   ICandleReturnProps,

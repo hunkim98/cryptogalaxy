@@ -3,10 +3,12 @@ import { Vector2 } from "../../utils/math/Vector2";
 
 export class Sun {
   canvas: HTMLCanvasElement;
-  radius = 150;
+  radius = 130;
   color = "#FFFF4D";
   brightness: number = 0;
   position: Vector2 = new Vector2(0, 0);
+  MIN_BRIGHTNESS = 5;
+  MAX_BRIGHTNESS = 30;
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
   }
@@ -23,7 +25,7 @@ export class Sun {
       return clampMaxValue;
     }
     if (adjustedRadius < 0) {
-      return 0;
+      return 5;
     }
     return adjustedRadius;
   }
@@ -34,7 +36,8 @@ export class Sun {
     ctx.arc(
       drawPosition.x,
       drawPosition.y,
-      this.radius + this.clampBrightnessRadius(this.brightness, 10),
+      this.radius +
+        this.clampBrightnessRadius(this.brightness, this.MAX_BRIGHTNESS),
       0,
       2 * Math.PI,
       false
@@ -50,7 +53,8 @@ export class Sun {
     ctx.arc(
       drawPosition.x,
       drawPosition.y,
-      this.radius + this.clampBrightnessRadius(this.brightness, 20),
+      this.radius +
+        this.clampBrightnessRadius(this.brightness, this.MAX_BRIGHTNESS) * 2,
       0,
       2 * Math.PI,
       false
