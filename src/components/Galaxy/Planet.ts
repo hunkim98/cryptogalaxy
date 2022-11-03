@@ -48,7 +48,7 @@ export class Planet {
     const shuffledContinents = ContinentSamples.sort(() => 0.5 - Math.random());
     const selectedContinents = shuffledContinents.slice(0, 5);
     this.continents = selectedContinents.map((continent) => {
-      return new Continent(this.canvas, continent, 20);
+      return new Continent(this.canvas, continent, this.radius / 2);
     });
     this.position = rotateAffineMatrix
       .multiplyVector(positionAffineVector)
@@ -65,12 +65,6 @@ export class Planet {
     } else if (resistance.length === 0 && support.length !== 0) {
       this.greenness = 255;
     } else {
-      console.log(
-        support[support.length - 1],
-        price,
-        resistance[resistance.length - 1],
-        this.name
-      );
       let finalSupportPrice = support[support.length - 1];
       let finalResistancePrice = resistance[resistance.length - 1];
       while (price > finalResistancePrice && resistance.length > 0) {
@@ -127,29 +121,6 @@ export class Planet {
       this.ctx.restore();
       this.continents.push(continent);
     }
-    // const northPoleContinent = this.continents[0];
-    // const southPoleContinent = this.continents[1];
-    // northPoleContinent.draw(origin.subtract(new Vector2(0, this.radius)), {
-    //   r: 255,
-    //   g: 0,
-    //   b: 255,
-    //   a: 1,
-    // });
-    // southPoleContinent.draw(origin.add(new Vector2(0, this.radius)), {
-    //   r: 255,
-    //   g: 0,
-    //   b: 255,
-    //   a: 1,
-    // });
-    // for (let i = 2; i < this.continents.length; i++) {
-    //   const continent = this.continents[i];
-    //   continent.draw(origin, {
-    //     r: 255,
-    //     g: 0,
-    //     b: 255,
-    //     a: 1,
-    //   });
-    // }
   }
 
   draw() {
@@ -183,7 +154,8 @@ export class Planet {
 
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = `rgba(255, 255, 255, 0.8)`;
+    this.ctx.font = "12px Righteous";
     this.ctx.fillText(
       this.name,
       drawPosition.x,

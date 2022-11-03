@@ -12,6 +12,7 @@ function App() {
         flexDirection: "column",
         minHeight: "100vh",
         backgroundColor: "black",
+        fontFamily: "Righteous",
       }}
     >
       {/* <header>

@@ -64,7 +64,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       const ticker = await getTicker(market);
       setCryptoData((prev) => {
         const newMap = new Map(prev);
-        newMap.set(market, {
+        newMap.set(market.replace("KRW-", ""), {
           increaseRatio,
           coefficient,
           volume,
@@ -100,7 +100,8 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
         retrieveOtherCryptoData("KRW-SAND", 200, btcCandles, coinMarketData);
         retrieveOtherCryptoData("KRW-XRP", 200, btcCandles, coinMarketData);
         retrieveOtherCryptoData("KRW-DOGE", 200, btcCandles, coinMarketData);
-      });
+      })
+      .catch((err) => console.log(err));
 
     getTicker("KRW-BTC").then((res) => {
       console.log(res);

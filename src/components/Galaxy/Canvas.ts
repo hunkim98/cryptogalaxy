@@ -57,9 +57,16 @@ export class GalaxyCanvas {
     support: Array<number>,
     resistance: Array<number>
   ) {
-    console.log(correlationCoefficient, increaseRatio, name);
-    const minDistance = this.sun.radius + 10;
-    const maxDistance = 400 + this.sun.radius;
+    const size = changeRelativeValueToRealValue(
+      volume,
+      615_291_230_759, // xdc market cap
+      93_930_235_541_513, //btc market cap - 500_000_000_000_000
+
+      this.MIN_PLANET_SIZE,
+      this.MAX_PLANET_SIZE
+    );
+    const minDistance = this.sun.radius + 20 + size;
+    const maxDistance = 400 + this.sun.radius - size;
     const distance = changeRelativeValueToRealValueInversed(
       // the bigger the correlation coefficient
       // the more similar is it to the sun
@@ -80,14 +87,6 @@ export class GalaxyCanvas {
       maxSpeed
     );
 
-    const size = changeRelativeValueToRealValue(
-      volume,
-      615_291_230_759, // xdc market cap
-      93_930_235_541_513, //btc market cap - 500_000_000_000_000
-
-      this.MIN_PLANET_SIZE,
-      this.MAX_PLANET_SIZE
-    );
     const planet = new Planet(
       this.element,
       distance,
@@ -99,6 +98,7 @@ export class GalaxyCanvas {
       resistance
     );
     this.planets.push(planet);
+    this.planets.sort((a, b) => b.radius - a.radius);
   }
 
   initialize() {

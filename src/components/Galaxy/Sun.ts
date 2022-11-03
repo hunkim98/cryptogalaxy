@@ -1,3 +1,4 @@
+import { changeRelativeValueToRealValue } from "utils/clamp";
 import { convertCartesianToScreenPoint } from "../../utils/cartesian";
 import { Vector2 } from "../../utils/math/Vector2";
 
@@ -7,27 +8,22 @@ export class Sun {
   color = "#FFFF4D";
   brightness: number = 0;
   position: Vector2 = new Vector2(0, 0);
-  MIN_BRIGHTNESS = 5;
-  MAX_BRIGHTNESS = 30;
+  MIN_BRIGHTNESS = 2;
+  MAX_BRIGHTNESS = 20;
+  increaseRatio?: number;
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
   }
 
-  setBrightness(brightness: number) {
-    console.log(brightness);
-    this.brightness = brightness;
-  }
-
-  clampBrightnessRadius(radius: number, clampMaxValue: number) {
-    const adjustedRadius = radius * 10000000;
-
-    if (adjustedRadius > clampMaxValue) {
-      return clampMaxValue;
-    }
-    if (adjustedRadius < 0) {
-      return 5;
-    }
-    return adjustedRadius;
+  setBrightness(increaseRatio: number) {
+    this.increaseRatio = increaseRatio;
+    this.brightness = changeRelativeValueToRealValue(
+      increaseRatio,
+      -1,
+      1,
+      this.MIN_BRIGHTNESS,
+      this.MAX_BRIGHTNESS
+    );
   }
 
   drawBrightnessInner(drawPosition: Vector2, ctx: CanvasRenderingContext2D) {
@@ -36,8 +32,7 @@ export class Sun {
     ctx.arc(
       drawPosition.x,
       drawPosition.y,
-      this.radius +
-        this.clampBrightnessRadius(this.brightness, this.MAX_BRIGHTNESS),
+      this.radius + this.brightness / 2,
       0,
       2 * Math.PI,
       false
@@ -53,8 +48,7 @@ export class Sun {
     ctx.arc(
       drawPosition.x,
       drawPosition.y,
-      this.radius +
-        this.clampBrightnessRadius(this.brightness, this.MAX_BRIGHTNESS) * 2,
+      this.radius + this.brightness,
       0,
       2 * Math.PI,
       false
