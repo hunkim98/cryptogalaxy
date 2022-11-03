@@ -1,6 +1,7 @@
 import { CryptoContext } from "context/CryptoContext";
 import React, { useContext, useEffect, useRef } from "react";
 import { GalaxyCanvas } from "./Canvas";
+import logo from "../../assets/logo.png";
 
 interface Props {}
 
@@ -85,6 +86,9 @@ const Galaxy: React.FC<Props> = () => {
       }}
       ref={divRef}
     >
+      <div style={{ position: "absolute", width: 200, left: 20, top: 30 }}>
+        <img src={logo} style={{ width: "100%", height: "auto" }} alt="logo" />
+      </div>
       <canvas ref={canvasRef} />
     </div>
   );

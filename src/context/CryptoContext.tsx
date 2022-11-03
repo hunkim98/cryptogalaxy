@@ -7,6 +7,7 @@ import CoinGecko from "coingecko-api";
 import axios from "axios";
 import { CoinGeckoMarketResponse } from "types/coingecko.res";
 import { calcSupportResistance } from "utils/quant/support-resistance";
+import { CoinGeckoJson } from "./CoinGecko221103";
 
 interface Props {
   children: React.ReactNode;
@@ -85,11 +86,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
         setCryptoData(
           (prev) => new Map([...prev, ["KRW-BTC", { increaseRatio }]])
         );
-        const coinMarketData = (
-          await axios.get<CoinGeckoMarketResponse>(
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=krw&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-          )
-        ).data;
+        const coinMarketData = CoinGeckoJson;
         return { btcCandles, coinMarketData };
       })
       // we need btc data first to calculate others
