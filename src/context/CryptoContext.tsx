@@ -93,7 +93,12 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       .then(({ btcCandles, coinMarketData }) => {
         retrieveOtherCryptoData("KRW-ETH", 200, btcCandles, coinMarketData);
         retrieveOtherCryptoData("KRW-ETC", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-APT", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-MATIC", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-LINK", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-ADA", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-STORJ", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-AAVE", 200, btcCandles, coinMarketData);
+        retrieveOtherCryptoData("KRW-USDT", 200, btcCandles, coinMarketData);
         retrieveOtherCryptoData("KRW-SAND", 200, btcCandles, coinMarketData);
         retrieveOtherCryptoData("KRW-XRP", 200, btcCandles, coinMarketData);
         retrieveOtherCryptoData("KRW-DOGE", 200, btcCandles, coinMarketData);

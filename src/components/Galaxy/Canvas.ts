@@ -15,8 +15,8 @@ export class GalaxyCanvas {
   sun: Sun;
   planets: Array<Planet> = [];
   requestAnimationFrameId: number;
-  MIN_PLANET_SIZE = 15;
-  MAX_PLANET_SIZE = 100;
+  MIN_PLANET_SIZE = 10;
+  MAX_PLANET_SIZE = 80;
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
