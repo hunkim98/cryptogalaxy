@@ -16,6 +16,7 @@ export class Rotator2D {
   }
   clamp() {
     this.degree = Rotator2D.getClampedValue(this.degree);
+    return this.degree;
   }
   toRadian() {
     this.clamp();

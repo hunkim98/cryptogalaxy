@@ -105,12 +105,101 @@ export class Planet {
       ).scalarBy(Math.random() * this.radius);
       this.continentOrigins.push(origin);
     }
+    this.setSpaceShip();
+  }
+
+  getCanvasOuterTrajectoryPoint() {
+    const rotatorAdvanceAmount = 20;
+    const bandWidthDegree = 3;
+    const minRotatorDegree =
+      this.rotator.degree + rotatorAdvanceAmount - bandWidthDegree;
+    const maxRotatorDegree =
+      this.rotator.degree + rotatorAdvanceAmount + bandWidthDegree;
+    const criterionRotator = new Rotator2D(
+      Math.random() * (maxRotatorDegree - minRotatorDegree) + minRotatorDegree
+      // Math.random() *
+      //   (this.rotator.degree +
+      //     bandWidthDegree -
+      //     //this can be a number like 370
+      //     (this.rotator.degree - bandWidthDegree) +
+      //     this.rotator.degree -
+      //     bandWidthDegree)
+    );
+
+    console.log(criterionRotator.degree);
+    let quadrant = 0b00; //1st qudrant
+
+    if (criterionRotator.degree <= 90 && criterionRotator.degree >= 0) {
+      quadrant = 0b00;
+    } else if (criterionRotator.degree <= 180) {
+      quadrant = 0b01;
+    } else if (criterionRotator.degree <= 270) {
+      quadrant = 0b11;
+    } else {
+      quadrant = 0b10;
+    }
+    criterionRotator.clamp();
+
+    const canvasEdgeStartPointOffset = 100;
+    const isBoundToY = Math.abs(Math.tan(criterionRotator.toRadian())) > 1;
+    if (isBoundToY) {
+      const y =
+        quadrant <= 0b01
+          ? (this.canvas.height + canvasEdgeStartPointOffset) / 2
+          : -(this.canvas.height + canvasEdgeStartPointOffset) / 2;
+      const x = y / Math.tan(criterionRotator.toRadian());
+      return { edgePosition: new Vector2(x, y), edgeRotator: criterionRotator };
+    } else {
+      const x =
+        quadrant % 2 === 0
+          ? (this.canvas.width + canvasEdgeStartPointOffset) / 2
+          : -(this.canvas.width + canvasEdgeStartPointOffset) / 2;
+      const y = Math.tan(criterionRotator.toRadian()) * x;
+      return { edgePosition: new Vector2(x, y), edgeRotator: criterionRotator };
+    }
+  }
+  setSpaceShip() {
+    const { edgePosition, edgeRotator } = this.getCanvasOuterTrajectoryPoint();
+    if (this.name === "DOGE") {
+      this.spaceShips.push(
+        new Spaceship(
+          this.canvas,
+          edgePosition,
+          this.rotator,
+          edgeRotator,
+          this
+        )
+      );
+    }
+  }
+
+  drawSpaceShips() {
+    for (const spaceShip of this.spaceShips) {
+      this.ctx.save();
+      this.ctx.beginPath();
+      const correctedStartPosition = convertCartesianToScreenPoint(
+        this.canvas,
+        this.position
+      );
+      const correctedEndPosition = convertCartesianToScreenPoint(
+        this.canvas,
+        spaceShip.canvasEdgePosition
+      );
+      this.ctx.moveTo(correctedStartPosition.x, correctedStartPosition.y);
+      this.ctx.lineTo(correctedEndPosition.x, correctedEndPosition.y);
+      this.ctx.strokeStyle = "white";
+      this.ctx.stroke();
+      this.ctx.closePath();
+      this.ctx.restore();
+      spaceShip.draw();
+    }
   }
 
   drawContinents(origin: Vector2) {
+    this.ctx.save();
     for (const continentOrigin of this.continentOrigins) {
       const continent = this.continents.shift()!;
-      this.ctx.save();
+
       this.ctx.arc(origin.x, origin.y, this.radius, 0, 2 * Math.PI, false);
       this.ctx.clip();
       continent.draw(origin.add(continentOrigin), {
@@ -119,12 +208,14 @@ export class Planet {
         b: 0,
         a: 1,
       });
-      this.ctx.restore();
+
       this.continents.push(continent);
     }
+    this.ctx.restore();
   }
 
   draw() {
+    this.drawSpaceShips();
     this.rotator.degree += this.speed;
     const positionAffineVector = new Vector2(this.distanceFromSun, 0).toAffine(
       true
@@ -162,6 +253,11 @@ export class Planet {
       drawPosition.x,
       drawPosition.y + this.radius + 15
     );
+    // this.ctx.fillText(
+    //   this.rotator.degree.toFixed(2),
+    //   drawPosition.x,
+    //   drawPosition.y + this.radius + 30
+    // );
     this.ctx.closePath();
     this.ctx.restore();
 
