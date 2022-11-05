@@ -4,19 +4,22 @@ import { Vector2 } from "../../utils/math/Vector2";
 
 export class Sun {
   canvas: HTMLCanvasElement;
-  radius = 130;
+  static radius = 130;
   color = "#FFFF4D";
   brightness: number = 0;
   position: Vector2 = new Vector2(0, 0);
   MIN_BRIGHTNESS = 2;
   MAX_BRIGHTNESS = 20;
-  increaseRatio?: number;
-  constructor(canvas: HTMLCanvasElement) {
+  increaseRatio: number;
+  name: string;
+  constructor(canvas: HTMLCanvasElement, name: string, increaseRatio: number) {
     this.canvas = canvas;
+    this.name = name;
+    this.increaseRatio = increaseRatio;
+    this.setBrightness(increaseRatio);
   }
 
   setBrightness(increaseRatio: number) {
-    this.increaseRatio = increaseRatio;
     this.brightness = changeRelativeValueToRealValue(
       increaseRatio,
       -1,
@@ -32,7 +35,7 @@ export class Sun {
     ctx.arc(
       drawPosition.x,
       drawPosition.y,
-      this.radius + this.brightness / 2,
+      Sun.radius + this.brightness / 2,
       0,
       2 * Math.PI,
       false
@@ -48,7 +51,7 @@ export class Sun {
     ctx.arc(
       drawPosition.x,
       drawPosition.y,
-      this.radius + this.brightness,
+      Sun.radius + this.brightness,
       0,
       2 * Math.PI,
       false
@@ -61,7 +64,7 @@ export class Sun {
   drawSun(drawPosition: Vector2, ctx: CanvasRenderingContext2D) {
     ctx.save();
     ctx.beginPath();
-    ctx.arc(drawPosition.x, drawPosition.y, this.radius, 0, 2 * Math.PI, false);
+    ctx.arc(drawPosition.x, drawPosition.y, Sun.radius, 0, 2 * Math.PI, false);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.restore();
@@ -75,5 +78,10 @@ export class Sun {
     this.drawBrightnessInner(drawPosition, ctx);
     this.drawBrightnessOuter(drawPosition, ctx);
     this.drawSun(drawPosition, ctx);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = `rgba(255, 255, 255, 0.8)`;
+    ctx.font = "18px Righteous";
+    ctx.fillText(this.name, drawPosition.x, drawPosition.y + Sun.radius + 20);
   }
 }

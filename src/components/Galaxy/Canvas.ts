@@ -12,7 +12,7 @@ export class GalaxyCanvas {
   ctx: CanvasRenderingContext2D;
   width: number = 0;
   height: number = 0;
-  sun: Sun;
+  sun: Sun | null;
   planets: Array<Planet> = [];
   requestAnimationFrameId: number;
   MIN_PLANET_SIZE = 10;
@@ -20,9 +20,7 @@ export class GalaxyCanvas {
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
-
-    this.sun = new Sun(element);
-
+    this.sun = null;
     this.render();
     this.requestAnimationFrameId = requestAnimationFrame(this.render);
     this.planets = [];
@@ -38,6 +36,11 @@ export class GalaxyCanvas {
     // this.continents.push(new Continent(element, Continent10, 100));
     this.initialize();
   }
+
+  setSun(name: string, increaseRatio: number) {
+    this.sun = new Sun(this.element, name, increaseRatio);
+  }
+
   updateFrame = () => {
     // this.drawAll();
     this.render();
@@ -66,8 +69,8 @@ export class GalaxyCanvas {
       this.MIN_PLANET_SIZE,
       this.MAX_PLANET_SIZE
     );
-    const minDistance = this.sun.radius + 20 + size;
-    const maxDistance = 400 + this.sun.radius - size;
+    const minDistance = Sun.radius + 20 + size;
+    const maxDistance = 400 + Sun.radius - size;
     const distance = changeRelativeValueToRealValueInversed(
       // the bigger the correlation coefficient
       // the more similar is it to the sun
@@ -145,7 +148,9 @@ export class GalaxyCanvas {
   drawDummy() {}
 
   drawGalaxyComponents() {
-    this.sun.draw();
+    if (this.sun) {
+      this.sun.draw();
+    }
     for (const planet of this.planets) {
       planet.draw();
     }
