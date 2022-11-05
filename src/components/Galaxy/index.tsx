@@ -41,7 +41,8 @@ const Galaxy: React.FC<Props> = () => {
           crypto[1].volume &&
           crypto[1].currentPrice &&
           crypto[1].support &&
-          crypto[1].resistance
+          crypto[1].resistance &&
+          crypto[1].rsi
         ) {
           galaxyCanvasRef.current.addPlanet(
             crypto[0].replace("KRW-", ""),
@@ -50,7 +51,8 @@ const Galaxy: React.FC<Props> = () => {
             crypto[1].volume,
             crypto[1].currentPrice,
             crypto[1].support,
-            crypto[1].resistance
+            crypto[1].resistance,
+            crypto[1].rsi
           );
         }
       }

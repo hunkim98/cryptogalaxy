@@ -22,6 +22,7 @@ export class Planet {
   support: Array<number>;
   resistance: Array<number>;
   greenness: number | null = null;
+  rsi: number;
   constructor(
     canvas: HTMLCanvasElement,
     distanceFromSun: number,
@@ -30,7 +31,8 @@ export class Planet {
     name: string,
     price: number,
     support: Array<number>,
-    resistance: Array<number>
+    resistance: Array<number>,
+    rsi: number
   ) {
     this.name = name;
     this.canvas = canvas;
@@ -43,6 +45,7 @@ export class Planet {
     this.price = price;
     this.resistance = resistance;
     this.support = support;
+    this.rsi = rsi;
     const positionAffineVector = new Vector2(distanceFromSun, 0).toAffine(true);
     const rotateAffineMatrix = this.rotator.getRotateAffineMatrix();
     const shuffledContinents = ContinentSamples.sort(() => 0.5 - Math.random());
@@ -57,7 +60,6 @@ export class Planet {
       new Vector2(0, -this.radius),
       new Vector2(0, this.radius),
     ];
-    console.log(support, resistance, this.name);
     if (support.length === 0 && resistance.length === 0) {
       this.greenness = 0;
     } else if (support.length === 0 && resistance.length !== 0) {
@@ -92,7 +94,6 @@ export class Planet {
           255
         );
       }
-      console.log(this.greenness, "greenness!!");
     }
     const leftOriginCount =
       this.continents.length - this.continentOrigins.length;

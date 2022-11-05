@@ -55,7 +55,8 @@ export class GalaxyCanvas {
     volume: number,
     price: number,
     support: Array<number>,
-    resistance: Array<number>
+    resistance: Array<number>,
+    rsi: number
   ) {
     const size = changeRelativeValueToRealValue(
       volume,
@@ -95,7 +96,8 @@ export class GalaxyCanvas {
       name,
       price,
       support,
-      resistance
+      resistance,
+      rsi
     );
     this.planets.push(planet);
     this.planets.sort((a, b) => b.radius - a.radius);

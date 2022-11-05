@@ -17,7 +17,6 @@ export const getDayCandles = async (market: string, count: number) => {
   const res = await axios.get(
     PROXY_API_URL + "days" + `?market=${market}&count=${count}`
   );
-  console.log(res);
   return res.data.data as ICandleDayReturnProps[];
 };
 

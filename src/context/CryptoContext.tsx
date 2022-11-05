@@ -8,6 +8,7 @@ import axios from "axios";
 import { CoinGeckoMarketResponse } from "types/coingecko.res";
 import { calcSupportResistance } from "utils/quant/support-resistance";
 import { CoinGeckoJson } from "./CoinGecko221103";
+import { calcRSI } from "utils/quant/rsi";
 
 interface Props {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ export type CryptoDataFields = {
   currentPrice?: number;
   coefficient?: number;
   volume?: number;
+  rsi?: number;
 };
 
 const allowedCoins = ["KRW-BTC"];
@@ -58,9 +60,18 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
         btcDayCandles,
         otherCryptoDayCandles.slice(-btcDayCandles.length)
       );
-      console.log(increaseRatio, coefficient, symbol);
       const { support, resistance } = calcSupportResistance(
         otherCryptoDayCandles
+      );
+      const rsi = calcRSI(otherCryptoDayCandles);
+      console.log(
+        "increase",
+        increaseRatio,
+        "relation",
+        Math.abs(coefficient),
+        "rsi",
+        rsi,
+        symbol
       );
       const ticker = await getTicker(market);
       setCryptoData((prev) => {
@@ -72,6 +83,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
           currentPrice: ticker.trade_price,
           support,
           resistance,
+          rsi,
         });
         return newMap;
       });
