@@ -4,6 +4,11 @@ import { Rotator2D } from "utils/rotator2d";
 import spaceship from "../../assets/spaceship.png";
 import { Planet } from "./Planet";
 
+export enum SpaceshipDirection {
+  IN = "IN",
+  OUT = "OUT",
+}
+
 // https://blog.naver.com/ivory82/220241862037
 export class Spaceship {
   canvas: HTMLCanvasElement;
@@ -11,53 +16,176 @@ export class Spaceship {
   canvasEdgePosition: Vector2;
   // currentPosition: Vector2;
   progress: number;
+  direction: SpaceshipDirection;
   imageElement: HTMLImageElement;
   planetRotator: Rotator2D;
   edgeRotator: Rotator2D;
   planet: Planet;
-  id: number;
+  id: string;
+  opacity: number;
+  position: Vector2;
+  startPosition: Vector2;
+  endPosition: Vector2;
+  progressIncreaseDelta: number;
+  isDestinationReached: boolean;
   constructor(
     canvas: HTMLCanvasElement,
     canvasEdgePosition: Vector2,
     planetRotator: Rotator2D,
     edgeRotator: Rotator2D,
-    planet: Planet
+    planet: Planet,
+    direction: SpaceshipDirection,
+    id: string
   ) {
+    this.isDestinationReached = false;
+    this.id = id;
     this.progress = 0;
-    this.id = Math.random();
+    this.opacity = 0;
     this.canvasEdgePosition = canvasEdgePosition;
     this.canvas = canvas;
     this.planet = planet;
+    this.progressIncreaseDelta = 1 + this.planet.speed * 3;
     this.ctx = canvas.getContext("2d")!;
     this.planetRotator = planetRotator;
     this.edgeRotator = edgeRotator;
+    this.direction = direction;
     const img = new Image();
     this.imageElement = img;
     img.src = spaceship;
+    this.position =
+      this.direction === SpaceshipDirection.OUT
+        ? planet.position
+        : canvasEdgePosition;
+    if (this.direction === SpaceshipDirection.OUT) {
+      this.startPosition = planet.position;
+      this.endPosition = canvasEdgePosition;
+    } else {
+      this.startPosition = canvasEdgePosition;
+      this.endPosition = planet.position;
+    }
 
     img.onload = () => {
       this.draw();
     };
   }
 
-  draw() {
-    this.progress++;
-    const dx = this.canvasEdgePosition.x - this.planet.position.x;
-    const dy = this.canvasEdgePosition.y - this.planet.position.y;
-    const angle = Math.atan2(dy, dx);
+  drawTrajectory(angle: number, destinationPosition: Vector2) {
+    let trajectoryOpacity = this.opacity;
+    if (trajectoryOpacity > 0.5) {
+      trajectoryOpacity = 0.5;
+    }
+
+    const trajectoryStartingFrom = this.position;
+    const trajectoryEndsAt = this.position.add(
+      new Vector2(Math.cos(angle), Math.sin(angle)).scalarBy(80)
+    );
+
+    let linePointingSpaceship = convertCartesianToScreenPoint(
+      this.canvas,
+      trajectoryStartingFrom
+    );
+    const trailingPoint = convertCartesianToScreenPoint(
+      this.canvas,
+      trajectoryEndsAt
+    );
+
+    if (this.isDestinationReached) {
+      linePointingSpaceship = convertCartesianToScreenPoint(
+        this.canvas,
+        destinationPosition
+      );
+    }
+
+    if (
+      Math.sqrt(trajectoryEndsAt.squareDistanceTo(destinationPosition)) < 10
+    ) {
+      this.planet.removeSpaceShip(this.id);
+    }
     this.ctx.save();
+
+    const grad = this.ctx.createLinearGradient(
+      trailingPoint.x,
+      trailingPoint.y,
+      linePointingSpaceship.x,
+      linePointingSpaceship.y
+    );
+    grad.addColorStop(0, `rgba(255, 255, 255, 0)`);
+
+    if (this.planet.rsi >= 70) {
+      grad.addColorStop(1, `rgba(255, 255, 77, 1)`);
+    } else {
+      grad.addColorStop(1, `rgba(255, 255, 255, ${trajectoryOpacity})`);
+    }
+    this.ctx.beginPath();
+    this.ctx.moveTo(linePointingSpaceship.x, linePointingSpaceship.y);
+    this.ctx.lineTo(trailingPoint.x, trailingPoint.y);
+
+    this.ctx.strokeStyle = grad;
+
+    this.ctx.stroke();
+    this.ctx.closePath();
+    this.ctx.restore();
+  }
+
+  drawSpaceshipImage(angle: number, destinationPosition: Vector2) {
+    if (destinationPosition.squareDistanceTo(this.position) < 10) {
+      this.isDestinationReached = true;
+    }
+
     const correctedEdgePosition = convertCartesianToScreenPoint(
       this.canvas,
-      this.canvasEdgePosition
+      this.direction === SpaceshipDirection.IN
+        ? this.canvasEdgePosition
+        : this.planet.position
     );
-    const imageWidth = this.imageElement.width / 10;
-    const imageHeight = this.imageElement.height / 10;
+    const imageWidth = this.imageElement.width / 25;
+    const imageHeight = this.imageElement.height / 25;
     const imageHalfWidth = imageWidth / 2;
     const imageHalfHeight = imageHeight / 2;
-    this.ctx.translate(
-      Math.cos(angle) - this.progress * Math.cos(angle),
-      Math.sin(angle) - this.progress * Math.sin(angle)
-    );
+
+    this.ctx.save();
+    if (this.direction === SpaceshipDirection.IN) {
+      this.ctx.translate(
+        -this.progress * Math.cos(angle),
+        -this.progress * Math.sin(angle)
+      );
+      this.position = this.canvasEdgePosition.subtract(
+        new Vector2(
+          this.progress * Math.cos(angle),
+          this.progress * Math.sin(angle)
+        )
+      );
+    } else {
+      this.ctx.translate(
+        this.progress * Math.cos(angle),
+        this.progress * Math.sin(angle)
+      );
+
+      this.ctx.fillStyle = "yellow";
+      this.position = this.planet.position.add(
+        new Vector2(
+          this.progress * Math.cos(angle),
+          this.progress * Math.sin(angle)
+        )
+      );
+    }
+    if (this.isDestinationReached) {
+      this.ctx.restore();
+      return;
+    }
+
+    if (
+      this.position.squareDistanceTo(this.canvasEdgePosition) > 25 &&
+      this.opacity < 1
+    ) {
+      this.opacity += 0.01;
+    }
+    if (
+      this.position.squareDistanceTo(this.planet.position) < 25 &&
+      this.opacity > 0
+    ) {
+      this.opacity -= 0.01;
+    }
 
     // this part is for drawing center-rotated image
     this.ctx.translate(
@@ -66,8 +194,13 @@ export class Spaceship {
     );
 
     this.ctx.translate(-imageHalfWidth, -imageHalfHeight);
-    this.ctx.rotate(-(-Math.PI / 2 - angle) + Math.PI);
+    if (this.direction === SpaceshipDirection.IN) {
+      this.ctx.rotate(-(-Math.PI / 2 - angle) + Math.PI);
+    } else {
+      this.ctx.rotate(-(-Math.PI / 2 - angle));
+    }
 
+    // this.ctx.globalAlpha = this.opacity;
     this.ctx.drawImage(
       this.imageElement,
       -imageHalfWidth,
@@ -75,9 +208,20 @@ export class Spaceship {
       imageWidth,
       imageHeight
     );
-    this.ctx.arc(0, 0, 10, 0, 2 * Math.PI);
-    this.ctx.fillStyle = "blue";
-    this.ctx.fill();
     this.ctx.restore();
+  }
+
+  draw() {
+    this.progress += this.progressIncreaseDelta;
+    const dx = this.canvasEdgePosition.x - this.planet.position.x;
+    const dy = this.canvasEdgePosition.y - this.planet.position.y;
+    const angle = Math.atan2(dy, dx);
+    const destinationPosition =
+      this.direction === SpaceshipDirection.OUT
+        ? this.canvasEdgePosition
+        : this.planet.position;
+
+    this.drawTrajectory(angle, destinationPosition);
+    this.drawSpaceshipImage(angle, destinationPosition);
   }
 }

@@ -1,10 +1,11 @@
 import { changeRelativeValueToRealValue } from "utils/clamp";
+import { generateRandomName } from "utils/generateRandomName";
 import { convertCartesianToScreenPoint } from "../../utils/cartesian";
 import { Vector2 } from "../../utils/math/Vector2";
 import { Rotator2D } from "../../utils/rotator2d";
 import { Continent } from "./Continent";
 import { ContinentSamples } from "./Continents/Examples";
-import { Spaceship } from "./Spaceship";
+import { Spaceship, SpaceshipDirection } from "./Spaceship";
 
 export class Planet {
   name: string;
@@ -22,6 +23,9 @@ export class Planet {
   support: Array<number>;
   resistance: Array<number>;
   greenness: number | null = null;
+  spaceShipCount: number;
+  spaceShipDirection: SpaceshipDirection;
+  spaceShipRegenerationInterval: number;
   rsi: number;
   constructor(
     canvas: HTMLCanvasElement,
@@ -46,6 +50,27 @@ export class Planet {
     this.resistance = resistance;
     this.support = support;
     this.rsi = rsi;
+    if (this.rsi >= 70) {
+      this.spaceShipCount = 3;
+      this.spaceShipDirection = SpaceshipDirection.IN;
+      this.spaceShipRegenerationInterval = 2000;
+    } else if (60 <= this.rsi && this.rsi < 70) {
+      this.spaceShipCount = 1;
+      this.spaceShipDirection = SpaceshipDirection.IN;
+      this.spaceShipRegenerationInterval = 5000;
+    } else if (40 <= this.rsi && this.rsi < 60) {
+      this.spaceShipCount = 0;
+      this.spaceShipDirection = SpaceshipDirection.OUT;
+      this.spaceShipRegenerationInterval = 10000;
+    } else if (30 <= this.rsi && this.rsi < 40) {
+      this.spaceShipCount = 1;
+      this.spaceShipDirection = SpaceshipDirection.OUT;
+      this.spaceShipRegenerationInterval = 5000;
+    } else {
+      this.spaceShipCount = 3;
+      this.spaceShipDirection = SpaceshipDirection.OUT;
+      this.spaceShipRegenerationInterval = 2000;
+    }
     const positionAffineVector = new Vector2(distanceFromSun, 0).toAffine(true);
     const rotateAffineMatrix = this.rotator.getRotateAffineMatrix();
     const shuffledContinents = ContinentSamples.sort(() => 0.5 - Math.random());
@@ -105,8 +130,15 @@ export class Planet {
       ).scalarBy(Math.random() * this.radius);
       this.continentOrigins.push(origin);
     }
-    this.setSpaceShip();
+    setInterval(() => {
+      if (this.spaceShips.length < this.spaceShipCount) {
+        this.setSpaceShip();
+      }
+    }, this.spaceShipRegenerationInterval);
+    // this.setSpaceShip();
   }
+
+  generateSpaceShip() {}
 
   getCanvasOuterTrajectoryPoint() {
     const rotatorAdvanceAmount = 20;
@@ -125,8 +157,6 @@ export class Planet {
       //     this.rotator.degree -
       //     bandWidthDegree)
     );
-
-    console.log(criterionRotator.degree);
     let quadrant = 0b00; //1st qudrant
 
     if (criterionRotator.degree <= 90 && criterionRotator.degree >= 0) {
@@ -160,14 +190,16 @@ export class Planet {
   }
   setSpaceShip() {
     const { edgePosition, edgeRotator } = this.getCanvasOuterTrajectoryPoint();
-    if (this.name === "DOGE") {
+    if (this.spaceShips.length < this.spaceShipCount) {
       this.spaceShips.push(
         new Spaceship(
           this.canvas,
           edgePosition,
           this.rotator,
           edgeRotator,
-          this
+          this,
+          this.spaceShipDirection,
+          generateRandomName()
         )
       );
     }
@@ -175,24 +207,14 @@ export class Planet {
 
   drawSpaceShips() {
     for (const spaceShip of this.spaceShips) {
-      this.ctx.save();
-      this.ctx.beginPath();
-      const correctedStartPosition = convertCartesianToScreenPoint(
-        this.canvas,
-        this.position
-      );
-      const correctedEndPosition = convertCartesianToScreenPoint(
-        this.canvas,
-        spaceShip.canvasEdgePosition
-      );
-      this.ctx.moveTo(correctedStartPosition.x, correctedStartPosition.y);
-      this.ctx.lineTo(correctedEndPosition.x, correctedEndPosition.y);
-      this.ctx.strokeStyle = "white";
-      this.ctx.stroke();
-      this.ctx.closePath();
-      this.ctx.restore();
       spaceShip.draw();
     }
+  }
+
+  removeSpaceShip(spaceShipId: string) {
+    this.spaceShips = this.spaceShips.filter(
+      (spaceShip) => spaceShip.id !== spaceShipId
+    );
   }
 
   drawContinents(origin: Vector2) {

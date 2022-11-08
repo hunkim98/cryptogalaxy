@@ -50,4 +50,8 @@ export class Vector2 {
   toScreenPointVector(): Vector2 {
     return new Vector2(Math.floor(this.x), Math.floor(this.y));
   }
+
+  squareDistanceTo(v: Vector2) {
+    return Math.pow(this.x - v.x, 2) + Math.pow(this.y - v.y, 2);
+  }
 }
