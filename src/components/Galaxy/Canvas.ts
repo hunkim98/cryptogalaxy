@@ -12,11 +12,14 @@ export class GalaxyCanvas {
   ctx: CanvasRenderingContext2D;
   width: number = 0;
   height: number = 0;
+  loop: number = 0;
   sun: Sun | null;
   planets: Array<Planet> = [];
   requestAnimationFrameId: number;
   MIN_PLANET_SIZE = 10;
   MAX_PLANET_SIZE = 80;
+  frameCount = 0;
+  backgroundLoopMax = 1000;
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
@@ -24,32 +27,12 @@ export class GalaxyCanvas {
     this.render();
     this.requestAnimationFrameId = requestAnimationFrame(this.render);
     this.planets = [];
-    // this.continents.push(new Continent(element, Continent1, 100));
-    // this.continents.push(new Continent(element, Continent2, 100));
-    // this.continents.push(new Continent(element, Continent3, 100));
-    // this.continents.push(new Continent(element, Continent4, 100));
-    // this.continents.push(new Continent(element, Continent5, 100));
-    // this.continents.push(new Continent(element, Continent6, 100));
-    // this.continents.push(new Continent(element, Continent7, 100));
-    // this.continents.push(new Continent(element, Continent8, 100));
-    // this.continents.push(new Continent(element, Continent9, 100));
-    // this.continents.push(new Continent(element, Continent10, 100));
     this.initialize();
   }
 
   setSun(name: string, increaseRatio: number) {
     this.sun = new Sun(this.element, name, increaseRatio);
   }
-
-  updateFrame = () => {
-    // this.drawAll();
-    this.render();
-    setTimeout(() => {
-      this.requestAnimationFrameId = requestAnimationFrame(
-        this.updateFrame.bind(this)
-      );
-    }, 1000 / this.fps);
-  };
 
   addPlanet(
     name: string,
@@ -128,11 +111,40 @@ export class GalaxyCanvas {
   }
 
   drawBackground() {
-    // this.ctx.fillStyle = "black";
-    // this.ctx.fillRect(0, 0, this.width, this.height);
+    this.ctx.save();
+    const grad = this.ctx.createLinearGradient(0, 0, this.width, this.height);
+    grad.addColorStop(0, `rgba(0, 0, 0, 0)`);
+    grad.addColorStop(
+      changeRelativeValueToRealValue(
+        this.loop,
+        0,
+        this.backgroundLoopMax,
+        0,
+        1
+      ),
+      `rgba(0, 15, 45, ${changeRelativeValueToRealValueInversed(
+        Math.abs(this.loop - this.backgroundLoopMax / 2),
+        0,
+        this.backgroundLoopMax / 2,
+        0,
+        1
+      )})`
+    );
+    grad.addColorStop(1, `rgba(0, 0, 0, 0)`);
+    this.ctx.fillStyle = grad;
+    this.ctx.fillRect(0, 0, this.width, this.height);
+    this.ctx.restore();
   }
 
   render = () => {
+    this.frameCount++;
+    this.loop++;
+    if (this.frameCount === this.fps + 1) {
+      this.frameCount = 0;
+    }
+    if (this.loop === this.backgroundLoopMax + 1) {
+      this.loop = 0;
+    }
     this.clear();
     this.drawBackground();
     this.drawScene();

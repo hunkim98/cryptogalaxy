@@ -24,13 +24,13 @@ export const calcCorrelationCoefficient = (
       ? [...candlesA].reverse()
       : candlesA;
 
-  const prevClosingPricesA = dateAscendingCandlesA.map(
-    (el) => el.prev_closing_price
-  );
+  const prevClosingPricesA = dateAscendingCandlesA
+    // .slice(-10)
+    .map((el) => el.prev_closing_price);
 
-  const prevClosingPricesB = dateAscendingCandlesB.map(
-    (el) => el.prev_closing_price
-  );
+  const prevClosingPricesB = dateAscendingCandlesB
+    // .slice(-10)
+    .map((el) => el.prev_closing_price);
 
   const prevClosingPricesMeanA =
     prevClosingPricesA.reduce((a, b) => a + b, 0) / prevClosingPricesA.length;
