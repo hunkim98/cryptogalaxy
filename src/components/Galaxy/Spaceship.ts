@@ -75,10 +75,18 @@ export class Spaceship {
       trajectoryOpacity = 0.5;
     }
 
-    const trajectoryStartingFrom = this.position;
-    const trajectoryEndsAt = this.position.add(
-      new Vector2(Math.cos(angle), Math.sin(angle)).scalarBy(80)
-    );
+    const trajectoryStartingFrom =
+      this.direction === SpaceshipDirection.IN
+        ? this.position
+        : this.position.add(
+            new Vector2(Math.cos(angle), Math.sin(angle)).scalarBy(-80)
+          );
+    const trajectoryEndsAt =
+      this.direction === SpaceshipDirection.IN
+        ? this.position.add(
+            new Vector2(Math.cos(angle), Math.sin(angle)).scalarBy(80)
+          )
+        : this.position;
 
     let linePointingSpaceship = convertCartesianToScreenPoint(
       this.canvas,
@@ -109,12 +117,21 @@ export class Spaceship {
       linePointingSpaceship.x,
       linePointingSpaceship.y
     );
-    grad.addColorStop(0, `rgba(255, 255, 255, 0)`);
+    grad.addColorStop(
+      this.direction === SpaceshipDirection.IN ? 0 : 1,
+      `rgba(255, 255, 255, 0)`
+    );
 
     if (this.planet.rsi >= 70) {
-      grad.addColorStop(1, `rgba(255, 255, 77, 1)`);
+      grad.addColorStop(
+        this.direction === SpaceshipDirection.IN ? 1 : 0,
+        `rgba(255, 255, 77, 1)`
+      );
     } else {
-      grad.addColorStop(1, `rgba(255, 255, 255, ${trajectoryOpacity})`);
+      grad.addColorStop(
+        this.direction === SpaceshipDirection.IN ? 1 : 0,
+        `rgba(255, 255, 255, ${trajectoryOpacity})`
+      );
     }
     this.ctx.beginPath();
     this.ctx.moveTo(linePointingSpaceship.x, linePointingSpaceship.y);
