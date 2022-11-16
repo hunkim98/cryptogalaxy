@@ -191,17 +191,9 @@ export class Spaceship {
       return;
     }
 
-    if (
-      this.position.squareDistanceTo(this.canvasEdgePosition) > 25 &&
-      this.opacity < 1
-    ) {
-      this.opacity += 0.01;
-    }
-    if (
-      this.position.squareDistanceTo(this.planet.position) < 25 &&
-      this.opacity > 0
-    ) {
-      this.opacity -= 0.01;
+    // spaceship opacity
+    if (this.opacity < 1) {
+      this.opacity += 0.02;
     }
 
     // this part is for drawing center-rotated image
@@ -217,7 +209,7 @@ export class Spaceship {
       this.ctx.rotate(-(-Math.PI / 2 - angle));
     }
 
-    // this.ctx.globalAlpha = this.opacity;
+    this.ctx.globalAlpha = this.opacity;
     this.ctx.drawImage(
       this.imageElement,
       -imageHalfWidth,

@@ -32,12 +32,35 @@ export type CryptoDataFields = {
   rsi?: number;
 };
 
-const allowedCoins = ["KRW-BTC"];
+const allowedCoins = [
+  "KRW-ETH",
+  "KRW-ETC",
+  "KRW-MATIC",
+  "KRW-LINK",
+  "KRW-ADA",
+  "KRW-STORJ",
+  "KRW-AAVE",
+  "KRW-SAND",
+  "KRW-XRP",
+  "KRW-DOGE",
+];
 
 const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   const [cryptoData, setCryptoData] = useState<Map<string, CryptoDataFields>>(
     new Map()
   );
+  const [markets, setMarkets] = useState<Array<string>>([
+    "KRW-ETH",
+    "KRW-ETC",
+    "KRW-MATIC",
+    "KRW-LINK",
+    "KRW-ADA",
+    "KRW-STORJ",
+    "KRW-AAVE",
+    "KRW-SAND",
+    "KRW-XRP",
+    "KRW-DOGE",
+  ]);
   const retrieveOtherCryptoData = useCallback(
     async (
       market: string,
@@ -90,7 +113,8 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
     },
     []
   );
-  useEffect(() => {
+  const retrieveAllCryptoData = useCallback(async () => {
+    console.log("retrieving");
     getDayCandles("KRW-BTC", 30)
       .then(async (res) => {
         const btcCandles = res;
@@ -103,39 +127,46 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       })
       // we need btc data first to calculate others
       .then(({ btcCandles, coinMarketData }) => {
-        retrieveOtherCryptoData("KRW-ETH", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-ETC", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-MATIC", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-LINK", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-ADA", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-STORJ", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-AAVE", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-USDT", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-SAND", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-XRP", 200, btcCandles, coinMarketData);
-        retrieveOtherCryptoData("KRW-DOGE", 200, btcCandles, coinMarketData);
+        markets.forEach((market) => {
+          retrieveOtherCryptoData(market, 200, btcCandles, coinMarketData);
+        });
       })
       .catch((err) => console.log(err));
+  }, [markets, retrieveOtherCryptoData]);
 
-    getTicker("KRW-BTC").then((res) => {
-      console.log(res);
+  const retrieveCurrentPrice = useCallback(async () => {
+    markets.forEach(async (market) => {
+      const ticker = await getTicker(market);
+      const previousData = cryptoData.get(market.replace("KRW-", ""));
+      if (previousData) {
+        setCryptoData((prev) => {
+          const newMap = new Map(prev);
+          newMap.set(market.replace("KRW-", ""), {
+            ...previousData,
+            currentPrice: ticker.trade_price,
+          });
+          return newMap;
+        });
+      }
     });
+  }, [markets, cryptoData]);
 
-    // upbitApi
-    //   .candlesDay("KRW-ETH", 60)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // upbitApi.candlesDay("KRW-DOGE", 60).then((res) => {
-    //   console.log(res);
-    // });
-    // upbitApi.ticker(["KRW-BTC"]).then((res) => {
-    //   console.log(res[0]);
-    // });
+  useEffect(() => {
+    retrieveAllCryptoData();
   }, []);
+
+  useEffect(() => {
+    const longInterval = setInterval(() => {
+      retrieveAllCryptoData();
+    }, 1000 * 60 * 60);
+    const shortInterval = setInterval(() => {
+      retrieveCurrentPrice();
+    }, 1000 * 10);
+    return () => {
+      clearInterval(longInterval);
+      clearInterval(shortInterval);
+    };
+  }, [retrieveAllCryptoData, retrieveCurrentPrice]);
 
   const [cryptoCodes, setCryptoCodes] = useState<Array<string>>([]);
   return (

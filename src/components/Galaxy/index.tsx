@@ -36,27 +36,46 @@ const Galaxy: React.FC<Props> = () => {
           crypto[1].increaseRatio
         );
       } else {
-        if (
-          !galaxyCanvasRef.current.planets
-            .map((planet) => planet.name)
-            .includes(crypto[0]) &&
-          crypto[1].coefficient &&
-          crypto[1].volume &&
-          crypto[1].currentPrice &&
-          crypto[1].support &&
-          crypto[1].resistance &&
-          crypto[1].rsi
-        ) {
-          galaxyCanvasRef.current.addPlanet(
-            crypto[0].replace("KRW-", ""),
-            crypto[1].increaseRatio,
-            crypto[1].coefficient,
-            crypto[1].volume,
-            crypto[1].currentPrice,
-            crypto[1].support,
-            crypto[1].resistance,
+        const indexOfPlanet = galaxyCanvasRef.current.planets.findIndex(
+          (element) => element.name === crypto[0].replace("KRW-", "")
+        );
+        if (indexOfPlanet === -1) {
+          if (
+            crypto[1].coefficient &&
+            crypto[1].volume &&
+            crypto[1].currentPrice &&
+            crypto[1].support &&
+            crypto[1].resistance &&
             crypto[1].rsi
-          );
+          ) {
+            galaxyCanvasRef.current.addPlanet(
+              crypto[0].replace("KRW-", ""),
+              crypto[1].increaseRatio,
+              crypto[1].coefficient,
+              crypto[1].volume,
+              crypto[1].currentPrice,
+              crypto[1].support,
+              crypto[1].resistance,
+              crypto[1].rsi
+            );
+          }
+        } else {
+          galaxyCanvasRef.current.planets[indexOfPlanet].update({
+            increaseRatio: crypto[1].increaseRatio,
+            coefficient: crypto[1].coefficient,
+            rsi: crypto[1].rsi,
+          });
+          // the planet already exists
+          // galaxyCanvasRef.current.updatePlanet(
+          //   crypto[0].replace("KRW-", ""),
+          //   crypto[1].increaseRatio,
+          //   crypto[1].coefficient,
+          //   crypto[1].volume,
+          //   crypto[1].currentPrice,
+          //   crypto[1].support,
+          //   crypto[1].resistance,
+          //   crypto[1].rsi
+          // );
         }
       }
     }

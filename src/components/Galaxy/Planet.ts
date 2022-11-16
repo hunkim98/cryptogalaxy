@@ -1,4 +1,8 @@
-import { changeRelativeValueToRealValue } from "utils/clamp";
+import { CryptoDataFields } from "context/CryptoContext";
+import {
+  changeRelativeValueToRealValue,
+  changeRelativeValueToRealValueInversed,
+} from "utils/clamp";
 import { generateRandomName } from "utils/generateRandomName";
 import { convertCartesianToScreenPoint } from "../../utils/cartesian";
 import { Vector2 } from "../../utils/math/Vector2";
@@ -6,6 +10,7 @@ import { Rotator2D } from "../../utils/rotator2d";
 import { Continent } from "./Continent";
 import { ContinentSamples } from "./Continents/Examples";
 import { Spaceship, SpaceshipDirection } from "./Spaceship";
+import { Sun } from "./Sun";
 
 export class Planet {
   name: string;
@@ -14,7 +19,9 @@ export class Planet {
   radius: number;
   position: Vector2;
   speed: number;
+  increaseRatio: number;
   distanceFromSun: number;
+  correlationCoefficient: number;
   spaceShips: Array<Spaceship>;
   continents: Array<Continent>;
   continentOrigins: Array<Vector2>;
@@ -29,8 +36,8 @@ export class Planet {
   rsi: number;
   constructor(
     canvas: HTMLCanvasElement,
-    distanceFromSun: number,
-    speed: number,
+    correlationCoefficient: number,
+    increaseRatio: number,
     radius: number,
     name: string,
     price: number,
@@ -40,38 +47,32 @@ export class Planet {
   ) {
     this.name = name;
     this.canvas = canvas;
-    this.speed = speed;
     this.rotator = new Rotator2D(Math.random() * 360);
-    this.distanceFromSun = distanceFromSun;
+    this.correlationCoefficient = correlationCoefficient;
     this.radius = radius;
+    this.distanceFromSun = this.calcDistanceFromSun(correlationCoefficient);
     this.spaceShips = [];
     this.ctx = this.canvas.getContext("2d")!;
     this.price = price;
+
     this.resistance = resistance;
     this.support = support;
+
+    this.increaseRatio = increaseRatio;
+    this.speed = this.calcSpeed(increaseRatio);
     this.rsi = rsi;
-    if (this.rsi >= 70) {
-      this.spaceShipCount = 3;
-      this.spaceShipDirection = SpaceshipDirection.IN;
-      this.spaceShipRegenerationInterval = 2000;
-    } else if (60 <= this.rsi && this.rsi < 70) {
-      this.spaceShipCount = 1;
-      this.spaceShipDirection = SpaceshipDirection.IN;
-      this.spaceShipRegenerationInterval = 5000;
-    } else if (40 <= this.rsi && this.rsi < 60) {
-      this.spaceShipCount = 0;
-      this.spaceShipDirection = SpaceshipDirection.OUT;
-      this.spaceShipRegenerationInterval = 10000;
-    } else if (30 <= this.rsi && this.rsi < 40) {
-      this.spaceShipCount = 1;
-      this.spaceShipDirection = SpaceshipDirection.OUT;
-      this.spaceShipRegenerationInterval = 5000;
-    } else {
-      this.spaceShipCount = 3;
-      this.spaceShipDirection = SpaceshipDirection.OUT;
-      this.spaceShipRegenerationInterval = 2000;
-    }
-    const positionAffineVector = new Vector2(distanceFromSun, 0).toAffine(true);
+    const {
+      spaceShipCount,
+      spaceShipDirection,
+      spaceShipRegenerationInterval,
+    } = this.setSpaceshipInformation(rsi);
+    this.spaceShipCount = spaceShipCount;
+    this.spaceShipDirection = spaceShipDirection;
+    this.spaceShipRegenerationInterval = spaceShipRegenerationInterval;
+
+    const positionAffineVector = new Vector2(this.distanceFromSun, 0).toAffine(
+      true
+    );
     const rotateAffineMatrix = this.rotator.getRotateAffineMatrix();
     const shuffledContinents = ContinentSamples.sort(() => 0.5 - Math.random());
     const selectedContinents = shuffledContinents.slice(0, 5);
@@ -138,7 +139,92 @@ export class Planet {
     // this.setSpaceShip();
   }
 
-  generateSpaceShip() {}
+  update(data: Partial<CryptoDataFields>) {
+    if (this.name === "DOGE") {
+      console.log("called update", data.increaseRatio);
+    }
+    if (data.coefficient) {
+      this.correlationCoefficient = data.coefficient;
+      this.distanceFromSun = this.calcDistanceFromSun(data.coefficient);
+    }
+    if (data.increaseRatio) {
+      this.increaseRatio = data.increaseRatio;
+      this.speed = this.calcSpeed(data.increaseRatio);
+    }
+    if (data.rsi) {
+      this.rsi = data.rsi;
+      const {
+        spaceShipDirection,
+        spaceShipCount,
+        spaceShipRegenerationInterval,
+      } = this.setSpaceshipInformation(data.rsi);
+      this.spaceShipCount = spaceShipCount;
+      this.spaceShipRegenerationInterval = spaceShipRegenerationInterval;
+      this.spaceShipDirection = spaceShipDirection;
+    }
+  }
+
+  setSpaceshipInformation(rsi: number) {
+    let spaceShipCount = 0;
+    let spaceShipDirection: SpaceshipDirection = SpaceshipDirection.IN;
+    let spaceShipRegenerationInterval = 20000;
+    if (rsi >= 70) {
+      spaceShipCount = 3;
+      spaceShipDirection = SpaceshipDirection.IN;
+      spaceShipRegenerationInterval = 5000;
+    } else if (60 <= rsi && rsi < 70) {
+      spaceShipCount = 1;
+      spaceShipDirection = SpaceshipDirection.IN;
+      spaceShipRegenerationInterval = 10000;
+    } else if (40 <= rsi && rsi < 60) {
+      spaceShipCount = 0;
+      spaceShipDirection = SpaceshipDirection.OUT;
+      spaceShipRegenerationInterval = 20000;
+    } else if (30 <= rsi && rsi < 40) {
+      spaceShipCount = 1;
+      spaceShipDirection = SpaceshipDirection.OUT;
+      spaceShipRegenerationInterval = 10000;
+    } else {
+      spaceShipCount = 3;
+      spaceShipDirection = SpaceshipDirection.OUT;
+      spaceShipRegenerationInterval = 5000;
+    }
+    return {
+      spaceShipCount,
+      spaceShipDirection,
+      spaceShipRegenerationInterval,
+    };
+  }
+
+  calcSpeed(increaseRatio: number) {
+    const maxSpeed = 0.3;
+    const minSpeed = 0.02;
+
+    const speed = changeRelativeValueToRealValue(
+      increaseRatio,
+      0,
+      1,
+      minSpeed,
+      maxSpeed
+    );
+    return speed;
+  }
+
+  calcDistanceFromSun(correlationCoefficient: number) {
+    const minDistance = Sun.radius + 20 + this.radius;
+    const maxDistance = 400 + Sun.radius - this.radius;
+
+    const distance = changeRelativeValueToRealValueInversed(
+      // the bigger the correlation coefficient
+      // the more similar is it to the sun
+      correlationCoefficient,
+      -0.1,
+      0.2,
+      minDistance,
+      maxDistance
+    );
+    return distance;
+  }
 
   getCanvasOuterTrajectoryPoint() {
     const rotatorAdvanceAmount = 20;

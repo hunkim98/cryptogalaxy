@@ -1,8 +1,11 @@
+import { CryptoDataFields } from "context/CryptoContext";
+import { convertCartesianToScreenPoint } from "utils/cartesian";
 import {
   changeRelativeValueToRealValue,
   changeRelativeValueToRealValueInversed,
   clamp,
 } from "utils/clamp";
+import { Vector2 } from "utils/math/Vector2";
 import { Planet } from "./Planet";
 import { Sun } from "./Sun";
 
@@ -30,6 +33,23 @@ export class GalaxyCanvas {
     this.initialize();
   }
 
+  onMouseMove(e: MouseEvent) {
+    // console.log(e.clientX, e.clientY);
+    // for (const planet of this.planets) {
+    //   const screenPoint = convertCartesianToScreenPoint(
+    //     this.element,
+    //     planet.position
+    //   );
+    //   const distance = screenPoint.squareDistanceTo(
+    //     new Vector2(e.clientX, e.clientY)
+    //   );
+    //   console.log(distance);
+    //   if (planet.name === "DOGE") {
+    //     console.log(distance);
+    //   }
+    // }
+  }
+
   setSun(name: string, increaseRatio: number) {
     this.sun = new Sun(this.element, name, increaseRatio);
   }
@@ -52,32 +72,11 @@ export class GalaxyCanvas {
       this.MIN_PLANET_SIZE,
       this.MAX_PLANET_SIZE
     );
-    const minDistance = Sun.radius + 20 + size;
-    const maxDistance = 400 + Sun.radius - size;
-    const distance = changeRelativeValueToRealValueInversed(
-      // the bigger the correlation coefficient
-      // the more similar is it to the sun
-      correlationCoefficient,
-      -0.1,
-      0.2,
-      minDistance,
-      maxDistance
-    );
-    const maxSpeed = 0.3;
-    const minSpeed = 0.02;
-
-    const speed = changeRelativeValueToRealValue(
-      increaseRatio,
-      0,
-      1,
-      minSpeed,
-      maxSpeed
-    );
 
     const planet = new Planet(
       this.element,
-      distance,
-      speed,
+      correlationCoefficient,
+      increaseRatio,
       size,
       name,
       price,
@@ -89,8 +88,16 @@ export class GalaxyCanvas {
     this.planets.sort((a, b) => b.radius - a.radius);
   }
 
+  updatePlanet(planetName: string, data: Partial<CryptoDataFields>) {
+    const planet = this.planets.find((planet) => planet.name === planetName);
+    if (planet) {
+      planet.update(data);
+    }
+  }
+
   initialize() {
     // this.planets.push(new Planet(this.element, this.sun.radius + 50, 1, 80));
+    this.element.addEventListener("mousemove", this.onMouseMove);
   }
 
   setWidth(width: number, devicePixelRatio?: number) {
@@ -175,5 +182,6 @@ export class GalaxyCanvas {
   destroy() {
     this.clear();
     this.planets = [];
+    this.element.removeEventListener("mousemove", this.onMouseMove);
   }
 }
