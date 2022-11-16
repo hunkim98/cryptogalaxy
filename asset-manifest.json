@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/cryptogalaxy/static/css/main.88b75c41.chunk.css",
-    "main.js": "/cryptogalaxy/static/js/main.e8aeceb1.chunk.js",
-    "main.js.map": "/cryptogalaxy/static/js/main.e8aeceb1.chunk.js.map",
+    "main.js": "/cryptogalaxy/static/js/main.f278ddcc.chunk.js",
+    "main.js.map": "/cryptogalaxy/static/js/main.f278ddcc.chunk.js.map",
     "runtime-main.js": "/cryptogalaxy/static/js/runtime-main.1098c1e0.js",
     "runtime-main.js.map": "/cryptogalaxy/static/js/runtime-main.1098c1e0.js.map",
-    "static/js/2.0278753d.chunk.js": "/cryptogalaxy/static/js/2.0278753d.chunk.js",
-    "static/js/2.0278753d.chunk.js.map": "/cryptogalaxy/static/js/2.0278753d.chunk.js.map",
+    "static/js/2.aceea442.chunk.js": "/cryptogalaxy/static/js/2.aceea442.chunk.js",
+    "static/js/2.aceea442.chunk.js.map": "/cryptogalaxy/static/js/2.aceea442.chunk.js.map",
     "static/js/3.445d01dd.chunk.js": "/cryptogalaxy/static/js/3.445d01dd.chunk.js",
     "static/js/3.445d01dd.chunk.js.map": "/cryptogalaxy/static/js/3.445d01dd.chunk.js.map",
     "index.html": "/cryptogalaxy/index.html",
     "static/css/main.88b75c41.chunk.css.map": "/cryptogalaxy/static/css/main.88b75c41.chunk.css.map",
-    "static/js/2.0278753d.chunk.js.LICENSE.txt": "/cryptogalaxy/static/js/2.0278753d.chunk.js.LICENSE.txt",
+    "static/js/2.aceea442.chunk.js.LICENSE.txt": "/cryptogalaxy/static/js/2.aceea442.chunk.js.LICENSE.txt",
     "static/media/logo.791fbd9b.png": "/cryptogalaxy/static/media/logo.791fbd9b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1098c1e0.js",
-    "static/js/2.0278753d.chunk.js",
+    "static/js/2.aceea442.chunk.js",
     "static/css/main.88b75c41.chunk.css",
-    "static/js/main.e8aeceb1.chunk.js"
+    "static/js/main.f278ddcc.chunk.js"
   ]
 }
