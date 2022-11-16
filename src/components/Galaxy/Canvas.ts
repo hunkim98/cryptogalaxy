@@ -171,6 +171,9 @@ export class GalaxyCanvas {
       this.sun.draw();
     }
     for (const planet of this.planets) {
+      planet.drawTrajectory();
+    }
+    for (const planet of this.planets) {
       planet.draw();
     }
   }

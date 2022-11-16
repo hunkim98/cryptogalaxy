@@ -322,6 +322,24 @@ export class Planet {
     this.ctx.restore();
   }
 
+  drawTrajectory() {
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.arc(
+      this.canvas.width / 2,
+      this.canvas.height / 2,
+      this.distanceFromSun,
+      0,
+      2 * Math.PI,
+      false
+    );
+    this.ctx.strokeStyle = "rgba(255,255,255,0.4)";
+    this.ctx.lineWidth = 0.5;
+    this.ctx.stroke();
+    // this.ctx.fill();
+    this.ctx.restore();
+  }
+
   draw() {
     this.drawSpaceShips();
     this.rotator.degree += this.speed;
@@ -368,7 +386,6 @@ export class Planet {
     // );
     this.ctx.closePath();
     this.ctx.restore();
-
     this.drawContinents(drawPosition);
   }
 }
