@@ -380,6 +380,23 @@ export class Planet {
     this.ctx.restore();
   }
 
+  drawOverlay(drawPosition: Vector2) {
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.arc(drawPosition.x, drawPosition.y, this.radius, 0, 2 * Math.PI);
+
+    this.ctx.fillStyle = `rgba(0, 0, 0, ${changeRelativeValueToRealValueInversed(
+      this.currentPriceRelativeLocation,
+      0,
+      1,
+      0,
+      0.6
+    )})`;
+    this.ctx.fill();
+    this.ctx.closePath();
+    this.ctx.restore();
+  }
+
   draw() {
     this.drawSpaceShips();
     this.rotator.degree += this.speed;
@@ -414,21 +431,7 @@ export class Planet {
     this.ctx.restore();
 
     this.drawContinents(drawPosition);
-
-    this.ctx.save();
-    this.ctx.beginPath();
-    this.ctx.arc(drawPosition.x, drawPosition.y, this.radius, 0, 2 * Math.PI);
-
-    this.ctx.fillStyle = `rgba(0, 0, 0, ${changeRelativeValueToRealValueInversed(
-      this.currentPriceRelativeLocation,
-      0,
-      1,
-      0,
-      0.8
-    )})`;
-    this.ctx.fill();
-    this.ctx.closePath();
-    this.ctx.restore();
+    this.drawOverlay(drawPosition);
 
     this.ctx.save();
 
