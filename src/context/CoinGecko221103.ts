@@ -3656,8 +3656,8 @@ export const CoinGeckoJson: Array<
     atl_change_percentage: 380.05724,
     atl_date: "2020-03-13T02:22:52.902Z",
     roi: null,
-    foreColor: "",
-    backColor: "",
+    foreColor: "#001E6A",
+    backColor: "#EBA808",
     last_updated: "2022-11-03T11:27:13.796Z",
   },
   {

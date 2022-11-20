@@ -195,7 +195,6 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
     };
   }, [retrieveAllCryptoData, retrieveCurrentPrice]);
 
-  const [cryptoCodes, setCryptoCodes] = useState<Array<string>>([]);
   return (
     <CryptoContext.Provider value={{ cryptoData }}>
       {children}

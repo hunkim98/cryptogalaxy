@@ -68,6 +68,7 @@ const Galaxy: React.FC<Props> = () => {
             increaseRatio: crypto[1].increaseRatio,
             coefficient: crypto[1].coefficient,
             rsi: crypto[1].rsi,
+            currentPrice: crypto[1].currentPrice,
           });
           // the planet already exists
           // galaxyCanvasRef.current.updatePlanet(

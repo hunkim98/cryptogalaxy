@@ -33,6 +33,9 @@ export class Planet {
   spaceShipCount: number;
   spaceShipDirection: SpaceshipDirection;
   spaceShipRegenerationInterval: number;
+  currentPriceRelativeLocation: number = 0.5;
+  finalResistancePrice: number | null = null;
+  finalSupportPrice: number | null = null;
   foreColor: string;
   backColor: string;
   rsi: number;
@@ -94,26 +97,35 @@ export class Planet {
     ];
     if (support.length === 0 && resistance.length === 0) {
       this.greenness = 0;
+      this.currentPriceRelativeLocation = 0.5;
     } else if (support.length === 0 && resistance.length !== 0) {
       this.greenness = 30;
-    } else if (resistance.length === 0 && support.length !== 0) {
+      this.currentPriceRelativeLocation = 0;
+      this.finalResistancePrice = resistance[resistance.length - 1];
+    } else if (support.length !== 0 && resistance.length === 0) {
       this.greenness = 255;
+      this.currentPriceRelativeLocation = 1;
+      this.finalSupportPrice = support[support.length - 1];
     } else {
       let finalSupportPrice = support[support.length - 1];
       let finalResistancePrice = resistance[resistance.length - 1];
       while (price > finalResistancePrice && resistance.length > 0) {
         resistance.pop();
         finalResistancePrice = resistance[resistance.length - 1];
+        this.finalResistancePrice = resistance[resistance.length - 1];
       }
       while (price < finalSupportPrice && support.length > 0) {
         support.pop();
         finalSupportPrice = support[support.length - 1];
+        this.finalSupportPrice = support[support.length - 1];
       }
       if (resistance.length === 0) {
         this.greenness = 255;
+        this.currentPriceRelativeLocation = 1;
       }
       if (support.length === 0) {
         this.greenness = 10;
+        this.currentPriceRelativeLocation = 0;
       }
 
       if (support.length !== 0 && resistance.length !== 0) {
@@ -124,6 +136,13 @@ export class Planet {
 
           10,
           255
+        );
+        this.currentPriceRelativeLocation = changeRelativeValueToRealValue(
+          price,
+          finalSupportPrice,
+          finalResistancePrice,
+          0,
+          1
         );
       }
     }
@@ -156,6 +175,9 @@ export class Planet {
     if (data.increaseRatio) {
       this.increaseRatio = data.increaseRatio;
       this.speed = this.calcSpeed(data.increaseRatio);
+    }
+    if (data.currentPrice) {
+      this.price = data.currentPrice;
     }
     if (data.rsi) {
       this.rsi = data.rsi;
@@ -368,10 +390,36 @@ export class Planet {
       false
     );
     this.ctx.fillStyle = this.backColor;
+    this.ctx.fill();
+    this.ctx.closePath();
     // this.ctx.fillStyle = `rgba(${
     //   this.greenness ? 255 - this.greenness : 0
     // }, ${0}, ${this.greenness ?? 0}, ${1})`;
+    this.ctx.restore();
+
+    this.drawContinents(drawPosition);
+
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.arc(drawPosition.x, drawPosition.y, this.radius, 0, 2 * Math.PI);
+    if (this.name === "DOGE" || this.name === "XRP") {
+      console.log("support", this.finalSupportPrice);
+      console.log("resistance", this.finalResistancePrice);
+      console.log("current", this.price);
+      console.log(this.currentPriceRelativeLocation);
+    }
+    this.ctx.fillStyle = `rgba(0, 0, 0, ${changeRelativeValueToRealValueInversed(
+      this.currentPriceRelativeLocation,
+      0,
+      1,
+      0,
+      0.8
+    )})`;
     this.ctx.fill();
+    this.ctx.closePath();
+    this.ctx.restore();
+
+    this.ctx.save();
 
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
@@ -387,8 +435,7 @@ export class Planet {
     //   drawPosition.x,
     //   drawPosition.y + this.radius + 30
     // );
-    this.ctx.closePath();
+
     this.ctx.restore();
-    this.drawContinents(drawPosition);
   }
 }
