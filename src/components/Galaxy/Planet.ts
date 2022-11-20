@@ -164,10 +164,22 @@ export class Planet {
     // this.setSpaceShip();
   }
 
-  update(data: Partial<CryptoDataFields>) {
-    if (this.name === "DOGE") {
-      console.log("called update", data.increaseRatio, this.price);
+  calcCurrentPriceRelativeLocation(price: number) {
+    if (this.finalSupportPrice === null || this.finalResistancePrice === null) {
+      return this.currentPriceRelativeLocation;
     }
+    const relativeLocation = changeRelativeValueToRealValue(
+      price,
+      this.finalSupportPrice,
+      this.finalResistancePrice,
+      0,
+      1
+    );
+    console.log(relativeLocation);
+    return relativeLocation;
+  }
+
+  update(data: Partial<CryptoDataFields>) {
     if (data.coefficient) {
       this.correlationCoefficient = data.coefficient;
       this.distanceFromSun = this.calcDistanceFromSun(data.coefficient);
@@ -177,7 +189,11 @@ export class Planet {
       this.speed = this.calcSpeed(data.increaseRatio);
     }
     if (data.currentPrice) {
+      console.log(this.currentPriceRelativeLocation, this.name);
       this.price = data.currentPrice;
+      this.currentPriceRelativeLocation = this.calcCurrentPriceRelativeLocation(
+        data.currentPrice
+      );
     }
     if (data.rsi) {
       this.rsi = data.rsi;
@@ -402,12 +418,7 @@ export class Planet {
     this.ctx.save();
     this.ctx.beginPath();
     this.ctx.arc(drawPosition.x, drawPosition.y, this.radius, 0, 2 * Math.PI);
-    if (this.name === "DOGE" || this.name === "XRP") {
-      console.log("support", this.finalSupportPrice);
-      console.log("resistance", this.finalResistancePrice);
-      console.log("current", this.price);
-      console.log(this.currentPriceRelativeLocation);
-    }
+
     this.ctx.fillStyle = `rgba(0, 0, 0, ${changeRelativeValueToRealValueInversed(
       this.currentPriceRelativeLocation,
       0,
