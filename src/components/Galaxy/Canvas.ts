@@ -50,8 +50,13 @@ export class GalaxyCanvas {
     // }
   }
 
-  setSun(name: string, increaseRatio: number) {
-    this.sun = new Sun(this.element, name, increaseRatio);
+  setSun(
+    name: string,
+    increaseRatio: number,
+    foreColor: string,
+    backColor: string
+  ) {
+    this.sun = new Sun(this.element, name, increaseRatio, foreColor, backColor);
   }
 
   addPlanet(
@@ -62,7 +67,9 @@ export class GalaxyCanvas {
     price: number,
     support: Array<number>,
     resistance: Array<number>,
-    rsi: number
+    rsi: number,
+    foreColor: string,
+    backColor: string
   ) {
     const size = changeRelativeValueToRealValue(
       volume,
@@ -82,7 +89,9 @@ export class GalaxyCanvas {
       price,
       support,
       resistance,
-      rsi
+      rsi,
+      foreColor,
+      backColor
     );
     this.planets.push(planet);
     this.planets.sort((a, b) => b.radius - a.radius);

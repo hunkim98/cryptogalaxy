@@ -33,6 +33,8 @@ export class Planet {
   spaceShipCount: number;
   spaceShipDirection: SpaceshipDirection;
   spaceShipRegenerationInterval: number;
+  foreColor: string;
+  backColor: string;
   rsi: number;
   constructor(
     canvas: HTMLCanvasElement,
@@ -43,9 +45,13 @@ export class Planet {
     price: number,
     support: Array<number>,
     resistance: Array<number>,
-    rsi: number
+    rsi: number,
+    foreColor: string,
+    backColor: string
   ) {
     this.name = name;
+    this.foreColor = foreColor;
+    this.backColor = backColor;
     this.canvas = canvas;
     this.rotator = new Rotator2D(Math.random() * 360);
     this.correlationCoefficient = correlationCoefficient;
@@ -141,7 +147,7 @@ export class Planet {
 
   update(data: Partial<CryptoDataFields>) {
     if (this.name === "DOGE") {
-      console.log("called update", data.increaseRatio);
+      console.log("called update", data.increaseRatio, this.price);
     }
     if (data.coefficient) {
       this.correlationCoefficient = data.coefficient;
@@ -310,12 +316,7 @@ export class Planet {
 
       this.ctx.arc(origin.x, origin.y, this.radius, 0, 2 * Math.PI, false);
       this.ctx.clip();
-      continent.draw(origin.add(continentOrigin), {
-        r: this.greenness ? 255 - this.greenness : 0,
-        g: this.greenness ?? 0,
-        b: 0,
-        a: 1,
-      });
+      continent.draw(origin.add(continentOrigin), this.foreColor);
 
       this.continents.push(continent);
     }
@@ -333,7 +334,8 @@ export class Planet {
       2 * Math.PI,
       false
     );
-    this.ctx.strokeStyle = "rgba(255,255,255,0.4)";
+    this.ctx.strokeStyle = this.foreColor;
+    this.ctx.globalAlpha = 0.3;
     this.ctx.lineWidth = 0.5;
     this.ctx.stroke();
     // this.ctx.fill();
@@ -365,9 +367,10 @@ export class Planet {
       2 * Math.PI,
       false
     );
-    this.ctx.fillStyle = `rgba(${
-      this.greenness ? 255 - this.greenness : 0
-    }, ${0}, ${this.greenness ?? 0}, ${1})`;
+    this.ctx.fillStyle = this.backColor;
+    // this.ctx.fillStyle = `rgba(${
+    //   this.greenness ? 255 - this.greenness : 0
+    // }, ${0}, ${this.greenness ?? 0}, ${1})`;
     this.ctx.fill();
 
     this.ctx.textAlign = "center";

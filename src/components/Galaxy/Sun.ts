@@ -11,9 +11,19 @@ export class Sun {
   MIN_BRIGHTNESS = 2;
   MAX_BRIGHTNESS = 20;
   increaseRatio: number;
+  foreColor: string;
+  backColor: string;
   name: string;
-  constructor(canvas: HTMLCanvasElement, name: string, increaseRatio: number) {
+  constructor(
+    canvas: HTMLCanvasElement,
+    name: string,
+    increaseRatio: number,
+    foreColor: string,
+    backColor: string
+  ) {
     this.canvas = canvas;
+    this.foreColor = foreColor;
+    this.backColor = backColor;
     this.name = name;
     this.increaseRatio = increaseRatio;
     this.setBrightness(increaseRatio);
@@ -65,7 +75,7 @@ export class Sun {
     ctx.save();
     ctx.beginPath();
     ctx.arc(drawPosition.x, drawPosition.y, Sun.radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = this.color;
+    ctx.fillStyle = this.backColor;
     ctx.fill();
     ctx.restore();
   }
@@ -75,8 +85,8 @@ export class Sun {
       this.canvas,
       this.position
     );
-    this.drawBrightnessInner(drawPosition, ctx);
-    this.drawBrightnessOuter(drawPosition, ctx);
+    // this.drawBrightnessInner(drawPosition, ctx);
+    // this.drawBrightnessOuter(drawPosition, ctx);
     this.drawSun(drawPosition, ctx);
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";

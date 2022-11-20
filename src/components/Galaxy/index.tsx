@@ -33,7 +33,9 @@ const Galaxy: React.FC<Props> = () => {
         //krw-btc is sun
         galaxyCanvasRef.current.setSun(
           crypto[0].replace("KRW-", ""),
-          crypto[1].increaseRatio
+          crypto[1].increaseRatio,
+          crypto[1].foreColor,
+          crypto[1].backColor
         );
       } else {
         const indexOfPlanet = galaxyCanvasRef.current.planets.findIndex(
@@ -56,7 +58,9 @@ const Galaxy: React.FC<Props> = () => {
               crypto[1].currentPrice,
               crypto[1].support,
               crypto[1].resistance,
-              crypto[1].rsi
+              crypto[1].rsi,
+              crypto[1].foreColor,
+              crypto[1].backColor
             );
           }
         } else {

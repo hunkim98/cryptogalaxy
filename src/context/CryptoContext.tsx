@@ -3,9 +3,7 @@ import { ICandleDayReturnProps } from "node-upbit/lib/@types/quotation";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { calcCorrelationCoefficient } from "utils/quant/correlation";
 import { calcIncreaseRatioOfMA } from "utils/quant/movingAverage";
-import CoinGecko from "coingecko-api";
-import axios from "axios";
-import { CoinGeckoMarketResponse } from "types/coingecko.res";
+import { CoinGeckoSingleMarketData } from "types/coingecko.res";
 import { calcSupportResistance } from "utils/quant/support-resistance";
 import { CoinGeckoJson } from "./CoinGecko221103";
 import { calcRSI } from "utils/quant/rsi";
@@ -30,6 +28,8 @@ export type CryptoDataFields = {
   coefficient?: number;
   volume?: number;
   rsi?: number;
+  foreColor: string;
+  backColor: string;
 };
 
 const allowedCoins = [
@@ -49,24 +49,28 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   const [cryptoData, setCryptoData] = useState<Map<string, CryptoDataFields>>(
     new Map()
   );
+  const [sunCrypto, setSunCrypto] = useState<string>("KRW-BTC");
   const [markets, setMarkets] = useState<Array<string>>([
     "KRW-ETH",
     "KRW-ETC",
     "KRW-MATIC",
     "KRW-LINK",
-    "KRW-ADA",
-    "KRW-STORJ",
     "KRW-AAVE",
     "KRW-SAND",
     "KRW-XRP",
     "KRW-DOGE",
+    "KRW-BTG",
+    "KRW-MANA",
+    "KRW-SOL",
   ]);
   const retrieveOtherCryptoData = useCallback(
     async (
       market: string,
       dayCount: number,
       btcDayCandles: ICandleDayReturnProps[],
-      coinMarketData: CoinGeckoMarketResponse
+      coinMarketData: Array<
+        CoinGeckoSingleMarketData & { foreColor: string; backColor: string }
+      >
     ) => {
       const symbol = market.split("-")[1].toLowerCase();
       const coinMarket = coinMarketData.find(
@@ -107,32 +111,55 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
           support,
           resistance,
           rsi,
+          foreColor: coinMarket.foreColor,
+          backColor: coinMarket.backColor,
         });
         return newMap;
       });
     },
     []
   );
-  const retrieveAllCryptoData = useCallback(async () => {
-    console.log("retrieving");
-    getDayCandles("KRW-BTC", 30)
-      .then(async (res) => {
-        const btcCandles = res;
-        const increaseRatio = calcIncreaseRatioOfMA(btcCandles, 20);
-        setCryptoData(
-          (prev) => new Map([...prev, ["KRW-BTC", { increaseRatio }]])
-        );
-        const coinMarketData = CoinGeckoJson;
-        return { btcCandles, coinMarketData };
-      })
-      // we need btc data first to calculate others
-      .then(({ btcCandles, coinMarketData }) => {
-        markets.forEach((market) => {
-          retrieveOtherCryptoData(market, 200, btcCandles, coinMarketData);
-        });
-      })
-      .catch((err) => console.log(err));
-  }, [markets, retrieveOtherCryptoData]);
+  const retrieveAllCryptoData = useCallback(
+    async (sunCrypto: string) => {
+      console.log("retrieving");
+      getDayCandles(sunCrypto, 30)
+        .then(async (res) => {
+          const btcCandles = res;
+          const increaseRatio = calcIncreaseRatioOfMA(btcCandles, 20);
+          const sunCoinGeckoData = CoinGeckoJson.findIndex(
+            (element) =>
+              element.symbol === sunCrypto.split("-")[1].toLowerCase()
+          );
+          if (sunCoinGeckoData === -1) {
+            throw Error("no sun data is undefined");
+          }
+          setCryptoData(
+            (prev) =>
+              new Map([
+                ...prev,
+                [
+                  "KRW-BTC",
+                  {
+                    increaseRatio,
+                    foreColor: CoinGeckoJson[sunCoinGeckoData].foreColor,
+                    backColor: CoinGeckoJson[sunCoinGeckoData].backColor,
+                  },
+                ],
+              ])
+          );
+          const coinMarketData = CoinGeckoJson;
+          return { btcCandles, coinMarketData };
+        })
+        // we need btc data first to calculate others
+        .then(({ btcCandles, coinMarketData }) => {
+          markets.forEach((market) => {
+            retrieveOtherCryptoData(market, 200, btcCandles, coinMarketData);
+          });
+        })
+        .catch((err) => console.log(err));
+    },
+    [markets, retrieveOtherCryptoData]
+  );
 
   const retrieveCurrentPrice = useCallback(async () => {
     markets.forEach(async (market) => {
@@ -152,16 +179,16 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   }, [markets, cryptoData]);
 
   useEffect(() => {
-    retrieveAllCryptoData();
+    retrieveAllCryptoData(sunCrypto);
   }, []);
 
   useEffect(() => {
     const longInterval = setInterval(() => {
-      retrieveAllCryptoData();
+      retrieveAllCryptoData(sunCrypto);
     }, 1000 * 60 * 60);
     const shortInterval = setInterval(() => {
       retrieveCurrentPrice();
-    }, 1000 * 10);
+    }, 1000 * 60 * 5);
     return () => {
       clearInterval(longInterval);
       clearInterval(shortInterval);

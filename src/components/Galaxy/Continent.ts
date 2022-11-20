@@ -10,7 +10,10 @@ export class Continent {
     this.scale = scale;
   }
 
-  draw(origin: Vector2, color: { r: number; g: number; b: number; a: number }) {
+  draw(
+    origin: Vector2,
+    color: { r: number; g: number; b: number; a: number } | string
+  ) {
     const ctx = this.canvas.getContext("2d")!;
 
     ctx.save();
@@ -30,7 +33,11 @@ export class Continent {
       );
     }
 
-    ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+    if (typeof color === "string") {
+      ctx.fillStyle = color;
+    } else {
+      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+    }
     ctx.fill();
 
     ctx.closePath();

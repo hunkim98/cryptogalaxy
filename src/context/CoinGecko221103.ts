@@ -1,6 +1,11 @@
-import { CoinGeckoMarketResponse } from "types/coingecko.res";
+import { CoinGeckoSingleMarketData } from "types/coingecko.res";
 
-export const CoinGeckoJson: CoinGeckoMarketResponse = [
+export const CoinGeckoJson: Array<
+  CoinGeckoSingleMarketData & {
+    foreColor: string;
+    backColor: string;
+  }
+> = [
   {
     id: "bitcoin",
     symbol: "btc",
@@ -28,6 +33,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 38186.9144,
     atl_date: "2013-07-05T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFD",
+    backColor: "#F69318",
     last_updated: "2022-11-03T10:51:35.321Z",
   },
   {
@@ -61,6 +68,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "btc",
       percentage: 10078.986189094996,
     },
+    foreColor: "#888888",
+    backColor: "#131212",
     last_updated: "2022-11-03T10:51:37.758Z",
   },
   {
@@ -90,6 +99,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 117.03377,
     atl_date: "2015-03-02T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#259392",
     last_updated: "2022-11-03T10:47:25.976Z",
   },
   {
@@ -119,6 +130,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1062576.6681,
     atl_date: "2017-10-19T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#F0B808",
     last_updated: "2022-11-03T10:51:27.375Z",
   },
   {
@@ -148,6 +161,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 41.15502,
     atl_date: "2021-05-19T13:14:05.611Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#2674CA",
     last_updated: "2022-11-03T10:51:30.513Z",
   },
   {
@@ -177,6 +192,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 23604.94996,
     atl_date: "2014-05-22T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#22292F",
     last_updated: "2022-11-03T10:52:36.109Z",
   },
   {
@@ -206,6 +223,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 39.83862,
     atl_date: "2021-05-19T13:04:37.445Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#F0B808",
     last_updated: "2022-11-03T10:51:22.891Z",
   },
   {
@@ -235,6 +254,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 203162.78113,
     atl_date: "2015-05-06T00:00:00.000Z",
     roi: null,
+    foreColor: "#F3F1E3",
+    backColor: "#BB9E33",
     last_updated: "2022-11-03T10:52:32.000Z",
   },
   {
@@ -264,6 +285,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2303.35026,
     atl_date: "2020-03-13T02:22:55.044Z",
     roi: null,
+    foreColor: "#0335BB",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:05.259Z",
   },
   {
@@ -293,6 +316,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 7312.96544,
     atl_date: "2020-05-11T19:35:23.449Z",
     roi: null,
+    foreColor: "#21EAA9",
+    backColor: "#010001",
     last_updated: "2022-11-03T10:51:56.909Z",
   },
   {
@@ -326,6 +351,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 36497.73010906181,
     },
+    foreColor: "#FAF9FC",
+    backColor: "#8346E5",
     last_updated: "2022-11-03T10:52:25.912Z",
   },
   {
@@ -355,36 +382,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 188.55086,
     atl_date: "2020-08-20T05:48:11.359Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#E6017B",
     last_updated: "2022-11-03T10:52:32.005Z",
-  },
-  {
-    id: "staked-ether",
-    symbol: "steth",
-    name: "Lido Staked Ether",
-    image:
-      "https://assets.coingecko.com/coins/images/13442/large/steth_logo.png?1608607546",
-    current_price: 2200805,
-    market_cap: 10325848426008,
-    market_cap_rank: 13,
-    fully_diluted_valuation: 10325848426008,
-    total_volume: 35156169920,
-    high_24h: 2262759,
-    low_24h: 2145766,
-    price_change_24h: 11371.58,
-    price_change_percentage_24h: 0.51938,
-    market_cap_change_24h: 129874989258,
-    market_cap_change_percentage_24h: 1.27379,
-    circulating_supply: 4669485.89982716,
-    total_supply: 4669530.3632598,
-    max_supply: 4669530.3632598,
-    ath: 5751791,
-    ath_change_percentage: -61.67093,
-    ath_date: "2021-11-08T23:56:40.797Z",
-    atl: 534274,
-    atl_change_percentage: 312.63603,
-    atl_date: "2020-12-22T04:08:21.854Z",
-    roi: null,
-    last_updated: "2022-11-03T10:52:29.303Z",
   },
   {
     id: "shiba-inu",
@@ -413,6 +413,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 27931561.90762,
     atl_date: "2020-12-11T19:13:27.875Z",
     roi: null,
+    foreColor: "#F4A22C",
+    backColor: "#E6240C",
     last_updated: "2022-11-03T10:52:22.460Z",
   },
   {
@@ -446,6 +448,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 3177.598598807436,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#FE0112",
     last_updated: "2022-11-03T10:51:28.736Z",
   },
   {
@@ -475,6 +479,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 36.54183,
     atl_date: "2021-01-05T01:09:30.489Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#FBB72A",
     last_updated: "2022-11-03T10:51:53.063Z",
   },
   {
@@ -504,6 +510,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 776.6623,
     atl_date: "2020-12-31T13:15:21.540Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#E84141",
     last_updated: "2022-11-03T10:51:31.540Z",
   },
   {
@@ -533,6 +541,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 755.21422,
     atl_date: "2020-09-17T01:20:38.214Z",
     roi: null,
+    foreColor: "#F90477",
+    backColor: "#FFDBEE",
     last_updated: "2022-11-03T10:52:18.789Z",
   },
   {
@@ -562,6 +572,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 711.52477,
     atl_date: "2019-04-02T00:00:00.000Z",
     roi: null,
+    foreColor: "#F49D41",
+    backColor: "#F5FAFE",
     last_updated: "2022-11-03T10:52:08.914Z",
   },
   {
@@ -591,6 +603,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 6939.46965,
     atl_date: "2015-01-14T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#345C9D",
     last_updated: "2022-11-03T10:51:49.800Z",
   },
   {
@@ -620,6 +634,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 617.96332,
     atl_date: "2019-12-31T12:34:30.203Z",
     roi: null,
+    foreColor: "#FFEE34",
+    backColor: "#171C1F",
     last_updated: "2022-11-03T10:52:20.393Z",
   },
   {
@@ -649,6 +665,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3480.72073,
     atl_date: "2019-01-14T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#010001",
     last_updated: "2022-11-03T10:51:11.559Z",
   },
   {
@@ -682,6 +700,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 13558.48472225549,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#2F3348",
     last_updated: "2022-11-03T10:51:53.546Z",
   },
   {
@@ -711,36 +731,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 6935.96891,
     atl_date: "2017-11-29T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#355ED5",
     last_updated: "2022-11-03T10:51:10.736Z",
-  },
-  {
-    id: "ftx-token",
-    symbol: "ftt",
-    name: "FTX",
-    image:
-      "https://assets.coingecko.com/coins/images/9026/large/F.png?1609051564",
-    current_price: 35278,
-    market_cap: 4751240024146,
-    market_cap_rank: 25,
-    fully_diluted_valuation: 11694970067979,
-    total_volume: 219541683103,
-    high_24h: 36794,
-    low_24h: 35445,
-    price_change_24h: -948.6051290560281,
-    price_change_percentage_24h: -2.6185,
-    market_cap_change_24h: -85175071202.57129,
-    market_cap_change_percentage_24h: -1.76112,
-    circulating_supply: 133618094.97959524,
-    total_supply: 328895112.304385,
-    max_supply: 328895112.304385,
-    ath: 98413,
-    ath_change_percentage: -63.97079,
-    ath_date: "2021-09-09T16:59:43.151Z",
-    atl: 1376.22,
-    atl_change_percentage: 2476.4403,
-    atl_date: "2019-09-06T00:00:00.000Z",
-    roi: null,
-    last_updated: "2022-11-03T10:52:35.017Z",
   },
   {
     id: "ethereum-classic",
@@ -773,6 +766,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 5249.395068406876,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#338333",
     last_updated: "2022-11-03T10:51:56.063Z",
   },
   {
@@ -802,6 +797,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 29811.5925,
     atl_date: "2015-03-05T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#010001",
     last_updated: "2022-11-03T10:52:12.960Z",
   },
   {
@@ -831,6 +828,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1065.27599,
     atl_date: "2019-02-08T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#1D3366",
     last_updated: "2022-11-03T10:52:16.153Z",
   },
   {
@@ -860,6 +859,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 90134.56671,
     atl_date: "2015-01-14T00:00:00.000Z",
     roi: null,
+    foreColor: "#FA6700",
+    backColor: "#4C4C4C",
     last_updated: "2022-11-03T10:51:32.397Z",
   },
   {
@@ -893,6 +894,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -84.43365160790768,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#262627",
     last_updated: "2022-11-03T10:51:26.972Z",
   },
   {
@@ -922,6 +925,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 634.41011,
     atl_date: "2020-11-04T16:09:15.137Z",
     roi: null,
+    foreColor: "#010001",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:06.813Z",
   },
   {
@@ -951,6 +956,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 270.55075,
     atl_date: "2021-09-21T00:33:11.092Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#0088CA",
     last_updated: "2022-11-03T10:52:08.069Z",
   },
   {
@@ -984,6 +991,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: 4320.350516204267,
     },
+    foreColor: "#010001",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:51:36.783Z",
   },
   {
@@ -1013,6 +1022,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 93.70455,
     atl_date: "2018-12-16T00:00:00.000Z",
     roi: null,
+    foreColor: "#FAFDF8",
+    backColor: "#8CC350",
     last_updated: "2022-11-03T10:52:26.500Z",
   },
   {
@@ -1042,6 +1053,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 65.44034,
     atl_date: "2022-06-18T20:11:35.436Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#0EEF8A",
     last_updated: "2022-11-03T10:52:40.897Z",
   },
   {
@@ -1071,6 +1084,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 38.63846,
     atl_date: "2022-06-18T20:54:43.983Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#0291FF",
     last_updated: "2022-11-03T10:51:33.392Z",
   },
   {
@@ -1104,40 +1119,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: 439.0525154177394,
     },
+    foreColor: "#22A5CB∂r",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:17.712Z",
-  },
-  {
-    id: "tokenize-xchange",
-    symbol: "tkx",
-    name: "Tokenize Xchange",
-    image:
-      "https://assets.coingecko.com/coins/images/4984/large/Tokenize.png?1561602968",
-    current_price: 27489,
-    market_cap: 2201163158275,
-    market_cap_rank: 38,
-    fully_diluted_valuation: 2751591529302,
-    total_volume: 121186133622,
-    high_24h: 27535,
-    low_24h: 25640,
-    price_change_24h: 1780.73,
-    price_change_percentage_24h: 6.92657,
-    market_cap_change_24h: 126505654091,
-    market_cap_change_percentage_24h: 6.09766,
-    circulating_supply: 79995999.94528414,
-    total_supply: 100000000.0,
-    max_supply: 100000000.0,
-    ath: 31836,
-    ath_change_percentage: -13.63816,
-    ath_date: "2022-10-31T10:29:24.903Z",
-    atl: 128.93,
-    atl_change_percentage: 21224.38587,
-    atl_date: "2019-04-28T00:00:00.000Z",
-    roi: {
-      times: 65.30102258138822,
-      currency: "usd",
-      percentage: 6530.102258138822,
-    },
-    last_updated: "2022-11-03T10:52:17.568Z",
   },
   {
     id: "terra-luna",
@@ -1166,6 +1150,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 24432.62848,
     atl_date: "2022-05-13T02:34:40.340Z",
     roi: null,
+    foreColor: "#FED73C",
+    backColor: "#172852",
     last_updated: "2022-11-03T10:52:16.366Z",
   },
   {
@@ -1195,6 +1181,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1096.71526,
     atl_date: "2020-10-20T08:30:07.309Z",
     roi: null,
+    foreColor: "#18151D",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:51:26.111Z",
   },
   {
@@ -1224,6 +1212,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 655.76916,
     atl_date: "2020-01-02T17:30:24.852Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#010001",
     last_updated: "2022-11-03T10:52:03.142Z",
   },
   {
@@ -1253,6 +1243,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 29.26998,
     atl_date: "2022-06-18T20:14:50.529Z",
     roi: null,
+    foreColor: "#F36527",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:51:14.473Z",
   },
   {
@@ -1282,6 +1274,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 57.20754,
     atl_date: "2022-06-15T09:20:22.479Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#1141AE",
     last_updated: "2022-11-03T10:51:23.573Z",
   },
   {
@@ -1315,6 +1309,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 996.8163813371846,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#CC0123",
     last_updated: "2022-11-03T10:52:15.836Z",
   },
   {
@@ -1344,6 +1340,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3541.54851,
     atl_date: "2020-11-04T15:59:14.441Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#07ACEE",
     last_updated: "2022-11-03T10:52:17.049Z",
   },
   {
@@ -1377,6 +1375,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 196.6259356761666,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#0163FE",
     last_updated: "2022-11-03T10:51:48.567Z",
   },
   {
@@ -1410,6 +1410,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 725.0752686114673,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#2DB9E5",
     last_updated: "2022-11-03T10:52:18.570Z",
   },
   {
@@ -1439,36 +1441,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 315.49704,
     atl_date: "2020-11-05T09:20:11.928Z",
     roi: null,
+    foreColor: "#40ADC1",
+    backColor: "#A95CA5",
     last_updated: "2022-11-03T10:51:54.663Z",
-  },
-  {
-    id: "frax",
-    symbol: "frax",
-    name: "Frax",
-    image:
-      "https://assets.coingecko.com/coins/images/13422/large/frax_logo.png?1608476506",
-    current_price: 1425.03,
-    market_cap: 1725995648525,
-    market_cap_rank: 49,
-    fully_diluted_valuation: 1725995648525,
-    total_volume: 8782849517,
-    high_24h: 1428.93,
-    low_24h: 1393.25,
-    price_change_24h: 11.71,
-    price_change_percentage_24h: 0.8285,
-    market_cap_change_24h: 10693723982,
-    market_cap_change_percentage_24h: 0.62343,
-    circulating_supply: 1211933897.57045,
-    total_supply: 1211933897.57045,
-    max_supply: 1211933897.57045,
-    ath: 1467.32,
-    ath_change_percentage: -2.88811,
-    ath_date: "2022-10-13T12:51:42.268Z",
-    atl: 1056.03,
-    atl_change_percentage: 34.93342,
-    atl_date: "2021-12-04T05:33:57.315Z",
-    roi: null,
-    last_updated: "2022-11-03T10:52:26.454Z",
   },
   {
     id: "decentraland",
@@ -1501,6 +1476,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 3131.404879806548,
     },
+    foreColor: "#FFC85A",
+    backColor: "#FF4556",
     last_updated: "2022-11-03T10:51:37.739Z",
   },
   {
@@ -1534,6 +1511,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 15.998893894305555,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#010001",
     last_updated: "2022-11-03T10:51:04.028Z",
   },
   {
@@ -1567,6 +1546,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 786.7300820893084,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#293169",
     last_updated: "2022-11-03T10:52:07.693Z",
   },
   {
@@ -1596,65 +1577,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1964.12014,
     atl_date: "2022-06-14T06:35:07.084Z",
     roi: null,
+    foreColor: "#rgb(255,254,254)",
+    backColor: "#010001",
     last_updated: "2022-11-03T10:52:28.705Z",
-  },
-  {
-    id: "whitebit",
-    symbol: "wbt",
-    name: "WhiteBIT Token",
-    image:
-      "https://assets.coingecko.com/coins/images/27045/large/WBT_250x250px.png?1663654854",
-    current_price: 14513.26,
-    market_cap: 1620281643969,
-    market_cap_rank: 54,
-    fully_diluted_valuation: 5805818032585,
-    total_volume: 12325868495,
-    high_24h: 14998.02,
-    low_24h: 14435.92,
-    price_change_24h: -325.43090278894124,
-    price_change_percentage_24h: -2.19312,
-    market_cap_change_24h: -29223480546.033203,
-    market_cap_change_percentage_24h: -1.77165,
-    circulating_supply: 111631583.0,
-    total_supply: 390631583.0,
-    max_supply: 400000000.0,
-    ath: 20865,
-    ath_change_percentage: -30.43498,
-    ath_date: "2022-10-28T12:32:18.119Z",
-    atl: 4290.25,
-    atl_change_percentage: 238.31502,
-    atl_date: "2022-09-21T23:38:03.675Z",
-    roi: null,
-    last_updated: "2022-11-03T10:50:06.602Z",
-  },
-  {
-    id: "lido-dao",
-    symbol: "ldo",
-    name: "Lido DAO",
-    image:
-      "https://assets.coingecko.com/coins/images/13573/large/Lido_DAO.png?1609873644",
-    current_price: 2188.87,
-    market_cap: 1598173764290,
-    market_cap_rank: 55,
-    fully_diluted_valuation: 2197503550966,
-    total_volume: 32169643051,
-    high_24h: 2214.03,
-    low_24h: 2052.04,
-    price_change_24h: 136.83,
-    price_change_percentage_24h: 6.668,
-    market_cap_change_24h: 107492978830,
-    market_cap_change_percentage_24h: 7.211,
-    circulating_supply: 727267887.047028,
-    total_supply: 1000000000.0,
-    max_supply: 1000000000.0,
-    ath: 8643.32,
-    ath_change_percentage: -74.60546,
-    ath_date: "2021-08-20T08:35:20.158Z",
-    atl: 524.54,
-    atl_change_percentage: 318.44687,
-    atl_date: "2022-06-18T20:55:12.035Z",
-    roi: null,
-    last_updated: "2022-11-03T10:52:05.297Z",
   },
   {
     id: "kucoin-shares",
@@ -1683,6 +1608,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3638.08506,
     atl_date: "2019-02-07T00:00:00.000Z",
     roi: null,
+    foreColor: "#26AE91",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:12.556Z",
   },
   {
@@ -1712,6 +1639,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 9092.5966,
     atl_date: "2020-11-06T08:05:43.662Z",
     roi: null,
+    foreColor: "#00CFF5",
+    backColor: "#004DDD",
     last_updated: "2022-11-03T10:51:26.397Z",
   },
   {
@@ -1741,6 +1670,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 11.22493,
     atl_date: "2022-10-19T03:53:04.558Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:06.945Z",
   },
   {
@@ -1770,6 +1701,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 40.66979,
     atl_date: "2018-11-23T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#EAB30F",
     last_updated: "2022-11-03T10:52:34.281Z",
   },
   {
@@ -1803,6 +1736,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -0.230496290049,
     },
+    foreColor: "#0299DB",
+    backColor: "#025E34",
     last_updated: "2022-11-03T10:52:23.066Z",
   },
   {
@@ -1832,40 +1767,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 44.49168,
     atl_date: "2021-01-04T10:18:11.302Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#185AFE",
     last_updated: "2022-11-03T10:51:47.311Z",
-  },
-  {
-    id: "arweave",
-    symbol: "ar",
-    name: "Arweave",
-    image:
-      "https://assets.coingecko.com/coins/images/4343/large/oRt6SiEN_400x400.jpg?1591059616",
-    current_price: 22567,
-    market_cap: 1144041051899,
-    market_cap_rank: 62,
-    fully_diluted_valuation: 1506864232847,
-    total_volume: 629121356080,
-    high_24h: 24836,
-    low_24h: 14107.79,
-    price_change_24h: 8339.74,
-    price_change_percentage_24h: 58.61701,
-    market_cap_change_24h: 430232022706,
-    market_cap_change_percentage_24h: 60.27271,
-    circulating_supply: 50108502.0,
-    total_supply: 64598643.0,
-    max_supply: 66000000.0,
-    ath: 105728,
-    ath_change_percentage: -78.42736,
-    ath_date: "2021-11-05T04:14:42.689Z",
-    atl: 356.5,
-    atl_change_percentage: 6297.84769,
-    atl_date: "2020-01-31T06:47:36.543Z",
-    roi: {
-      times: 20.367200692920107,
-      currency: "usd",
-      percentage: 2036.7200692920107,
-    },
-    last_updated: "2022-11-03T10:52:10.468Z",
   },
   {
     id: "maker",
@@ -1894,36 +1798,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 498.46948,
     atl_date: "2020-03-16T20:52:36.527Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#52AD9E",
     last_updated: "2022-11-03T10:51:50.240Z",
-  },
-  {
-    id: "compound-usd-coin",
-    symbol: "cusdc",
-    name: "cUSDC",
-    image:
-      "https://assets.coingecko.com/coins/images/9442/large/Compound_USDC.png?1567581577",
-    current_price: 32.35,
-    market_cap: 1115086589435,
-    market_cap_rank: 64,
-    fully_diluted_valuation: null,
-    total_volume: 13691.25,
-    high_24h: 32.36,
-    low_24h: 32.0,
-    price_change_24h: 0.324268,
-    price_change_percentage_24h: 1.01258,
-    market_cap_change_24h: 9516058718,
-    market_cap_change_percentage_24h: 0.86074,
-    circulating_supply: 34471295210.628,
-    total_supply: 34470403692.1428,
-    max_supply: null,
-    ath: 66.68,
-    ath_change_percentage: -51.48861,
-    ath_date: "2020-10-21T11:24:27.820Z",
-    atl: 6.98,
-    atl_change_percentage: 363.29559,
-    atl_date: "2021-03-04T08:11:37.438Z",
-    roi: null,
-    last_updated: "2022-11-03T10:52:11.648Z",
   },
   {
     id: "bittorrent",
@@ -1952,6 +1829,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 26.4159,
     atl_date: "2022-06-18T21:29:51.935Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#010001",
     last_updated: "2022-11-03T10:52:11.170Z",
   },
   {
@@ -1981,6 +1860,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 373.39115,
     atl_date: "2020-04-29T08:19:34.574Z",
     roi: null,
+    foreColor: "#FE8A01",
+    backColor: "#AB031E",
     last_updated: "2022-11-03T10:52:26.523Z",
   },
   {
@@ -2010,6 +1891,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 147.31354,
     atl_date: "2022-06-18T20:27:33.261Z",
     roi: null,
+    foreColor: "#A200D0",
+    backColor: "#3B3768",
     last_updated: "2022-11-03T10:52:28.241Z",
   },
   {
@@ -2039,6 +1922,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 18.41162,
     atl_date: "2022-06-19T16:15:11.558Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#226B58",
     last_updated: "2022-11-03T10:52:31.841Z",
   },
   {
@@ -2068,6 +1953,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 151.37499,
     atl_date: "2021-07-20T20:49:46.212Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#017DC7",
     last_updated: "2022-11-03T10:52:35.524Z",
   },
   {
@@ -2101,6 +1988,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "btc",
       percentage: 843.4474372284768,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#252425",
     last_updated: "2022-11-03T10:52:16.469Z",
   },
   {
@@ -2130,6 +2019,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2933.02984,
     atl_date: "2020-11-03T14:29:34.165Z",
     roi: null,
+    foreColor: "#D0894F",
+    backColor: "#2ACAD7",
     last_updated: "2022-11-03T10:51:30.313Z",
   },
   {
@@ -2159,6 +2050,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2002.06369,
     atl_date: "2020-03-13T02:18:02.481Z",
     roi: null,
+    foreColor: "#C95654",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:13.976Z",
   },
   {
@@ -2188,6 +2081,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 20.63822,
     atl_date: "2022-10-21T12:26:12.669Z",
     roi: null,
+    foreColor: "#452493",
+    backColor: "#4B7ACE",
     last_updated: "2022-11-03T10:52:04.678Z",
   },
   {
@@ -2217,6 +2112,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 54.32343,
     atl_date: "2022-09-19T02:51:46.433Z",
     roi: null,
+    foreColor: "#B1BDEA",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:06.618Z",
   },
   {
@@ -2246,6 +2143,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 202.1263,
     atl_date: "2020-03-13T02:20:55.002Z",
     roi: null,
+    foreColor: "#FFFEFC",
+    backColor: "#EDB044",
     last_updated: "2022-11-03T10:51:49.371Z",
   },
   {
@@ -2279,6 +2178,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -0.26863805845068,
     },
+    foreColor: "#28EBFE",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:03.059Z",
   },
   {
@@ -2312,36 +2213,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 806.0306052964584,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#1A69FF",
     last_updated: "2022-11-03T10:51:44.022Z",
-  },
-  {
-    id: "evmos",
-    symbol: "evmos",
-    name: "Evmos",
-    image:
-      "https://assets.coingecko.com/coins/images/24023/large/evmos.png?1653958927",
-    current_price: 2655.77,
-    market_cap: 898247751465,
-    market_cap_rank: 78,
-    fully_diluted_valuation: 2657924189331,
-    total_volume: 5336501352,
-    high_24h: 2712.55,
-    low_24h: 2494.1,
-    price_change_24h: 63.36,
-    price_change_percentage_24h: 2.44414,
-    market_cap_change_24h: 28541722244,
-    market_cap_change_percentage_24h: 3.28177,
-    circulating_supply: 337950854.682342,
-    total_supply: 1000000000.0,
-    max_supply: null,
-    ath: 8700.42,
-    ath_change_percentage: -69.47466,
-    ath_date: "2022-04-28T21:20:31.780Z",
-    atl: 1440.52,
-    atl_change_percentage: 84.36601,
-    atl_date: "2022-06-13T10:08:39.859Z",
-    roi: null,
-    last_updated: "2022-11-03T10:51:52.894Z",
   },
   {
     id: "havven",
@@ -2374,6 +2248,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 401.0107527236666,
     },
+    foreColor: "#00D2FC",
+    backColor: "#150550",
     last_updated: "2022-11-03T10:51:35.677Z",
   },
   {
@@ -2407,69 +2283,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 23344.744333521423,
     },
+    foreColor: "#00E599",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T10:52:05.853Z",
-  },
-  {
-    id: "btse-token",
-    symbol: "btse",
-    name: "BTSE Token",
-    image:
-      "https://assets.coingecko.com/coins/images/10807/large/BTSE_logo_Square.jpeg?1583965964",
-    current_price: 5220.66,
-    market_cap: 851585159079,
-    market_cap_rank: 81,
-    fully_diluted_valuation: 1050940727840,
-    total_volume: 56553636,
-    high_24h: 5312.04,
-    low_24h: 5087.95,
-    price_change_24h: 16.57,
-    price_change_percentage_24h: 0.31847,
-    market_cap_change_24h: 8304020932,
-    market_cap_change_percentage_24h: 0.98473,
-    circulating_supply: 162061501.0,
-    total_supply: 200000000.0,
-    max_supply: 200000000.0,
-    ath: 11193.44,
-    ath_change_percentage: -53.37637,
-    ath_date: "2022-03-23T09:11:07.549Z",
-    atl: 689.22,
-    atl_change_percentage: 657.20635,
-    atl_date: "2020-12-13T14:22:21.597Z",
-    roi: {
-      times: 0.828923579242024,
-      currency: "usd",
-      percentage: 82.8923579242024,
-    },
-    last_updated: "2022-11-03T10:52:40.253Z",
-  },
-  {
-    id: "compound-ether",
-    symbol: "ceth",
-    name: "cETH",
-    image:
-      "https://assets.coingecko.com/coins/images/10643/large/ceth2.JPG?1581389598",
-    current_price: 44434,
-    market_cap: 819746146627,
-    market_cap_rank: 82,
-    fully_diluted_valuation: 819751259518,
-    total_volume: 6520.89,
-    high_24h: 44843,
-    low_24h: 43127,
-    price_change_24h: 334.53,
-    price_change_percentage_24h: 0.75858,
-    market_cap_change_24h: 3906663029,
-    market_cap_change_percentage_24h: 0.47885,
-    circulating_supply: 18448715.6399153,
-    total_supply: 18448830.7075875,
-    max_supply: null,
-    ath: 116493,
-    ath_change_percentage: -61.85721,
-    ath_date: "2021-11-21T12:39:57.508Z",
-    atl: 2308.5,
-    atl_change_percentage: 1824.79337,
-    atl_date: "2020-03-13T02:22:33.711Z",
-    roi: null,
-    last_updated: "2022-11-03T10:07:37.941Z",
   },
   {
     id: "mina-protocol",
@@ -2498,36 +2314,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 56.3404,
     atl_date: "2022-06-18T20:14:44.078Z",
     roi: null,
+    foreColor: "#E77B47",
+    backColor: "#9F89EB",
     last_updated: "2022-11-03T10:51:53.746Z",
-  },
-  {
-    id: "cdai",
-    symbol: "cdai",
-    name: "cDAI",
-    image:
-      "https://assets.coingecko.com/coins/images/9281/large/cDAI.png?1576467585",
-    current_price: 31.52,
-    market_cap: 798631490502,
-    market_cap_rank: 84,
-    fully_diluted_valuation: null,
-    total_volume: 364075684,
-    high_24h: 31.53,
-    low_24h: 31.23,
-    price_change_24h: 0.264062,
-    price_change_percentage_24h: 0.84495,
-    market_cap_change_24h: 11016983809,
-    market_cap_change_percentage_24h: 1.39878,
-    circulating_supply: 25340756856.6338,
-    total_supply: 25340760810.9316,
-    max_supply: null,
-    ath: 36.28,
-    ath_change_percentage: -13.12954,
-    ath_date: "2020-10-12T21:29:00.007Z",
-    atl: 9.01,
-    atl_change_percentage: 249.97017,
-    atl_date: "2020-03-18T04:29:40.819Z",
-    roi: null,
-    last_updated: "2022-11-03T10:52:40.115Z",
   },
   {
     id: "nexo",
@@ -2560,6 +2349,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 879.1524020516271,
     },
+    foreColor: "#3DA8E5",
+    backColor: "#1A4199",
     last_updated: "2022-11-03T10:52:20.445Z",
   },
   {
@@ -2589,36 +2380,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 4096.24052,
     atl_date: "2020-04-18T00:19:10.902Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#474CFE",
     last_updated: "2022-11-03T10:52:40.896Z",
-  },
-  {
-    id: "radix",
-    symbol: "xrd",
-    name: "Radix",
-    image:
-      "https://assets.coingecko.com/coins/images/4374/large/Radix.png?1629701658",
-    current_price: 75.7,
-    market_cap: 758216582500,
-    market_cap_rank: 87,
-    fully_diluted_valuation: 1815812426922,
-    total_volume: 524312822,
-    high_24h: 77.18,
-    low_24h: 74.72,
-    price_change_24h: 0.302237,
-    price_change_percentage_24h: 0.40085,
-    market_cap_change_24h: 3436994172,
-    market_cap_change_percentage_24h: 0.45536,
-    circulating_supply: 10021518583.201,
-    total_supply: 12421536552.2297,
-    max_supply: 24000000000.0,
-    ath: 768.46,
-    ath_change_percentage: -90.14987,
-    ath_date: "2021-11-14T16:09:27.130Z",
-    atl: 70.34,
-    atl_change_percentage: 7.60739,
-    atl_date: "2022-10-22T19:25:10.015Z",
-    roi: null,
-    last_updated: "2022-11-03T10:51:31.330Z",
   },
   {
     id: "curve-dao-token",
@@ -2647,6 +2411,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 248.57301,
     atl_date: "2020-11-05T13:09:50.181Z",
     roi: null,
+    foreColor: "#EE1D0A",
+    backColor: "#0146F9",
     last_updated: "2022-11-03T10:52:25.855Z",
   },
   {
@@ -2676,6 +2442,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 50834.98553,
     atl_date: "2020-06-09T09:15:06.983Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#3574BB",
     last_updated: "2022-11-03T10:51:23.953Z",
   },
   {
@@ -2709,6 +2477,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: 37.092762167371966,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#FF5001",
     last_updated: "2022-11-03T10:52:17.638Z",
   },
   {
@@ -2738,6 +2508,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 41.76644,
     atl_date: "2019-11-18T03:09:35.959Z",
     roi: null,
+    foreColor: "#EADD1C",
+    backColor: "#FEFFFF",
     last_updated: "2022-11-03T10:52:10.957Z",
   },
   {
@@ -2767,6 +2539,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 25300.71412,
     atl_date: "2014-02-14T00:00:00.000Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#0D8EEA",
     last_updated: "2022-11-03T10:51:42.231Z",
   },
   {
@@ -2800,6 +2574,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: 134.27631077503506,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#46C1BE",
     last_updated: "2022-11-03T10:52:19.091Z",
   },
   {
@@ -2833,6 +2609,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 3891.116580045829,
     },
+    foreColor: "#32E1C1",
+    backColor: "#121722",
     last_updated: "2022-11-03T10:51:41.150Z",
   },
   {
@@ -2862,6 +2640,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 14.25307,
     atl_date: "2022-06-18T20:44:32.363Z",
     roi: null,
+    foreColor: "#010001",
+    backColor: "#ACFE00",
     last_updated: "2022-11-03T10:52:00.627Z",
   },
   {
@@ -2891,6 +2671,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2941.32386,
     atl_date: "2017-11-12T00:00:00.000Z",
     roi: null,
+    foreColor: "#B7FCFE",
+    backColor: "#8E6AFF",
     last_updated: "2022-11-03T10:51:43.744Z",
   },
   {
@@ -2920,6 +2702,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 480.65968,
     atl_date: "2020-03-13T02:24:16.835Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#FF574E",
     last_updated: "2022-11-03T10:51:22.101Z",
   },
   {
@@ -2949,36 +2733,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 150.93558,
     atl_date: "2022-06-14T02:00:36.378Z",
     roi: null,
+    foreColor: "#FFFEFE",
+    backColor: "#55AEF2",
     last_updated: "2022-11-03T10:52:15.681Z",
-  },
-  {
-    id: "frax-share",
-    symbol: "fxs",
-    name: "Frax Share",
-    image:
-      "https://assets.coingecko.com/coins/images/13423/large/frax_share.png?1608478989",
-    current_price: 9250.88,
-    market_cap: 623637923639,
-    market_cap_rank: 99,
-    fully_diluted_valuation: 924510024057,
-    total_volume: 6448235924,
-    high_24h: 9273.11,
-    low_24h: 8984.24,
-    price_change_24h: 110.01,
-    price_change_percentage_24h: 1.20351,
-    market_cap_change_24h: 9425940396,
-    market_cap_change_percentage_24h: 1.53464,
-    circulating_supply: 67336639.8683672,
-    total_supply: 99822984.1145714,
-    max_supply: 99822984.1145714,
-    ath: 52187,
-    ath_change_percentage: -82.26646,
-    ath_date: "2022-04-03T17:24:11.513Z",
-    atl: 1695.88,
-    atl_change_percentage: 445.70835,
-    atl_date: "2021-06-25T16:50:51.447Z",
-    roi: null,
-    last_updated: "2022-11-03T10:52:31.046Z",
   },
   {
     id: "blockstack",
@@ -3011,40 +2768,9 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 165.38336917558408,
     },
+    foreColor: "#FFFEFE",
+    backColor: "#5746FE",
     last_updated: "2022-11-03T10:52:10.814Z",
-  },
-  {
-    id: "blockstack",
-    symbol: "stx",
-    name: "Stacks",
-    image:
-      "https://assets.coingecko.com/coins/images/2069/large/Stacks_logo_full.png?1604112510",
-    current_price: 448.92,
-    market_cap: 603337399606,
-    market_cap_rank: 101,
-    fully_diluted_valuation: 817126095846,
-    total_volume: 26949744303,
-    high_24h: 459.32,
-    low_24h: 430.97,
-    price_change_24h: 12.18,
-    price_change_percentage_24h: 2.78836,
-    market_cap_change_24h: 18938328326,
-    market_cap_change_percentage_24h: 3.24065,
-    circulating_supply: 1342347769.89703,
-    total_supply: 1352464600.0,
-    max_supply: 1818000000.0,
-    ath: 4006.27,
-    ath_change_percentage: -88.74396,
-    ath_date: "2021-12-01T01:32:34.725Z",
-    atl: 55.78,
-    atl_change_percentage: 708.38173,
-    atl_date: "2020-03-13T02:29:26.415Z",
-    roi: {
-      times: 1.6209953013532232,
-      currency: "usd",
-      percentage: 162.09953013532234,
-    },
-    last_updated: "2022-11-03T11:27:09.102Z",
   },
   {
     id: "casper-network",
@@ -3073,6 +2799,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 94.33656,
     atl_date: "2022-06-18T20:14:44.694Z",
     roi: null,
+    foreColor: "#ED6E64",
+    backColor: "#FFFEFE",
     last_updated: "2022-11-03T11:26:54.506Z",
   },
   {
@@ -3102,6 +2830,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 33.77828,
     atl_date: "2020-03-12T23:32:32.137Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:35.808Z",
   },
   {
@@ -3131,6 +2861,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 314132.74328,
     atl_date: "2018-08-28T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:49.970Z",
   },
   {
@@ -3160,6 +2892,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 7469.55478,
     atl_date: "2016-12-26T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:10.676Z",
   },
   {
@@ -3193,6 +2927,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 212.0712272827091,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:56.055Z",
   },
   {
@@ -3226,6 +2962,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "btc",
       percentage: 625.8907119342502,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:03.173Z",
   },
   {
@@ -3255,6 +2993,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 155.36175,
     atl_date: "2020-07-04T17:59:08.922Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:35.507Z",
   },
   {
@@ -3284,6 +3024,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 363.06277,
     atl_date: "2020-07-16T10:24:06.014Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:13.109Z",
   },
   {
@@ -3313,6 +3055,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 58.40462,
     atl_date: "2022-06-13T14:56:42.602Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:49.342Z",
   },
   {
@@ -3342,6 +3086,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 147.0299,
     atl_date: "2020-11-04T13:18:12.191Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:59.250Z",
   },
   {
@@ -3371,6 +3117,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 28.233,
     atl_date: "2022-06-18T20:10:15.819Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:49.067Z",
   },
   {
@@ -3400,6 +3148,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 63.40106,
     atl_date: "2022-08-29T00:11:56.615Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:44.794Z",
   },
   {
@@ -3433,6 +3183,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: 484.3131797006655,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:53.057Z",
   },
   {
@@ -3462,6 +3214,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 236.76439,
     atl_date: "2021-07-20T13:17:29.183Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:08.794Z",
   },
   {
@@ -3491,6 +3245,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 298.83356,
     atl_date: "2020-03-13T02:30:00.004Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:20.307Z",
   },
   {
@@ -3520,6 +3276,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 7641.20706,
     atl_date: "2020-03-13T02:30:37.972Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:37.901Z",
   },
   {
@@ -3549,6 +3307,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 54340.76603,
     atl_date: "2015-09-05T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:18.641Z",
   },
   {
@@ -3578,6 +3338,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 13.74371,
     atl_date: "2022-10-25T12:44:23.354Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:57.187Z",
   },
   {
@@ -3607,6 +3369,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 765.58287,
     atl_date: "2020-07-22T19:54:06.406Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:24:50.134Z",
   },
   {
@@ -3636,6 +3400,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 540.29934,
     atl_date: "2022-06-18T20:35:39.169Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:18.205Z",
   },
   {
@@ -3665,6 +3431,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 7.49006,
     atl_date: "2022-10-21T12:25:24.581Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:08.112Z",
   },
   {
@@ -3698,6 +3466,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 350.4553810094965,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:21.624Z",
   },
   {
@@ -3727,6 +3497,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 320.80163,
     atl_date: "2021-09-24T14:19:24.453Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:47.212Z",
   },
   {
@@ -3760,6 +3532,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 1661.772766757124,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:48.705Z",
   },
   {
@@ -3789,6 +3563,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 102.63806,
     atl_date: "2022-06-18T20:54:18.261Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:05.456Z",
   },
   {
@@ -3818,6 +3594,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 346.18308,
     atl_date: "2020-11-04T16:03:44.715Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:04.850Z",
   },
   {
@@ -3847,6 +3625,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 148.99934,
     atl_date: "2020-11-26T17:09:12.182Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:46.981Z",
   },
   {
@@ -3876,6 +3656,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 380.05724,
     atl_date: "2020-03-13T02:22:52.902Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:13.796Z",
   },
   {
@@ -3905,6 +3687,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 483.35194,
     atl_date: "2022-03-11T06:04:31.100Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:53.320Z",
   },
   {
@@ -3934,6 +3718,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 4633.1642,
     atl_date: "2020-01-14T19:20:20.768Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:05.968Z",
   },
   {
@@ -3963,6 +3749,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1869.30487,
     atl_date: "2020-03-13T02:24:11.825Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:40.163Z",
   },
   {
@@ -3992,6 +3780,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 37.55787,
     atl_date: "2022-07-13T00:38:46.306Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:20.368Z",
   },
   {
@@ -4021,6 +3811,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 37784.58101,
     atl_date: "2020-12-28T08:46:48.367Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:57.278Z",
   },
   {
@@ -4050,6 +3842,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 320.66672,
     atl_date: "2020-03-13T02:22:57.149Z",
     roi: { times: 8.374783969338, currency: "usd", percentage: 837.4783969338 },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:56.791Z",
   },
   {
@@ -4079,6 +3873,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 722.13262,
     atl_date: "2020-08-11T13:32:04.611Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:40.213Z",
   },
   {
@@ -4108,6 +3904,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 10.17237,
     atl_date: "2022-09-19T07:28:44.857Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:29.363Z",
   },
   {
@@ -4137,6 +3935,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2752.63434,
     atl_date: "2020-03-13T02:29:47.597Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:39.810Z",
   },
   {
@@ -4166,6 +3966,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 126.52315,
     atl_date: "2022-06-18T20:49:56.139Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:57.083Z",
   },
   {
@@ -4199,6 +4001,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 2634.610490417257,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:16.411Z",
   },
   {
@@ -4228,6 +4032,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3468.87146,
     atl_date: "2019-10-26T22:59:09.500Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:41.734Z",
   },
   {
@@ -4261,6 +4067,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 484.7727348283228,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:39.419Z",
   },
   {
@@ -4290,6 +4098,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 719.45785,
     atl_date: "2020-03-13T02:25:35.257Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:21.428Z",
   },
   {
@@ -4319,6 +4129,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 124.5944,
     atl_date: "2020-10-12T03:56:16.768Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:34.742Z",
   },
   {
@@ -4348,6 +4160,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 30893.50133,
     atl_date: "2020-07-18T12:26:27.150Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:45.797Z",
   },
   {
@@ -4381,6 +4195,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 31.0765467142056,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:46.632Z",
   },
   {
@@ -4410,6 +4226,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3291.9166,
     atl_date: "2021-04-23T06:09:26.872Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:01.846Z",
   },
   {
@@ -4439,6 +4257,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 585.65465,
     atl_date: "2020-05-09T06:08:54.872Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:09.647Z",
   },
   {
@@ -4468,6 +4288,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 109.08565,
     atl_date: "2022-06-18T20:44:49.597Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:54.513Z",
   },
   {
@@ -4497,6 +4319,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 100.79106,
     atl_date: "2022-06-18T21:00:00.231Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:51.829Z",
   },
   {
@@ -4526,6 +4350,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1.4791391466344997e37,
     atl_date: "2021-08-12T22:59:09.156Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:53.592Z",
   },
   {
@@ -4559,6 +4385,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 519.7147997546699,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:09.405Z",
   },
   {
@@ -4588,6 +4416,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 423.90332,
     atl_date: "2022-10-13T10:36:10.009Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:56.444Z",
   },
   {
@@ -4621,6 +4451,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 348.4769200792736,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:09.515Z",
   },
   {
@@ -4650,6 +4482,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 100.78447,
     atl_date: "2022-06-18T20:55:45.957Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:46.235Z",
   },
   {
@@ -4679,6 +4513,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2716.22589,
     atl_date: "2020-03-13T02:22:30.088Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:47.855Z",
   },
   {
@@ -4708,6 +4544,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 36.42135,
     atl_date: "2022-06-14T02:42:27.638Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:12.656Z",
   },
   {
@@ -4737,6 +4575,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2385.19489,
     atl_date: "2020-06-16T13:22:25.900Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:16.029Z",
   },
   {
@@ -4766,6 +4606,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 448.15986,
     atl_date: "2020-03-13T02:30:10.072Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:11.991Z",
   },
   {
@@ -4795,6 +4637,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 642431.75394,
     atl_date: "2021-01-10T16:54:16.852Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:23:52.823Z",
   },
   {
@@ -4828,6 +4672,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 141.0391327053701,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:00.173Z",
   },
   {
@@ -4857,6 +4703,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 4161.84766,
     atl_date: "2018-12-26T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:16.792Z",
   },
   {
@@ -4886,6 +4734,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 187.75404,
     atl_date: "2022-06-18T20:54:52.178Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:01.568Z",
   },
   {
@@ -4919,6 +4769,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 439.2708729428452,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:18.061Z",
   },
   {
@@ -4948,6 +4800,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 436.42054,
     atl_date: "2020-11-03T16:19:30.576Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:48.375Z",
   },
   {
@@ -4977,6 +4831,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 19.18049,
     atl_date: "2022-10-13T10:41:43.523Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:45.940Z",
   },
   {
@@ -5006,6 +4862,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 73.79104,
     atl_date: "2022-06-18T20:55:50.603Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:53.613Z",
   },
   {
@@ -5035,6 +4893,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 452.55174,
     atl_date: "2022-06-08T23:09:36.451Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:34.701Z",
   },
   {
@@ -5064,6 +4924,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 955.08664,
     atl_date: "2021-01-04T10:19:13.803Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:11.746Z",
   },
   {
@@ -5093,6 +4955,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 29.7643,
     atl_date: "2022-06-18T20:44:02.136Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:03.405Z",
   },
   {
@@ -5122,6 +4986,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1647.79256,
     atl_date: "2021-06-09T02:48:21.787Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:09.368Z",
   },
   {
@@ -5151,6 +5017,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 5658.28921,
     atl_date: "2021-01-13T05:29:57.987Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:54.279Z",
   },
   {
@@ -5180,6 +5048,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 12.83777,
     atl_date: "2021-12-04T05:29:46.350Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:55.871Z",
   },
   {
@@ -5209,6 +5079,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 529.0789,
     atl_date: "2020-10-23T14:56:23.999Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:08.179Z",
   },
   {
@@ -5242,6 +5114,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 103.06128039811382,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:35.909Z",
   },
   {
@@ -5271,6 +5145,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 27.98189,
     atl_date: "2022-06-18T20:14:01.365Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:39.141Z",
   },
   {
@@ -5300,6 +5176,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 31.70247,
     atl_date: "2021-07-26T01:08:30.998Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:03.450Z",
   },
   {
@@ -5329,6 +5207,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 95307.14005,
     atl_date: "2021-09-09T21:36:32.800Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:52.194Z",
   },
   {
@@ -5358,6 +5238,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 41.34108,
     atl_date: "2021-05-21T14:38:31.217Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:52.467Z",
   },
   {
@@ -5387,6 +5269,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 131.08099,
     atl_date: "2022-06-18T21:30:19.093Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:42.419Z",
   },
   {
@@ -5420,6 +5304,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -74.56773828124454,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:09.061Z",
   },
   {
@@ -5449,6 +5335,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 38.3637,
     atl_date: "2022-06-18T20:47:48.528Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:49.380Z",
   },
   {
@@ -5478,6 +5366,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 200.8254,
     atl_date: "2020-11-27T03:03:31.701Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:52.990Z",
   },
   {
@@ -5507,6 +5397,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 52.45985,
     atl_date: "2022-06-18T20:29:44.854Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:11.462Z",
   },
   {
@@ -5536,6 +5428,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 46.7354,
     atl_date: "2022-10-26T13:55:06.377Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:04.251Z",
   },
   {
@@ -5565,6 +5459,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 196.16505,
     atl_date: "2021-09-21T21:19:58.123Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:52.300Z",
   },
   {
@@ -5594,6 +5490,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 69.13802,
     atl_date: "2022-06-18T20:17:51.413Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:05.164Z",
   },
   {
@@ -5623,6 +5521,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 536.30948,
     atl_date: "2020-04-06T07:35:48.099Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:07.441Z",
   },
   {
@@ -5652,6 +5552,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 771.63996,
     atl_date: "2020-04-03T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:03.322Z",
   },
   {
@@ -5685,6 +5587,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 319.9281890769995,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:23:58.376Z",
   },
   {
@@ -5714,6 +5618,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 34.58908,
     atl_date: "2022-06-13T09:12:42.846Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:19.980Z",
   },
   {
@@ -5743,6 +5649,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 34.96194,
     atl_date: "2022-06-15T08:15:19.940Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:57.400Z",
   },
   {
@@ -5772,6 +5680,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1992.63393,
     atl_date: "2021-03-19T22:40:28.697Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:19.524Z",
   },
   {
@@ -5801,6 +5711,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 408.53063,
     atl_date: "2017-07-31T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:49.997Z",
   },
   {
@@ -5834,6 +5746,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: -35.00732889190373,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:19.420Z",
   },
   {
@@ -5867,6 +5781,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "btc",
       percentage: -22.667931742450143,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:45.910Z",
   },
   {
@@ -5896,6 +5812,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 349.27899,
     atl_date: "2020-11-03T11:28:47.769Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:13.433Z",
   },
   {
@@ -5925,6 +5843,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 131.78923,
     atl_date: "2020-03-16T22:38:47.902Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:22.437Z",
   },
   {
@@ -5954,6 +5874,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 25.76147,
     atl_date: "2021-07-22T11:15:31.791Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:45.941Z",
   },
   {
@@ -5983,6 +5905,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1390.12784,
     atl_date: "2018-12-15T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:24:59.470Z",
   },
   {
@@ -6012,6 +5936,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 30.96901,
     atl_date: "2022-09-07T03:17:53.109Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:58.789Z",
   },
   {
@@ -6041,6 +5967,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 771.16776,
     atl_date: "2020-04-29T17:00:41.760Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:51.074Z",
   },
   {
@@ -6070,6 +5998,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 17.61663,
     atl_date: "2022-05-16T10:36:10.628Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.264Z",
   },
   {
@@ -6099,6 +6029,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 17.87427,
     atl_date: "2022-10-21T08:43:45.288Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:55.926Z",
   },
   {
@@ -6128,6 +6060,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 180.06575,
     atl_date: "2022-09-01T18:05:41.566Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:55.961Z",
   },
   {
@@ -6157,6 +6091,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 7.00252,
     atl_date: "2022-10-21T12:27:03.223Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:43.083Z",
   },
   {
@@ -6186,6 +6122,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 37963.59773,
     atl_date: "2015-01-14T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:53.398Z",
   },
   {
@@ -6219,6 +6157,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 289.5774416233884,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:52.707Z",
   },
   {
@@ -6248,6 +6188,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 158.58951,
     atl_date: "2020-11-30T17:06:42.635Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:08.648Z",
   },
   {
@@ -6277,6 +6219,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 289.80174,
     atl_date: "2021-06-22T13:53:57.916Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.900Z",
   },
   {
@@ -6306,6 +6250,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1097.04588,
     atl_date: "2017-03-01T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.764Z",
   },
   {
@@ -6335,6 +6281,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 36.295,
     atl_date: "2022-06-14T02:40:47.537Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:02.309Z",
   },
   {
@@ -6364,6 +6312,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 23.3385,
     atl_date: "2020-06-20T10:23:48.171Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:01.431Z",
   },
   {
@@ -6393,6 +6343,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 25919.15748,
     atl_date: "2021-01-26T14:52:40.692Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.784Z",
   },
   {
@@ -6422,6 +6374,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3193.51664,
     atl_date: "2021-11-21T11:33:21.508Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.246Z",
   },
   {
@@ -6451,6 +6405,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 682.31333,
     atl_date: "2020-03-13T02:29:11.980Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.403Z",
   },
   {
@@ -6480,6 +6436,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 366.27665,
     atl_date: "2021-07-20T14:22:47.966Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.937Z",
   },
   {
@@ -6509,6 +6467,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 74.90187,
     atl_date: "2022-06-15T09:27:25.697Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:55.401Z",
   },
   {
@@ -6538,6 +6498,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 7.20671201112471e38,
     atl_date: "2021-09-01T04:06:13.165Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:47.933Z",
   },
   {
@@ -6571,6 +6533,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: 40.989578299559994,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:32.104Z",
   },
   {
@@ -6600,6 +6564,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 935.14347,
     atl_date: "2021-05-23T17:07:45.384Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:14.669Z",
   },
   {
@@ -6629,6 +6595,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 4588.12741,
     atl_date: "2020-07-18T10:14:36.612Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.625Z",
   },
   {
@@ -6658,6 +6626,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3948.26532,
     atl_date: "2020-12-21T11:04:43.868Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:39.736Z",
   },
   {
@@ -6687,6 +6657,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 15.13514,
     atl_date: "2021-05-19T13:14:32.592Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:57.592Z",
   },
   {
@@ -6716,6 +6688,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 121.85249,
     atl_date: "2022-06-18T20:20:06.515Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:00.665Z",
   },
   {
@@ -6749,6 +6723,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -65.83512092349535,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:06.172Z",
   },
   {
@@ -6778,6 +6754,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 40.03762,
     atl_date: "2022-06-14T02:05:06.777Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:58.034Z",
   },
   {
@@ -6807,6 +6785,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2157.03197,
     atl_date: "2020-03-13T02:24:59.299Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:07.296Z",
   },
   {
@@ -6840,6 +6820,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 55.18910291718754,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:14.403Z",
   },
   {
@@ -6869,6 +6851,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 481.42989,
     atl_date: "2020-11-15T07:19:59.258Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.786Z",
   },
   {
@@ -6898,6 +6882,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 452.03604,
     atl_date: "2020-03-13T02:10:36.877Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:54.819Z",
   },
   {
@@ -6931,6 +6917,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -72.51279232606365,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:07.194Z",
   },
   {
@@ -6964,6 +6952,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 1166.3016379647136,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:54.144Z",
   },
   {
@@ -6993,6 +6983,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 377.75183,
     atl_date: "2020-03-13T01:59:34.168Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:47.675Z",
   },
   {
@@ -7022,6 +7014,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 79.76653,
     atl_date: "2022-08-19T07:45:15.996Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.149Z",
   },
   {
@@ -7051,6 +7045,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 57.11736,
     atl_date: "2022-04-04T18:19:50.217Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:06.091Z",
   },
   {
@@ -7080,6 +7076,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 17366.63381,
     atl_date: "2021-07-06T01:11:20.438Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.379Z",
   },
   {
@@ -7109,6 +7107,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 388.94461,
     atl_date: "2021-06-22T12:55:49.177Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:07.758Z",
   },
   {
@@ -7138,6 +7138,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 105.99294,
     atl_date: "2022-05-12T06:06:30.777Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:45.290Z",
   },
   {
@@ -7167,6 +7169,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3035.31049,
     atl_date: "2019-08-31T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:57.832Z",
   },
   {
@@ -7196,6 +7200,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 94.46671,
     atl_date: "2022-09-19T09:49:22.933Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:08.999Z",
   },
   {
@@ -7229,6 +7235,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 60.0860465742739,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:15.088Z",
   },
   {
@@ -7258,6 +7266,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1508.72934,
     atl_date: "2021-11-29T05:56:42.899Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:48.762Z",
   },
   {
@@ -7291,6 +7301,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 466.1664001579229,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.193Z",
   },
   {
@@ -7320,6 +7332,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 93585.4736,
     atl_date: "2015-02-22T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.517Z",
   },
   {
@@ -7349,6 +7363,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 24.41077,
     atl_date: "2022-06-14T02:50:25.993Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.141Z",
   },
   {
@@ -7378,6 +7394,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 121.70706,
     atl_date: "2021-12-03T21:32:28.961Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:42.260Z",
   },
   {
@@ -7411,6 +7429,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -12.247846511820484,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:00.497Z",
   },
   {
@@ -7440,6 +7460,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 59.22807,
     atl_date: "2021-06-22T13:57:49.433Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:48.294Z",
   },
   {
@@ -7469,6 +7491,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 88.82416,
     atl_date: "2022-06-18T20:57:32.629Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:53.882Z",
   },
   {
@@ -7498,6 +7522,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2785.19276,
     atl_date: "2019-11-25T05:59:45.392Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.431Z",
   },
   {
@@ -7527,6 +7553,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3521.36291,
     atl_date: "2017-07-16T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:58.779Z",
   },
   {
@@ -7560,6 +7588,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 23.0736766526198,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.339Z",
   },
   {
@@ -7593,6 +7623,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -9.9485100287355,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:13.702Z",
   },
   {
@@ -7622,6 +7654,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 87.50664,
     atl_date: "2022-05-12T14:21:59.383Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.229Z",
   },
   {
@@ -7651,6 +7685,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 88.97836,
     atl_date: "2022-05-12T14:26:34.443Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:53.552Z",
   },
   {
@@ -7680,6 +7716,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 757.51446,
     atl_date: "2019-12-20T09:02:40.254Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:40.659Z",
   },
   {
@@ -7709,6 +7747,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 77.64787,
     atl_date: "2022-06-18T20:57:41.479Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:46.104Z",
   },
   {
@@ -7738,6 +7778,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 27.72046,
     atl_date: "2022-08-02T03:36:39.955Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.362Z",
   },
   {
@@ -7771,6 +7813,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 933.026807830025,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:13.504Z",
   },
   {
@@ -7800,6 +7844,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1217.55572,
     atl_date: "2016-12-06T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:07.718Z",
   },
   {
@@ -7829,6 +7875,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 51.73847,
     atl_date: "2022-06-19T05:30:05.232Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:30.461Z",
   },
   {
@@ -7858,6 +7906,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 17.07315,
     atl_date: "2022-10-13T10:37:27.432Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:07.185Z",
   },
   {
@@ -7891,6 +7941,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 77.36599264692663,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:42.123Z",
   },
   {
@@ -7920,6 +7972,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 63358.95424,
     atl_date: "2022-05-20T01:46:32.095Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:01.917Z",
   },
   {
@@ -7949,6 +8003,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 230.52712,
     atl_date: "2022-06-29T14:12:31.119Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:05.645Z",
   },
   {
@@ -7978,6 +8034,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 27.47636,
     atl_date: "2022-05-12T22:50:10.174Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:05.302Z",
   },
   {
@@ -8007,6 +8065,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 156.80444,
     atl_date: "2021-06-22T14:11:59.151Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:45.115Z",
   },
   {
@@ -8036,6 +8096,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 193.24709,
     atl_date: "2022-10-05T13:46:48.123Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.927Z",
   },
   {
@@ -8065,6 +8127,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 204.66201,
     atl_date: "2021-07-27T01:46:34.647Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:52.053Z",
   },
   {
@@ -8094,6 +8158,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 9.66326,
     atl_date: "2022-10-25T10:20:11.293Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.874Z",
   },
   {
@@ -8123,6 +8189,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 302.13114,
     atl_date: "2017-03-11T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.048Z",
   },
   {
@@ -8152,6 +8220,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 825.15771,
     atl_date: "2018-11-27T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:44.197Z",
   },
   {
@@ -8181,6 +8251,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 266.33347,
     atl_date: "2021-08-05T13:00:27.077Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.506Z",
   },
   {
@@ -8210,6 +8282,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 551.69566,
     atl_date: "2020-10-30T09:43:18.668Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:48.975Z",
   },
   {
@@ -8239,6 +8313,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 4.76132,
     atl_date: "2022-11-02T13:45:57.586Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:36.558Z",
   },
   {
@@ -8268,6 +8344,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 355.32831,
     atl_date: "2020-03-13T02:29:21.245Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:44.213Z",
   },
   {
@@ -8297,6 +8375,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2377.88844,
     atl_date: "2021-10-07T01:57:51.729Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.372Z",
   },
   {
@@ -8326,6 +8406,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 169.88163,
     atl_date: "2020-06-27T19:54:44.712Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:48.413Z",
   },
   {
@@ -8355,6 +8437,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1.92151,
     atl_date: "2022-10-23T18:01:37.508Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.626Z",
   },
   {
@@ -8384,6 +8468,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 158.7636,
     atl_date: "2021-08-20T13:09:26.512Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:07.470Z",
   },
   {
@@ -8413,6 +8499,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 265.80864,
     atl_date: "2019-10-16T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.429Z",
   },
   {
@@ -8442,6 +8530,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 19.9422,
     atl_date: "2022-09-20T14:55:36.281Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.660Z",
   },
   {
@@ -8471,6 +8561,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 15.54803,
     atl_date: "2022-10-13T10:42:19.714Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:03.650Z",
   },
   {
@@ -8500,6 +8592,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 279.80622,
     atl_date: "2020-12-24T06:45:06.825Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:14.179Z",
   },
   {
@@ -8529,6 +8623,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 629.9796,
     atl_date: "2019-12-18T13:12:52.346Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.377Z",
   },
   {
@@ -8558,6 +8654,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 881.93995,
     atl_date: "2018-12-15T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.169Z",
   },
   {
@@ -8587,6 +8685,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 6.59728,
     atl_date: "2022-10-13T10:48:10.693Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.537Z",
   },
   {
@@ -8616,6 +8716,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 20.98352,
     atl_date: "2022-10-23T12:31:14.307Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.921Z",
   },
   {
@@ -8649,6 +8751,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 204.2155470001832,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.021Z",
   },
   {
@@ -8682,6 +8786,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: 132.9209290355539,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.291Z",
   },
   {
@@ -8715,6 +8821,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 83.75230802606066,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:08.719Z",
   },
   {
@@ -8744,6 +8852,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 21.40258,
     atl_date: "2020-11-25T11:31:13.036Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:37.744Z",
   },
   {
@@ -8777,6 +8887,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 431.4378659142597,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.349Z",
   },
   {
@@ -8810,6 +8922,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 123.46923704970791,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.641Z",
   },
   {
@@ -8843,6 +8957,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 128.2371091392544,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.906Z",
   },
   {
@@ -8872,6 +8988,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2393.09301,
     atl_date: "2019-11-10T15:12:15.992Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:49.402Z",
   },
   {
@@ -8905,6 +9023,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -30.06911839174111,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:03.873Z",
   },
   {
@@ -8934,6 +9054,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 19.96767,
     atl_date: "2022-10-13T10:42:45.601Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:53.580Z",
   },
   {
@@ -8963,6 +9085,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 34.74825,
     atl_date: "2022-10-12T14:57:09.796Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:55.953Z",
   },
   {
@@ -8992,6 +9116,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 68.90319,
     atl_date: "2022-06-19T02:34:57.530Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:28.306Z",
   },
   {
@@ -9025,6 +9151,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 505.3295665792898,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.998Z",
   },
   {
@@ -9058,6 +9186,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 55.67329217461675,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:06.185Z",
   },
   {
@@ -9087,6 +9217,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 6558.34281,
     atl_date: "2020-11-26T02:10:52.806Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:06.760Z",
   },
   {
@@ -9116,6 +9248,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 14.92683,
     atl_date: "2022-10-13T10:48:35.946Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:27.034Z",
   },
   {
@@ -9145,6 +9279,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 82.46639,
     atl_date: "2022-09-23T06:00:40.848Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:37.321Z",
   },
   {
@@ -9174,6 +9310,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 727.13848,
     atl_date: "2020-03-13T02:22:42.216Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:22.500Z",
   },
   {
@@ -9203,6 +9341,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 133.85873,
     atl_date: "2021-01-04T10:19:48.243Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:25.104Z",
   },
   {
@@ -9232,6 +9372,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 8.16985,
     atl_date: "2022-08-12T11:56:41.449Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:53.345Z",
   },
   {
@@ -9261,6 +9403,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 6118.74051,
     atl_date: "2016-08-12T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:50.636Z",
   },
   {
@@ -9290,6 +9434,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 15.59612,
     atl_date: "2022-05-19T19:34:41.622Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.041Z",
   },
   {
@@ -9319,6 +9465,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 706.63242,
     atl_date: "2018-11-27T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:29.028Z",
   },
   {
@@ -9352,6 +9500,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 466.03483558482145,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:37.193Z",
   },
   {
@@ -9385,6 +9535,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 360.250473776676,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:49.781Z",
   },
   {
@@ -9414,6 +9566,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2229.40175,
     atl_date: "2021-06-28T04:44:10.311Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:26.904Z",
   },
   {
@@ -9447,6 +9601,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -43.69917515199513,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.237Z",
   },
   {
@@ -9476,6 +9632,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 916.68372,
     atl_date: "2021-08-11T14:01:35.223Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:28.363Z",
   },
   {
@@ -9505,6 +9663,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 30.53579,
     atl_date: "2022-06-15T17:24:01.810Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:25:26.867Z",
   },
   {
@@ -9538,6 +9698,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: -87.26387208329746,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.254Z",
   },
   {
@@ -9571,6 +9733,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 7.776415768256525,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:24.514Z",
   },
   {
@@ -9600,6 +9764,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 202.49343,
     atl_date: "2020-09-12T12:15:05.468Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:36.287Z",
   },
   {
@@ -9629,6 +9795,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 129.5049,
     atl_date: "2022-07-05T05:12:32.563Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:33.997Z",
   },
   {
@@ -9658,6 +9826,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 279.73901,
     atl_date: "2020-10-06T05:02:54.510Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:39.617Z",
   },
   {
@@ -9687,6 +9857,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 908.07426,
     atl_date: "2020-03-16T10:28:49.766Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:18.402Z",
   },
   {
@@ -9716,6 +9888,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 6.68511,
     atl_date: "2022-10-21T12:28:38.829Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:00.881Z",
   },
   {
@@ -9749,6 +9923,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -80.618669914351,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:54.054Z",
   },
   {
@@ -9782,6 +9958,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 314.4411630950087,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.541Z",
   },
   {
@@ -9811,6 +9989,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 209.89,
     atl_date: "2022-06-18T20:56:57.599Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:30.251Z",
   },
   {
@@ -9840,6 +10020,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 436.29207,
     atl_date: "2021-01-03T05:20:35.561Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:01.394Z",
   },
   {
@@ -9873,6 +10055,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 115.22804830033729,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:19.428Z",
   },
   {
@@ -9902,6 +10086,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 147.77395,
     atl_date: "2022-06-18T20:11:09.578Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:25:45.634Z",
   },
   {
@@ -9931,6 +10117,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 7.08434,
     atl_date: "2022-10-21T12:25:04.740Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:05.752Z",
   },
   {
@@ -9960,6 +10148,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 48.11642,
     atl_date: "2020-11-03T17:30:44.588Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:59.726Z",
   },
   {
@@ -9989,6 +10179,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 92.03146,
     atl_date: "2022-07-24T08:39:07.672Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:53.621Z",
   },
   {
@@ -10022,6 +10214,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: -84.78838826851411,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.104Z",
   },
   {
@@ -10051,6 +10245,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 42.26607,
     atl_date: "2020-09-11T20:29:43.246Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:39.874Z",
   },
   {
@@ -10084,6 +10280,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -3.239079454693,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:40.740Z",
   },
   {
@@ -10113,6 +10311,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 336.66129,
     atl_date: "2021-12-14T00:24:41.641Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:04.397Z",
   },
   {
@@ -10146,6 +10346,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -89.58349164564433,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:17.158Z",
   },
   {
@@ -10175,6 +10377,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 246.77611,
     atl_date: "2022-06-18T20:26:43.060Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:36.737Z",
   },
   {
@@ -10204,6 +10408,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 590.12846,
     atl_date: "2021-07-20T05:41:21.428Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:26.566Z",
   },
   {
@@ -10233,6 +10439,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 32.69691,
     atl_date: "2020-03-13T00:30:21.994Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:38.567Z",
   },
   {
@@ -10262,6 +10470,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 105.93856,
     atl_date: "2022-09-05T11:33:11.969Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:51.942Z",
   },
   {
@@ -10291,6 +10501,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 169.99378,
     atl_date: "2020-03-18T08:09:20.698Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:15.365Z",
   },
   {
@@ -10320,6 +10532,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 131.87895,
     atl_date: "2022-04-01T07:20:36.175Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:01.268Z",
   },
   {
@@ -10349,6 +10563,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 10346.12815,
     atl_date: "2022-03-19T14:38:41.034Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:14.325Z",
   },
   {
@@ -10378,6 +10594,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 17.37222,
     atl_date: "2022-06-18T20:54:34.105Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.726Z",
   },
   {
@@ -10411,6 +10629,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 276.6072834731746,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:18.216Z",
   },
   {
@@ -10440,6 +10660,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 14674.83425,
     atl_date: "2021-10-06T13:37:28.994Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:24.765Z",
   },
   {
@@ -10473,6 +10695,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: -61.52687408457369,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:12:47.283Z",
   },
   {
@@ -10502,6 +10726,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1.96766,
     atl_date: "2022-11-02T23:09:10.788Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:03.644Z",
   },
   {
@@ -10535,6 +10761,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 448.80082878454414,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:07.775Z",
   },
   {
@@ -10564,6 +10792,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 197.15371,
     atl_date: "2022-09-13T08:00:11.765Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:32.121Z",
   },
   {
@@ -10593,6 +10823,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 42.24231,
     atl_date: "2021-01-05T02:00:16.826Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:17.792Z",
   },
   {
@@ -10626,6 +10858,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 274.66837755991867,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:03.696Z",
   },
   {
@@ -10659,6 +10893,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -32.29671458347486,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.646Z",
   },
   {
@@ -10688,6 +10924,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 11.31772,
     atl_date: "2022-08-19T14:37:16.555Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:25:50.213Z",
   },
   {
@@ -10721,6 +10959,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 3617.587925289204,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:23.310Z",
   },
   {
@@ -10750,6 +10990,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 334.51776,
     atl_date: "2021-06-26T08:59:55.161Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:21.890Z",
   },
   {
@@ -10779,6 +11021,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 104.97542,
     atl_date: "2022-06-18T21:02:49.774Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:26.548Z",
   },
   {
@@ -10808,6 +11052,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 43.26566,
     atl_date: "2021-05-19T13:21:15.750Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:02.652Z",
   },
   {
@@ -10837,6 +11083,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2171.6948,
     atl_date: "2021-01-20T11:39:54.775Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:30.331Z",
   },
   {
@@ -10866,6 +11114,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 16.08266,
     atl_date: "2022-10-31T07:53:14.421Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:53.293Z",
   },
   {
@@ -10895,6 +11145,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 21.18292,
     atl_date: "2022-06-18T20:55:10.566Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:13.224Z",
   },
   {
@@ -10928,6 +11180,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -98.5430073003324,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:06.083Z",
   },
   {
@@ -10957,6 +11211,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 327.07732,
     atl_date: "2020-03-13T02:22:35.431Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:22.561Z",
   },
   {
@@ -10986,6 +11242,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 36.24671,
     atl_date: "2022-06-18T20:13:49.047Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.498Z",
   },
   {
@@ -11015,6 +11273,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 48.83335,
     atl_date: "2022-06-18T21:00:11.374Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:23.517Z",
   },
   {
@@ -11044,6 +11304,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 11.31637,
     atl_date: "2022-06-13T10:29:02.606Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:22.163Z",
   },
   {
@@ -11073,6 +11335,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 135.7239,
     atl_date: "2022-06-15T10:22:54.917Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.423Z",
   },
   {
@@ -11102,6 +11366,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2089.97924,
     atl_date: "2018-09-21T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.649Z",
   },
   {
@@ -11135,6 +11401,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -2.87822358079421,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:08.678Z",
   },
   {
@@ -11164,6 +11432,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 17.18229,
     atl_date: "2022-10-13T15:55:56.058Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.057Z",
   },
   {
@@ -11193,6 +11463,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2397.82883,
     atl_date: "2022-10-23T20:48:12.269Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:39.227Z",
   },
   {
@@ -11222,6 +11494,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 968.81872,
     atl_date: "2021-07-21T00:39:36.177Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:13.377Z",
   },
   {
@@ -11251,6 +11525,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 33.5183,
     atl_date: "2022-06-30T15:03:27.104Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.968Z",
   },
   {
@@ -11280,6 +11556,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 16.03106,
     atl_date: "2022-10-13T11:03:36.089Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.102Z",
   },
   {
@@ -11313,6 +11591,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -67.0886977066801,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:04.968Z",
   },
   {
@@ -11346,6 +11626,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -30.19195124646705,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:59.757Z",
   },
   {
@@ -11375,6 +11657,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 13.1853,
     atl_date: "2022-10-21T12:27:00.695Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:35.241Z",
   },
   {
@@ -11408,6 +11692,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 234.71186924457203,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:26.047Z",
   },
   {
@@ -11437,6 +11723,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 131.65314,
     atl_date: "2020-10-16T09:35:16.795Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:12.454Z",
   },
   {
@@ -11466,6 +11754,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 60.50476,
     atl_date: "2020-12-05T10:29:11.104Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:04.913Z",
   },
   {
@@ -11499,6 +11789,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -50.01298875256888,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:23.480Z",
   },
   {
@@ -11528,6 +11820,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 495.58283,
     atl_date: "2020-11-03T05:48:27.343Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:26.236Z",
   },
   {
@@ -11557,6 +11851,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 12.04366,
     atl_date: "2022-11-01T13:50:30.110Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:10.341Z",
   },
   {
@@ -11586,6 +11882,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 233.09714,
     atl_date: "2020-09-29T18:03:45.797Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:13.573Z",
   },
   {
@@ -11615,6 +11913,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 42.77678,
     atl_date: "2022-06-24T00:58:05.449Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:17.580Z",
   },
   {
@@ -11644,6 +11944,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 48.7864,
     atl_date: "2022-08-29T14:18:49.465Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:30.989Z",
   },
   {
@@ -11673,6 +11975,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 16.50834,
     atl_date: "2022-10-29T06:32:35.468Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:24:27.966Z",
   },
   {
@@ -11702,6 +12006,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 648.37984,
     atl_date: "2021-07-20T11:27:13.554Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:14.930Z",
   },
   {
@@ -11731,6 +12037,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 23.28685,
     atl_date: "2022-10-20T01:17:52.241Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:14.802Z",
   },
   {
@@ -11760,6 +12068,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 719.82716,
     atl_date: "2020-03-13T02:29:15.457Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:09.069Z",
   },
   {
@@ -11789,6 +12099,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 36.62175,
     atl_date: "2022-05-12T07:30:29.802Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:24.252Z",
   },
   {
@@ -11822,6 +12134,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 1043.023840641604,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:25.274Z",
   },
   {
@@ -11855,6 +12169,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: -82.8633983795912,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:36.954Z",
   },
   {
@@ -11884,6 +12200,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 185826.12998,
     atl_date: "2015-02-06T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:49.609Z",
   },
   {
@@ -11913,6 +12231,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 2564.26876,
     atl_date: "2020-08-05T18:09:13.078Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:49.491Z",
   },
   {
@@ -11942,6 +12262,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 55.94279,
     atl_date: "2022-06-18T21:36:38.083Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:02.337Z",
   },
   {
@@ -11971,6 +12293,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 5621859741.13801,
     atl_date: "2021-07-07T19:28:30.496Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:19.283Z",
   },
   {
@@ -12000,6 +12324,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 152.17078,
     atl_date: "2020-03-13T02:24:21.810Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:16.445Z",
   },
   {
@@ -12029,6 +12355,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3247.90282,
     atl_date: "2021-09-27T14:58:23.898Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:46.704Z",
   },
   {
@@ -12058,6 +12386,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 9.37535,
     atl_date: "2022-06-15T08:17:11.621Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:10.093Z",
   },
   {
@@ -12087,6 +12417,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1497.73852,
     atl_date: "2020-08-03T17:50:20.141Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:04.235Z",
   },
   {
@@ -12116,6 +12448,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 491.88577,
     atl_date: "2022-06-15T09:17:34.808Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:37.484Z",
   },
   {
@@ -12145,6 +12479,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 53.26044,
     atl_date: "2022-05-12T05:59:16.951Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:26.559Z",
   },
   {
@@ -12174,6 +12510,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 22.59791,
     atl_date: "2022-07-11T06:43:09.462Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:47.291Z",
   },
   {
@@ -12203,6 +12541,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 238.33055,
     atl_date: "2022-05-12T07:20:31.543Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:44.832Z",
   },
   {
@@ -12232,6 +12572,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1506.94829,
     atl_date: "2020-03-13T02:24:16.179Z",
     roi: null,
+    foreColor: "#0DA5E4",
+    backColor: "#DA1056",
     last_updated: "2022-11-03T11:28:59.792Z",
   },
   {
@@ -12261,6 +12603,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 46.10467,
     atl_date: "2022-01-24T14:55:16.883Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:38.222Z",
   },
   {
@@ -12290,6 +12634,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 895.83617,
     atl_date: "2022-05-12T07:24:30.583Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:33.281Z",
   },
   {
@@ -12319,6 +12665,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 433.03013,
     atl_date: "2021-01-31T18:59:55.835Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:16.372Z",
   },
   {
@@ -12352,6 +12700,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 2950.648054257616,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:25:27.967Z",
   },
   {
@@ -12381,6 +12731,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 154.90681,
     atl_date: "2022-06-18T22:01:30.274Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:25.536Z",
   },
   {
@@ -12410,6 +12762,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 300.04665,
     atl_date: "2021-06-26T07:00:35.599Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:11.348Z",
   },
   {
@@ -12439,6 +12793,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 115.215,
     atl_date: "2022-06-22T08:43:30.038Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:36.746Z",
   },
   {
@@ -12468,6 +12824,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 144.87358,
     atl_date: "2020-07-27T15:50:07.313Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:56.105Z",
   },
   {
@@ -12497,6 +12855,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 855.86719,
     atl_date: "2021-04-23T23:08:02.648Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:58.800Z",
   },
   {
@@ -12530,6 +12890,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "eth",
       percentage: -62.13450985234279,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:54.133Z",
   },
   {
@@ -12559,6 +12921,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 613.06624,
     atl_date: "2019-06-12T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:19.327Z",
   },
   {
@@ -12588,6 +12952,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 485.54711,
     atl_date: "2020-10-28T09:58:45.766Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:05.995Z",
   },
   {
@@ -12617,6 +12983,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 40.58074,
     atl_date: "2021-05-19T13:14:14.913Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:45.360Z",
   },
   {
@@ -12646,6 +13014,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 941.88328,
     atl_date: "2021-07-21T01:29:39.734Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:07.678Z",
   },
   {
@@ -12675,6 +13045,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 331.53208,
     atl_date: "2020-03-13T02:30:31.098Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:01:16.670Z",
   },
   {
@@ -12704,6 +13076,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 11877.26112,
     atl_date: "2015-05-27T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:47.307Z",
   },
   {
@@ -12733,6 +13107,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 88.45947,
     atl_date: "2022-05-12T07:16:26.039Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:08.117Z",
   },
   {
@@ -12762,6 +13138,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 214.63416,
     atl_date: "2021-04-04T19:57:22.871Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:02.305Z",
   },
   {
@@ -12791,6 +13169,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 5995.72755,
     atl_date: "2021-06-26T16:38:11.337Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:07.356Z",
   },
   {
@@ -12820,6 +13200,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3713.47204,
     atl_date: "2020-11-09T13:42:09.948Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:02.042Z",
   },
   {
@@ -12849,6 +13231,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 90.44756,
     atl_date: "2021-04-18T03:44:09.238Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:00.290Z",
   },
   {
@@ -12878,6 +13262,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 94.69893,
     atl_date: "2022-06-18T21:00:55.241Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:07:53.119Z",
   },
   {
@@ -12907,6 +13293,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 141.49722,
     atl_date: "2022-06-18T20:12:03.498Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:44.805Z",
   },
   {
@@ -12936,6 +13324,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 91.34495,
     atl_date: "2022-06-25T19:37:15.040Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:12.000Z",
   },
   {
@@ -12965,6 +13355,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 314.51662,
     atl_date: "2022-07-29T01:15:11.255Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:54.303Z",
   },
   {
@@ -12994,6 +13386,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 54.17365,
     atl_date: "2022-06-15T18:10:05.124Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:20.667Z",
   },
   {
@@ -13023,6 +13417,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 197.91823,
     atl_date: "2020-12-04T12:21:01.227Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:55.730Z",
   },
   {
@@ -13052,6 +13448,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 13.29468,
     atl_date: "2022-10-21T13:59:11.975Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:31.799Z",
   },
   {
@@ -13085,6 +13483,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -68.75420521759011,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:50.032Z",
   },
   {
@@ -13114,6 +13514,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 74.25149,
     atl_date: "2022-06-14T02:06:50.102Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:15.248Z",
   },
   {
@@ -13143,6 +13545,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 14.97244,
     atl_date: "2022-06-12T05:30:00.765Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:40.553Z",
   },
   {
@@ -13172,6 +13576,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 129.68179,
     atl_date: "2022-08-01T23:38:54.301Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:07.751Z",
   },
   {
@@ -13201,6 +13607,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 67.12951,
     atl_date: "2022-09-07T06:58:45.796Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:35.621Z",
   },
   {
@@ -13230,6 +13638,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 253.15876,
     atl_date: "2022-06-19T19:06:14.173Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:53.498Z",
   },
   {
@@ -13259,6 +13669,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 49.27798,
     atl_date: "2022-05-12T08:39:30.181Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:02.098Z",
   },
   {
@@ -13288,6 +13700,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 65.71683,
     atl_date: "2022-06-18T20:50:54.917Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:55.312Z",
   },
   {
@@ -13317,6 +13731,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 37.96962,
     atl_date: "2022-08-12T02:07:08.954Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:48.405Z",
   },
   {
@@ -13346,6 +13762,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 389.67081,
     atl_date: "2020-10-29T16:39:44.123Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:54.139Z",
   },
   {
@@ -13375,6 +13793,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 85989.04921,
     atl_date: "2020-08-09T19:52:54.886Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:09.949Z",
   },
   {
@@ -13404,6 +13824,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 21.93258,
     atl_date: "2022-10-13T10:38:45.140Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:50.725Z",
   },
   {
@@ -13433,6 +13855,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 783.13964,
     atl_date: "2020-11-17T05:38:41.319Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:27.259Z",
   },
   {
@@ -13462,6 +13886,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 54.07555,
     atl_date: "2022-05-12T07:21:58.380Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:41.518Z",
   },
   {
@@ -13491,6 +13917,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 76.80091,
     atl_date: "2022-06-18T20:44:21.542Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:14.363Z",
   },
   {
@@ -13520,6 +13948,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 88.38555,
     atl_date: "2022-05-12T07:20:26.962Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:43.555Z",
   },
   {
@@ -13549,6 +13979,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 256.21776,
     atl_date: "2020-12-18T01:08:10.980Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:44.176Z",
   },
   {
@@ -13578,6 +14010,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 153.79052,
     atl_date: "2022-05-13T00:49:46.668Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:07.293Z",
   },
   {
@@ -13607,6 +14041,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 16579.04934,
     atl_date: "2020-12-04T16:07:02.145Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:54.530Z",
   },
   {
@@ -13636,6 +14072,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 14669581.39629,
     atl_date: "2021-05-18T21:57:11.872Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T10:17:58.500Z",
   },
   {
@@ -13665,6 +14103,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 772.47429,
     atl_date: "2019-10-31T23:34:28.705Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:05.577Z",
   },
   {
@@ -13694,6 +14134,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 214.35651,
     atl_date: "2022-09-22T13:51:17.851Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:16.812Z",
   },
   {
@@ -13723,6 +14165,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 43.89999,
     atl_date: "2021-05-19T13:20:47.209Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:08.776Z",
   },
   {
@@ -13752,6 +14196,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 256.68842,
     atl_date: "2021-09-17T08:41:31.412Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:42.243Z",
   },
   {
@@ -13781,6 +14227,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 9699.73831,
     atl_date: "2022-05-12T11:06:09.074Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:25.372Z",
   },
   {
@@ -13810,6 +14258,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 168.48932,
     atl_date: "2020-07-16T14:24:05.394Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:50.607Z",
   },
   {
@@ -13839,6 +14289,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 4.90992,
     atl_date: "2022-10-26T22:16:35.980Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:31.935Z",
   },
   {
@@ -13868,6 +14320,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 160.27893,
     atl_date: "2021-02-23T11:58:52.567Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:44.782Z",
   },
   {
@@ -13897,6 +14351,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 78.02658,
     atl_date: "2022-09-26T04:42:28.873Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:57.968Z",
   },
   {
@@ -13926,6 +14382,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 27.34717,
     atl_date: "2022-06-06T08:29:38.387Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:13.514Z",
   },
   {
@@ -13955,6 +14413,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 41.08227,
     atl_date: "2022-06-15T18:48:32.829Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:06.916Z",
   },
   {
@@ -13988,6 +14448,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -34.574322855226384,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:48.664Z",
   },
   {
@@ -14017,6 +14479,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1.5723724067781674e35,
     atl_date: "2022-04-30T09:34:12.229Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:59.799Z",
   },
   {
@@ -14046,6 +14510,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 29.8855,
     atl_date: "2022-07-14T12:51:16.168Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:29.124Z",
   },
   {
@@ -14075,6 +14541,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 361248.78933,
     atl_date: "2020-03-13T02:22:35.503Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:41.240Z",
   },
   {
@@ -14104,6 +14572,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 9.67533,
     atl_date: "2022-09-22T15:50:24.885Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:05.383Z",
   },
   {
@@ -14133,6 +14603,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 15.62576,
     atl_date: "2021-12-04T05:34:32.526Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:11.941Z",
   },
   {
@@ -14166,6 +14638,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: -1.5829895642267333,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:21.574Z",
   },
   {
@@ -14199,6 +14673,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 80.15526090651268,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:48.613Z",
   },
   {
@@ -14228,6 +14704,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 136.76894,
     atl_date: "2022-06-18T20:57:43.885Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:56.517Z",
   },
   {
@@ -14257,6 +14735,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 312.37876,
     atl_date: "2021-07-21T19:44:31.731Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:14.959Z",
   },
   {
@@ -14290,6 +14770,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 914.6646772342945,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:26:19.665Z",
   },
   {
@@ -14319,6 +14801,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 143.0985,
     atl_date: "2020-11-19T18:01:15.869Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:54.249Z",
   },
   {
@@ -14348,6 +14832,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 576.50118,
     atl_date: "2022-08-10T08:07:14.025Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:01.599Z",
   },
   {
@@ -14377,6 +14863,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 18166.74114,
     atl_date: "2019-02-19T00:00:00.000Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:59.974Z",
   },
   {
@@ -14410,6 +14898,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 116.13938012319969,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:48.807Z",
   },
   {
@@ -14439,6 +14929,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 167.99621,
     atl_date: "2022-08-18T07:19:22.184Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:35.103Z",
   },
   {
@@ -14468,6 +14960,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 51.77985,
     atl_date: "2022-06-18T20:57:37.976Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:06.960Z",
   },
   {
@@ -14497,6 +14991,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 36.13321,
     atl_date: "2022-06-18T20:45:30.071Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:41.532Z",
   },
   {
@@ -14526,6 +15022,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 4.42704,
     atl_date: "2022-11-01T22:20:00.228Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:09.651Z",
   },
   {
@@ -14555,6 +15053,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 83.85987,
     atl_date: "2022-10-13T10:42:12.285Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:08.148Z",
   },
   {
@@ -14584,6 +15084,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 21.33905,
     atl_date: "2022-11-01T13:53:07.276Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:19.110Z",
   },
   {
@@ -14613,6 +15115,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 3199.5655,
     atl_date: "2021-07-01T22:57:44.002Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:06.700Z",
   },
   {
@@ -14646,6 +15150,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 1668.190296432395,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:05.636Z",
   },
   {
@@ -14675,6 +15181,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 123.95732,
     atl_date: "2022-09-07T08:21:16.422Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:45.746Z",
   },
   {
@@ -14704,6 +15212,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 66.65904,
     atl_date: "2020-12-29T16:24:38.986Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:17.966Z",
   },
   {
@@ -14733,6 +15243,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 18.5045,
     atl_date: "2022-06-18T20:57:48.609Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:58.868Z",
   },
   {
@@ -14762,6 +15274,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 51.49621,
     atl_date: "2022-06-18T20:12:02.334Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:56.200Z",
   },
   {
@@ -14795,6 +15309,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 210.84908778353852,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:04.736Z",
   },
   {
@@ -14824,6 +15340,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 197489.26529,
     atl_date: "2019-11-01T10:00:10.047Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:28:31.412Z",
   },
   {
@@ -14853,6 +15371,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 524.08585,
     atl_date: "2022-06-17T07:20:33.005Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:09.292Z",
   },
   {
@@ -14882,6 +15402,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
     atl_change_percentage: 1680.05244,
     atl_date: "2022-05-26T14:42:59.316Z",
     roi: null,
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:27:56.910Z",
   },
   {
@@ -14915,6 +15437,8 @@ export const CoinGeckoJson: CoinGeckoMarketResponse = [
       currency: "usd",
       percentage: 350.2822732687844,
     },
+    foreColor: "",
+    backColor: "",
     last_updated: "2022-11-03T11:29:07.402Z",
   },
 ];

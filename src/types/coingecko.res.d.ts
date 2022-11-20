@@ -1,5 +1,3 @@
-export type CoinGeckoMarketResponse = CoinGeckoSingleMarketData[];
-
 export type CoinGeckoSingleMarketData = {
   id: string;
   symbol: string; //btc, eth, etc
