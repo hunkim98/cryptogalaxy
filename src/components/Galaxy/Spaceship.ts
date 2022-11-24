@@ -28,6 +28,7 @@ export class Spaceship {
   endPosition: Vector2;
   progressIncreaseDelta: number;
   isDestinationReached: boolean;
+  dpr: number;
   constructor(
     canvas: HTMLCanvasElement,
     canvasEdgePosition: Vector2,
@@ -35,10 +36,12 @@ export class Spaceship {
     edgeRotator: Rotator2D,
     planet: Planet,
     direction: SpaceshipDirection,
-    id: string
+    id: string,
+    dpr: number
   ) {
     this.isDestinationReached = false;
     this.id = id;
+    this.dpr = dpr;
     this.progress = 0;
     this.opacity = 0;
     this.canvasEdgePosition = canvasEdgePosition;
@@ -90,17 +93,20 @@ export class Spaceship {
 
     let linePointingSpaceship = convertCartesianToScreenPoint(
       this.canvas,
-      trajectoryStartingFrom
+      trajectoryStartingFrom,
+      this.dpr
     );
     const trailingPoint = convertCartesianToScreenPoint(
       this.canvas,
-      trajectoryEndsAt
+      trajectoryEndsAt,
+      this.dpr
     );
 
     if (this.isDestinationReached) {
       linePointingSpaceship = convertCartesianToScreenPoint(
         this.canvas,
-        destinationPosition
+        destinationPosition,
+        this.dpr
       );
     }
 
@@ -153,7 +159,8 @@ export class Spaceship {
       this.canvas,
       this.direction === SpaceshipDirection.IN
         ? this.canvasEdgePosition
-        : this.planet.position
+        : this.planet.position,
+      this.dpr
     );
     const imageWidth = this.imageElement.width / 25;
     const imageHeight = this.imageElement.height / 25;
@@ -232,5 +239,8 @@ export class Spaceship {
 
     this.drawTrajectory(angle, destinationPosition);
     this.drawSpaceshipImage(angle, destinationPosition);
+  }
+  setDpr(dpr: number) {
+    this.dpr = dpr;
   }
 }

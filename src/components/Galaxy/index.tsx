@@ -92,8 +92,10 @@ const Galaxy: React.FC<Props> = () => {
         return;
       }
       const rect = divRef.current.getBoundingClientRect();
+      const dpr = window.devicePixelRatio;
 
-      galaxyCanvasRef.current.setSize(rect.width, rect.height);
+      galaxyCanvasRef.current.setSize(rect.width, rect.height, dpr);
+      galaxyCanvasRef.current.scale(dpr, dpr);
       galaxyCanvasRef.current.drawScene();
     };
 

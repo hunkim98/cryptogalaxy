@@ -14,17 +14,20 @@ export class Sun {
   foreColor: string;
   backColor: string;
   name: string;
+  dpr: number;
   constructor(
     canvas: HTMLCanvasElement,
     name: string,
     increaseRatio: number,
     foreColor: string,
-    backColor: string
+    backColor: string,
+    dpr: number
   ) {
     this.canvas = canvas;
     this.foreColor = foreColor;
     this.backColor = backColor;
     this.name = name;
+    this.dpr = dpr;
     this.increaseRatio = increaseRatio;
     this.setBrightness(increaseRatio);
   }
@@ -83,7 +86,8 @@ export class Sun {
     const ctx = this.canvas.getContext("2d")!;
     const drawPosition = convertCartesianToScreenPoint(
       this.canvas,
-      this.position
+      this.position,
+      this.dpr
     );
     // this.drawBrightnessInner(drawPosition, ctx);
     // this.drawBrightnessOuter(drawPosition, ctx);
@@ -93,5 +97,9 @@ export class Sun {
     ctx.fillStyle = `rgba(255, 255, 255, 0.8)`;
     ctx.font = "18px Righteous";
     ctx.fillText(this.name, drawPosition.x, drawPosition.y + Sun.radius + 20);
+  }
+
+  setDpr(dpr: number) {
+    this.dpr = dpr;
   }
 }

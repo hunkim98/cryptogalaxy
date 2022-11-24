@@ -23,6 +23,7 @@ export class GalaxyCanvas {
   MAX_PLANET_SIZE = 80;
   frameCount = 0;
   backgroundLoopMax = 1000;
+  dpr: number = 1;
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
@@ -56,7 +57,14 @@ export class GalaxyCanvas {
     foreColor: string,
     backColor: string
   ) {
-    this.sun = new Sun(this.element, name, increaseRatio, foreColor, backColor);
+    this.sun = new Sun(
+      this.element,
+      name,
+      increaseRatio,
+      foreColor,
+      backColor,
+      this.dpr
+    );
   }
 
   addPlanet(
@@ -91,7 +99,8 @@ export class GalaxyCanvas {
       resistance,
       rsi,
       foreColor,
-      backColor
+      backColor,
+      this.dpr
     );
     this.planets.push(planet);
     this.planets.sort((a, b) => b.radius - a.radius);
@@ -124,6 +133,13 @@ export class GalaxyCanvas {
   setSize(width: number, height: number, devicePixelRatio?: number) {
     this.setWidth(width, devicePixelRatio);
     this.setHeight(height, devicePixelRatio);
+    this.dpr = devicePixelRatio ? devicePixelRatio : this.dpr;
+  }
+
+  scale(x: number, y: number) {
+    this.ctx.scale(x, y);
+    this.sun?.setDpr(this.dpr);
+    this.planets.forEach((planet) => planet.setDpr(this.dpr));
   }
 
   drawBackground() {

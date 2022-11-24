@@ -11,6 +11,7 @@ import { Continent } from "./Continent";
 import { ContinentSamples } from "./Continents/Examples";
 import { Spaceship, SpaceshipDirection } from "./Spaceship";
 import { Sun } from "./Sun";
+import { iceAgeLevel1, iceAgeLevel2, iceAgeLevel3 } from "assets/iceAge";
 
 export class Planet {
   name: string;
@@ -37,8 +38,10 @@ export class Planet {
   finalResistancePrice: number | null = null;
   finalSupportPrice: number | null = null;
   foreColor: string;
+  iceAgeImage: HTMLImageElement;
   backColor: string;
   rsi: number;
+  dpr: number;
   constructor(
     canvas: HTMLCanvasElement,
     correlationCoefficient: number,
@@ -50,7 +53,8 @@ export class Planet {
     resistance: Array<number>,
     rsi: number,
     foreColor: string,
-    backColor: string
+    backColor: string,
+    dpr: number
   ) {
     this.name = name;
     this.foreColor = foreColor;
@@ -63,6 +67,10 @@ export class Planet {
     this.spaceShips = [];
     this.ctx = this.canvas.getContext("2d")!;
     this.price = price;
+    this.dpr = dpr;
+
+    const image = new Image();
+    this.iceAgeImage = image;
 
     this.resistance = resistance;
     this.support = support;
@@ -216,22 +224,30 @@ export class Planet {
       spaceShipCount = 3;
       spaceShipDirection = SpaceshipDirection.IN;
       spaceShipRegenerationInterval = 5000;
+      this.iceAgeImage.src = "";
     } else if (60 <= rsi && rsi < 70) {
       spaceShipCount = 1;
       spaceShipDirection = SpaceshipDirection.IN;
       spaceShipRegenerationInterval = 10000;
+      this.iceAgeImage.src = "";
     } else if (40 <= rsi && rsi < 60) {
       spaceShipCount = 0;
       spaceShipDirection = SpaceshipDirection.OUT;
       spaceShipRegenerationInterval = 20000;
+      this.iceAgeImage.src =
+        iceAgeLevel1[Math.floor(Math.random() * iceAgeLevel1.length)];
     } else if (30 <= rsi && rsi < 40) {
       spaceShipCount = 1;
       spaceShipDirection = SpaceshipDirection.OUT;
       spaceShipRegenerationInterval = 10000;
+      this.iceAgeImage.src =
+        iceAgeLevel2[Math.floor(Math.random() * iceAgeLevel2.length)];
     } else {
       spaceShipCount = 3;
       spaceShipDirection = SpaceshipDirection.OUT;
       spaceShipRegenerationInterval = 5000;
+      this.iceAgeImage.src =
+        iceAgeLevel3[Math.floor(Math.random() * iceAgeLevel3.length)];
     }
     return {
       spaceShipCount,
@@ -329,7 +345,8 @@ export class Planet {
           edgeRotator,
           this,
           this.spaceShipDirection,
-          generateRandomName()
+          generateRandomName(),
+          this.dpr
         )
       );
     }
@@ -365,8 +382,8 @@ export class Planet {
     this.ctx.save();
     this.ctx.beginPath();
     this.ctx.arc(
-      this.canvas.width / 2,
-      this.canvas.height / 2,
+      this.canvas.width / this.dpr / 2,
+      this.canvas.height / this.dpr / 2,
       this.distanceFromSun,
       0,
       2 * Math.PI,
@@ -377,6 +394,26 @@ export class Planet {
     this.ctx.lineWidth = 0.5;
     this.ctx.stroke();
     // this.ctx.fill();
+    this.ctx.restore();
+  }
+
+  drawIceAge(drawPosition: Vector2) {
+    this.ctx.save();
+    const imageSize = this.radius * 2 * 1.2;
+    this.ctx.globalAlpha = changeRelativeValueToRealValue(
+      this.currentPriceRelativeLocation,
+      0,
+      1,
+      0.5,
+      0.8
+    );
+    this.ctx.drawImage(
+      this.iceAgeImage,
+      drawPosition.x - imageSize / 2,
+      drawPosition.y - imageSize / 2,
+      imageSize,
+      imageSize
+    );
     this.ctx.restore();
   }
 
@@ -409,7 +446,8 @@ export class Planet {
       .toVector2();
     const drawPosition = convertCartesianToScreenPoint(
       this.canvas,
-      this.position
+      this.position,
+      this.dpr
     );
 
     this.ctx.save();
@@ -451,5 +489,10 @@ export class Planet {
     // );
 
     this.ctx.restore();
+    this.drawIceAge(drawPosition);
+  }
+  setDpr(dpr: number) {
+    this.dpr = dpr;
+    this.spaceShips.forEach((spaceShip) => spaceShip.setDpr(dpr));
   }
 }
