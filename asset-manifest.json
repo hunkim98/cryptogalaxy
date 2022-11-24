@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cryptogalaxy/static/css/main.88b75c41.chunk.css",
-    "main.js": "/cryptogalaxy/static/js/main.f278ddcc.chunk.js",
-    "main.js.map": "/cryptogalaxy/static/js/main.f278ddcc.chunk.js.map",
+    "main.js": "/cryptogalaxy/static/js/main.941c8e72.chunk.js",
+    "main.js.map": "/cryptogalaxy/static/js/main.941c8e72.chunk.js.map",
     "runtime-main.js": "/cryptogalaxy/static/js/runtime-main.1098c1e0.js",
     "runtime-main.js.map": "/cryptogalaxy/static/js/runtime-main.1098c1e0.js.map",
     "static/js/2.aceea442.chunk.js": "/cryptogalaxy/static/js/2.aceea442.chunk.js",
@@ -12,12 +12,16 @@
     "index.html": "/cryptogalaxy/index.html",
     "static/css/main.88b75c41.chunk.css.map": "/cryptogalaxy/static/css/main.88b75c41.chunk.css.map",
     "static/js/2.aceea442.chunk.js.LICENSE.txt": "/cryptogalaxy/static/js/2.aceea442.chunk.js.LICENSE.txt",
+    "static/media/ice_2_a.c5f74b68.png": "/cryptogalaxy/static/media/ice_2_a.c5f74b68.png",
+    "static/media/ice_2_b.a4e2e359.png": "/cryptogalaxy/static/media/ice_2_b.a4e2e359.png",
+    "static/media/ice_3_a.0e60f983.png": "/cryptogalaxy/static/media/ice_3_a.0e60f983.png",
+    "static/media/ice_3_b.ca77fbfe.png": "/cryptogalaxy/static/media/ice_3_b.ca77fbfe.png",
     "static/media/logo.791fbd9b.png": "/cryptogalaxy/static/media/logo.791fbd9b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1098c1e0.js",
     "static/js/2.aceea442.chunk.js",
     "static/css/main.88b75c41.chunk.css",
-    "static/js/main.f278ddcc.chunk.js"
+    "static/js/main.941c8e72.chunk.js"
   ]
 }
