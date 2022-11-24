@@ -400,13 +400,7 @@ export class Planet {
   drawIceAge(drawPosition: Vector2) {
     this.ctx.save();
     const imageSize = this.radius * 2 * 1.2;
-    this.ctx.globalAlpha = changeRelativeValueToRealValue(
-      this.currentPriceRelativeLocation,
-      0,
-      1,
-      0.5,
-      0.8
-    );
+    this.ctx.globalAlpha = 0.8;
     this.ctx.drawImage(
       this.iceAgeImage,
       drawPosition.x - imageSize / 2,
@@ -422,12 +416,12 @@ export class Planet {
     this.ctx.beginPath();
     this.ctx.arc(drawPosition.x, drawPosition.y, this.radius, 0, 2 * Math.PI);
 
-    this.ctx.fillStyle = `rgba(0, 0, 0, ${changeRelativeValueToRealValueInversed(
+    this.ctx.fillStyle = `rgba(255, 255, 255, ${changeRelativeValueToRealValueInversed(
       this.currentPriceRelativeLocation,
       0,
       1,
       0,
-      0.6
+      0.8
     )})`;
     this.ctx.fill();
     this.ctx.closePath();
