@@ -58,7 +58,8 @@ export class Sun {
       2 * Math.PI,
       false
     );
-    ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+    ctx.fillStyle = this.foreColor;
+    ctx.globalAlpha = 0.4;
     ctx.fill();
     ctx.restore();
   }
@@ -74,7 +75,8 @@ export class Sun {
       2 * Math.PI,
       false
     );
-    ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+    ctx.fillStyle = this.foreColor;
+    ctx.globalAlpha = 0.2;
     ctx.fill();
     ctx.restore();
   }

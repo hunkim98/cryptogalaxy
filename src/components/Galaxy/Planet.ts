@@ -12,6 +12,7 @@ import { ContinentSamples } from "./Continents/Examples";
 import { Spaceship, SpaceshipDirection } from "./Spaceship";
 import { Sun } from "./Sun";
 import { iceAgeLevel1, iceAgeLevel2, iceAgeLevel3 } from "assets/iceAge";
+import { returnRandomInRange } from "utils/randomInRange";
 
 export class Planet {
   name: string;
@@ -99,9 +100,14 @@ export class Planet {
     );
     const rotateAffineMatrix = this.rotator.getRotateAffineMatrix();
     const shuffledContinents = ContinentSamples.sort(() => 0.5 - Math.random());
-    const selectedContinents = shuffledContinents.slice(0, 5);
+    const selectedContinents = shuffledContinents.slice(0, 7);
     this.continents = selectedContinents.map((continent) => {
-      return new Continent(this.canvas, continent, this.radius / 2);
+      return new Continent(
+        this.canvas,
+        continent,
+        this.radius,
+        returnRandomInRange(this.radius / 4, this.radius / 2)
+      );
     });
     this.position = rotateAffineMatrix
       .multiplyVector(positionAffineVector)
@@ -174,7 +180,7 @@ export class Planet {
       const origin = new Vector2(
         Math.cos(angle * i),
         Math.sin(angle * i)
-      ).scalarBy(this.radius - this.radius / 5);
+      ).scalarBy(returnRandomInRange(this.radius / 2, this.radius * 1.2));
       this.continentOrigins.push(origin);
     }
     setInterval(() => {
@@ -457,7 +463,7 @@ export class Planet {
       this.ctx.closePath();
       this.ctx.clip();
 
-      continent.draw(origin.add(continentOrigin), this.foreColor);
+      continent.draw(origin.add(continentOrigin), this.foreColor, origin);
       this.continents.push(continent);
     }
     this.ctx.restore();
@@ -499,9 +505,14 @@ export class Planet {
     //   imageSize
     // );
     // this.ctx.save();
-    const iceInnerRadius = this.radius * 0.6;
-    const glacierRadius = this.radius * 0.8;
-
+    const iceInnerRadius =
+      //  this.radius * 0.6;
+      this.radius *
+      changeRelativeValueToRealValueInversed(this.rsi, 0, 100, 0, 0.9);
+    const glacierRadius =
+      //  this.radius * 0.8;
+      this.radius *
+      changeRelativeValueToRealValueInversed(this.rsi, 0, 100, 0, 1.1);
     const northPolePosition = new Vector2(
       origin.x,
       origin.y - this.radius * 1.5
@@ -617,9 +628,48 @@ export class Planet {
       2 * Math.PI,
       false
     );
-    this.ctx.fillStyle = `rgba(0, 36, 121, 1)`;
+    this.ctx.fillStyle = `rgba(0, 55, 186, 1)`;
     this.ctx.fill();
     this.ctx.closePath();
+    this.ctx.beginPath();
+    this.ctx.arc(
+      this.canvasDrawPosition.x,
+      this.canvasDrawPosition.y,
+      this.radius,
+      0,
+      2 * Math.PI,
+      false
+    );
+    this.ctx.fillStyle = `rgba(255, 255, 255, ${changeRelativeValueToRealValueInversed(
+      this.rsi,
+      0,
+      100,
+      0,
+      0.5
+    )})`;
+    this.ctx.fill();
+    this.ctx.closePath();
+
+    //redness
+    this.ctx.beginPath();
+    this.ctx.arc(
+      this.canvasDrawPosition.x,
+      this.canvasDrawPosition.y,
+      this.radius,
+      0,
+      2 * Math.PI,
+      false
+    );
+    this.ctx.fillStyle = `rgba(30, 0, 0, ${changeRelativeValueToRealValue(
+      this.rsi,
+      0,
+      100,
+      0,
+      0.5
+    )})`;
+    this.ctx.fill();
+    this.ctx.closePath();
+    //redness
     // this.ctx.fillStyle = `rgba(${
     //   this.greenness ? 255 - this.greenness : 0
     // }, ${0}, ${this.greenness ?? 0}, ${1})`;

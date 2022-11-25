@@ -54,7 +54,7 @@ export const CoinGeckoSimplifiedJson: Array<
     atl_change_percentage: 38186.9144,
     atl_date: "2013-07-05T00:00:00.000Z",
     roi: null,
-    foreColor: "#FFFEFD",
+    foreColor: "#F69318",
     backColor: "#F69318",
     last_updated: "2022-11-03T10:51:35.321Z",
     logoImg: btc,
