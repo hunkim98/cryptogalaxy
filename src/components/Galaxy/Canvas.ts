@@ -19,7 +19,7 @@ export class GalaxyCanvas {
   sun: Sun | null;
   planets: Array<Planet> = [];
   requestAnimationFrameId: number;
-  MIN_PLANET_SIZE = 30;
+  MIN_PLANET_SIZE = 20;
   MAX_PLANET_SIZE = 80;
   frameCount = 0;
   backgroundLoopMax = 1000;
@@ -86,7 +86,7 @@ export class GalaxyCanvas {
       quadrant = 0b10;
     }
     const borderRadius = 10;
-    const popupWidth = 100;
+    const popupWidth = 120;
     const popupHeight = 80;
     const width = quadrant % 2 === 0 ? popupWidth : -popupWidth;
     const height = (quadrant & 0b10) === 0b10 ? -popupHeight : popupHeight;
@@ -154,7 +154,7 @@ export class GalaxyCanvas {
       topLeftPoint.y + popupPadding + 15
     );
     this.ctx.fillText(
-      "correlation: " + planet.correlationCoefficient.toFixed(8),
+      "correlation: " + planet.correlationCoefficient.toFixed(5),
       topLeftPoint.x + popupPadding,
       topLeftPoint.y + popupPadding + 30
     );

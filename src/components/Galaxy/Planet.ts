@@ -293,12 +293,24 @@ export class Planet {
     const minDistance = Sun.radius + 20 + this.radius;
     const maxDistance = this.canvas.height / this.dpr / 2;
 
-    const distance = changeRelativeValueToRealValueInversed(
+    const relativeToRadian = changeRelativeValueToRealValueInversed(
       // the bigger the correlation coefficient
       // the more similar is it to the sun
       correlationCoefficient,
-      -0.1,
-      0.2,
+      -0.001,
+      0.1,
+      (Math.PI * 85) / 180,
+      (Math.PI * 89.9) / 180
+    );
+    // ln x derivative is 1/x
+    const tanOfRadian = Math.tan(relativeToRadian);
+
+    const distance = changeRelativeValueToRealValue(
+      // the bigger the correlation coefficient
+      // the more similar is it to the sun
+      tanOfRadian,
+      Math.tan((Math.PI * 85) / 180),
+      Math.tan((Math.PI * 89.9) / 180),
       minDistance,
       maxDistance
     );
@@ -385,74 +397,6 @@ export class Planet {
 
   setIsPopupOpen(isPopupOpen: boolean) {
     this.isPopupOpen = isPopupOpen;
-  }
-
-  drawPopup(drawPosition: Vector2) {
-    let quadrant = 0b00;
-    if (
-      drawPosition.x > this.canvas.width / this.dpr / 2 &&
-      drawPosition.y < this.canvas.height / this.dpr / 2
-    ) {
-      quadrant = 0b00;
-    } else if (
-      drawPosition.x < this.canvas.width / this.dpr / 2 &&
-      drawPosition.y < this.canvas.height / this.dpr / 2
-    ) {
-      quadrant = 0b01;
-    } else if (
-      drawPosition.x < this.canvas.width / this.dpr / 2 &&
-      drawPosition.y > this.canvas.height / this.dpr / 2
-    ) {
-      quadrant = 0b11;
-    } else {
-      quadrant = 0b10;
-    }
-    const borderRadius = 10;
-    const popupWidth = 80;
-    const popupHeight = 150;
-    const width = quadrant % 2 === 0 ? popupWidth : -popupWidth;
-    const height = (quadrant & 0b10) === 0b10 ? -popupHeight : popupHeight;
-    this.ctx.save();
-    this.ctx.beginPath();
-    this.ctx.moveTo(
-      quadrant % 2 === 0
-        ? drawPosition.x + borderRadius
-        : drawPosition.x - borderRadius,
-      drawPosition.y
-    );
-    this.ctx.arcTo(
-      drawPosition.x + width,
-      drawPosition.y,
-      drawPosition.x + width,
-      drawPosition.y + height,
-      borderRadius
-    );
-    this.ctx.arcTo(
-      drawPosition.x + width,
-      drawPosition.y + height,
-      drawPosition.x,
-      drawPosition.y + height,
-      borderRadius
-    );
-    this.ctx.arcTo(
-      drawPosition.x,
-      drawPosition.y + height,
-      drawPosition.x,
-      drawPosition.y,
-      borderRadius
-    );
-    this.ctx.arcTo(
-      drawPosition.x,
-      drawPosition.y,
-      drawPosition.x + width,
-      drawPosition.y,
-      borderRadius
-    );
-    this.ctx.closePath();
-    this.ctx.stroke();
-    this.ctx.fillStyle = "white";
-    this.ctx.fill();
-    this.ctx.restore();
   }
 
   drawContinents(origin: Vector2) {
@@ -712,10 +656,6 @@ export class Planet {
     this.ctx.restore();
     this.drawLogo(this.canvasDrawPosition);
     this.drawIceAge(this.canvasDrawPosition);
-
-    // if (this.isPopupOpen) {
-    //   this.drawPopup(this.canvasDrawPosition);
-    // }
   }
   setDpr(dpr: number) {
     this.dpr = dpr;

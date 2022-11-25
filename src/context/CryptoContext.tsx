@@ -86,7 +86,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       );
       const coefficient = calcCorrelationCoefficient(
         btcDayCandles.slice(-10),
-        otherCryptoDayCandles.slice(-btcDayCandles.length).slice(-10)
+        otherCryptoDayCandles.slice(-10)
       );
       const { support, resistance } = calcSupportResistance(
         otherCryptoDayCandles
