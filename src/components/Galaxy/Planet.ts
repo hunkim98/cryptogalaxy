@@ -567,6 +567,18 @@ export class Planet {
     this.ctx.fillStyle = gradientLower;
     this.ctx.fill();
     this.ctx.closePath();
+
+    this.ctx.beginPath();
+    this.ctx.arc(origin.x, origin.y, this.radius, 0, 2 * Math.PI, false);
+    this.ctx.closePath();
+    this.ctx.fillStyle = `rgba(255,255,255,${changeRelativeValueToRealValueInversed(
+      this.rsi,
+      0,
+      100,
+      0,
+      0.2
+    )})`;
+    this.ctx.fill();
     // this.ctx.restore();
     this.ctx.restore();
   }
