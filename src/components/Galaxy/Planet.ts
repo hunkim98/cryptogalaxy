@@ -42,6 +42,9 @@ export class Planet {
   backColor: string;
   rsi: number;
   dpr: number;
+  isPopupOpen: boolean = false;
+  canvasDrawPosition: Vector2;
+  logoImage: HTMLImageElement;
   constructor(
     canvas: HTMLCanvasElement,
     correlationCoefficient: number,
@@ -54,8 +57,12 @@ export class Planet {
     rsi: number,
     foreColor: string,
     backColor: string,
-    dpr: number
+    dpr: number,
+    logoImg: string
   ) {
+    const logoImage = new Image();
+    this.logoImage = logoImage;
+    logoImage.src = logoImg;
     this.name = name;
     this.foreColor = foreColor;
     this.backColor = backColor;
@@ -63,11 +70,11 @@ export class Planet {
     this.rotator = new Rotator2D(Math.random() * 360);
     this.correlationCoefficient = correlationCoefficient;
     this.radius = radius;
-    this.distanceFromSun = this.calcDistanceFromSun(correlationCoefficient);
     this.spaceShips = [];
     this.ctx = this.canvas.getContext("2d")!;
     this.price = price;
     this.dpr = dpr;
+    this.distanceFromSun = this.calcDistanceFromSun(correlationCoefficient);
 
     const image = new Image();
     this.iceAgeImage = image;
@@ -99,6 +106,11 @@ export class Planet {
     this.position = rotateAffineMatrix
       .multiplyVector(positionAffineVector)
       .toVector2();
+    this.canvasDrawPosition = convertCartesianToScreenPoint(
+      this.canvas,
+      this.position,
+      this.dpr
+    );
     this.continentOrigins = [
       new Vector2(0, -this.radius),
       new Vector2(0, this.radius),
@@ -197,7 +209,6 @@ export class Planet {
       this.speed = this.calcSpeed(data.increaseRatio);
     }
     if (data.currentPrice) {
-      console.log(this.currentPriceRelativeLocation, this.name);
       this.price = data.currentPrice;
       this.currentPriceRelativeLocation = this.calcCurrentPriceRelativeLocation(
         data.currentPrice
@@ -272,7 +283,7 @@ export class Planet {
 
   calcDistanceFromSun(correlationCoefficient: number) {
     const minDistance = Sun.radius + 20 + this.radius;
-    const maxDistance = 400 + Sun.radius - this.radius;
+    const maxDistance = this.canvas.height / this.dpr / 2 + 200;
 
     const distance = changeRelativeValueToRealValueInversed(
       // the bigger the correlation coefficient
@@ -364,6 +375,78 @@ export class Planet {
     );
   }
 
+  setIsPopupOpen(isPopupOpen: boolean) {
+    this.isPopupOpen = isPopupOpen;
+  }
+
+  drawPopup(drawPosition: Vector2) {
+    let quadrant = 0b00;
+    if (
+      drawPosition.x > this.canvas.width / this.dpr / 2 &&
+      drawPosition.y < this.canvas.height / this.dpr / 2
+    ) {
+      quadrant = 0b00;
+    } else if (
+      drawPosition.x < this.canvas.width / this.dpr / 2 &&
+      drawPosition.y < this.canvas.height / this.dpr / 2
+    ) {
+      quadrant = 0b01;
+    } else if (
+      drawPosition.x < this.canvas.width / this.dpr / 2 &&
+      drawPosition.y > this.canvas.height / this.dpr / 2
+    ) {
+      quadrant = 0b11;
+    } else {
+      quadrant = 0b10;
+    }
+    const borderRadius = 10;
+    const popupWidth = 80;
+    const popupHeight = 150;
+    const width = quadrant % 2 === 0 ? popupWidth : -popupWidth;
+    const height = (quadrant & 0b10) === 0b10 ? -popupHeight : popupHeight;
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.moveTo(
+      quadrant % 2 === 0
+        ? drawPosition.x + borderRadius
+        : drawPosition.x - borderRadius,
+      drawPosition.y
+    );
+    this.ctx.arcTo(
+      drawPosition.x + width,
+      drawPosition.y,
+      drawPosition.x + width,
+      drawPosition.y + height,
+      borderRadius
+    );
+    this.ctx.arcTo(
+      drawPosition.x + width,
+      drawPosition.y + height,
+      drawPosition.x,
+      drawPosition.y + height,
+      borderRadius
+    );
+    this.ctx.arcTo(
+      drawPosition.x,
+      drawPosition.y + height,
+      drawPosition.x,
+      drawPosition.y,
+      borderRadius
+    );
+    this.ctx.arcTo(
+      drawPosition.x,
+      drawPosition.y,
+      drawPosition.x + width,
+      drawPosition.y,
+      borderRadius
+    );
+    this.ctx.closePath();
+    this.ctx.stroke();
+    this.ctx.fillStyle = "white";
+    this.ctx.fill();
+    this.ctx.restore();
+  }
+
   drawContinents(origin: Vector2) {
     this.ctx.save();
     for (const continentOrigin of this.continentOrigins) {
@@ -411,6 +494,20 @@ export class Planet {
     this.ctx.restore();
   }
 
+  drawLogo(drawPosition: Vector2) {
+    this.ctx.save();
+    const imageSize = this.radius;
+    this.ctx.globalAlpha = 0.8;
+    this.ctx.drawImage(
+      this.logoImage,
+      drawPosition.x - imageSize / 2,
+      drawPosition.y - imageSize / 2,
+      imageSize,
+      imageSize
+    );
+    this.ctx.restore();
+  }
+
   drawOverlay(drawPosition: Vector2) {
     this.ctx.save();
     this.ctx.beginPath();
@@ -438,7 +535,7 @@ export class Planet {
     this.position = rotateAffineMatrix
       .multiplyVector(positionAffineVector)
       .toVector2();
-    const drawPosition = convertCartesianToScreenPoint(
+    this.canvasDrawPosition = convertCartesianToScreenPoint(
       this.canvas,
       this.position,
       this.dpr
@@ -447,8 +544,8 @@ export class Planet {
     this.ctx.save();
     this.ctx.beginPath();
     this.ctx.arc(
-      drawPosition.x,
-      drawPosition.y,
+      this.canvasDrawPosition.x,
+      this.canvasDrawPosition.y,
       this.radius,
       0,
       2 * Math.PI,
@@ -462,8 +559,8 @@ export class Planet {
     // }, ${0}, ${this.greenness ?? 0}, ${1})`;
     this.ctx.restore();
 
-    this.drawContinents(drawPosition);
-    this.drawOverlay(drawPosition);
+    this.drawContinents(this.canvasDrawPosition);
+    // this.drawOverlay(this.canvasDrawPosition);
 
     this.ctx.save();
 
@@ -473,8 +570,8 @@ export class Planet {
     this.ctx.font = "12px Righteous";
     this.ctx.fillText(
       this.name,
-      drawPosition.x,
-      drawPosition.y + this.radius + 15
+      this.canvasDrawPosition.x,
+      this.canvasDrawPosition.y + this.radius + 15
     );
     // this.ctx.fillText(
     //   this.rotator.degree.toFixed(2),
@@ -483,7 +580,11 @@ export class Planet {
     // );
 
     this.ctx.restore();
-    this.drawIceAge(drawPosition);
+    this.drawLogo(this.canvasDrawPosition);
+    // this.drawIceAge(this.canvasDrawPosition);
+    // if (this.isPopupOpen) {
+    //   this.drawPopup(this.canvasDrawPosition);
+    // }
   }
   setDpr(dpr: number) {
     this.dpr = dpr;

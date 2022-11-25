@@ -5,7 +5,7 @@ import { calcCorrelationCoefficient } from "utils/quant/correlation";
 import { calcIncreaseRatioOfMA } from "utils/quant/movingAverage";
 import { CoinGeckoSingleMarketData } from "types/coingecko.res";
 import { calcSupportResistance } from "utils/quant/support-resistance";
-import { CoinGeckoJson } from "./CoinGecko221103";
+import { CoinGeckoSimplifiedJson } from "./CoinGeckoReal";
 import { calcRSI } from "utils/quant/rsi";
 
 interface Props {
@@ -28,22 +28,10 @@ export type CryptoDataFields = {
   coefficient?: number;
   volume?: number;
   rsi?: number;
+  logoImg: string;
   foreColor: string;
   backColor: string;
 };
-
-const allowedCoins = [
-  "KRW-ETH",
-  "KRW-ETC",
-  "KRW-MATIC",
-  "KRW-LINK",
-  "KRW-ADA",
-  "KRW-STORJ",
-  "KRW-AAVE",
-  "KRW-SAND",
-  "KRW-XRP",
-  "KRW-DOGE",
-];
 
 const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   const [cryptoData, setCryptoData] = useState<Map<string, CryptoDataFields>>(
@@ -52,16 +40,24 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   const [sunCrypto, setSunCrypto] = useState<string>("KRW-BTC");
   const [markets, setMarkets] = useState<Array<string>>([
     "KRW-ETH",
-    "KRW-ETC",
-    "KRW-MATIC",
-    "KRW-LINK",
-    "KRW-AAVE",
-    "KRW-SAND",
-    "KRW-XRP",
     "KRW-DOGE",
-    "KRW-BTG",
-    "KRW-MANA",
+    "KRW-BCH",
+    "KRW-ANKR",
+    "KRW-STX",
+    "KRW-MATIC",
+    "KRW-AAVE",
+    "KRW-LINK",
+    "KRW-XRP",
+    "KRW-CELO",
+    "KRW-EOS",
+    "KRW-ALGO",
+    "KRW-XTZ",
+    "KRW-ATOM",
+    "KRW-ENJ",
     "KRW-SOL",
+    "KRW-NU",
+    "KRW-KNC",
+    "KRW-ETC",
   ]);
   const retrieveOtherCryptoData = useCallback(
     async (
@@ -69,7 +65,11 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       dayCount: number,
       btcDayCandles: ICandleDayReturnProps[],
       coinMarketData: Array<
-        CoinGeckoSingleMarketData & { foreColor: string; backColor: string }
+        CoinGeckoSingleMarketData & {
+          foreColor: string;
+          backColor: string;
+          logoImg: string;
+        }
       >
     ) => {
       const symbol = market.split("-")[1].toLowerCase();
@@ -113,6 +113,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
           rsi,
           foreColor: coinMarket.foreColor,
           backColor: coinMarket.backColor,
+          logoImg: coinMarket.logoImg,
         });
         return newMap;
       });
@@ -126,7 +127,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
         .then(async (res) => {
           const btcCandles = res;
           const increaseRatio = calcIncreaseRatioOfMA(btcCandles, 20);
-          const sunCoinGeckoData = CoinGeckoJson.findIndex(
+          const sunCoinGeckoData = CoinGeckoSimplifiedJson.findIndex(
             (element) =>
               element.symbol === sunCrypto.split("-")[1].toLowerCase()
           );
@@ -141,13 +142,16 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
                   "KRW-BTC",
                   {
                     increaseRatio,
-                    foreColor: CoinGeckoJson[sunCoinGeckoData].foreColor,
-                    backColor: CoinGeckoJson[sunCoinGeckoData].backColor,
+                    foreColor:
+                      CoinGeckoSimplifiedJson[sunCoinGeckoData].foreColor,
+                    backColor:
+                      CoinGeckoSimplifiedJson[sunCoinGeckoData].backColor,
+                    logoImg: CoinGeckoSimplifiedJson[sunCoinGeckoData].logoImg,
                   },
                 ],
               ])
           );
-          const coinMarketData = CoinGeckoJson;
+          const coinMarketData = CoinGeckoSimplifiedJson;
           return { btcCandles, coinMarketData };
         })
         // we need btc data first to calculate others

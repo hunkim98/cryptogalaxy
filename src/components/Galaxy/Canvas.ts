@@ -19,11 +19,13 @@ export class GalaxyCanvas {
   sun: Sun | null;
   planets: Array<Planet> = [];
   requestAnimationFrameId: number;
-  MIN_PLANET_SIZE = 10;
+  MIN_PLANET_SIZE = 30;
   MAX_PLANET_SIZE = 80;
   frameCount = 0;
   backgroundLoopMax = 1000;
   dpr: number = 1;
+  hoveredPlanet: Planet | null = null;
+  isPopupOpen: boolean = false;
   constructor(element: HTMLCanvasElement) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
@@ -35,27 +37,139 @@ export class GalaxyCanvas {
   }
 
   onMouseMove(e: MouseEvent) {
-    // console.log(e.clientX, e.clientY);
-    // for (const planet of this.planets) {
-    //   const screenPoint = convertCartesianToScreenPoint(
-    //     this.element,
-    //     planet.position
-    //   );
-    //   const distance = screenPoint.squareDistanceTo(
-    //     new Vector2(e.clientX, e.clientY)
-    //   );
-    //   console.log(distance);
-    //   if (planet.name === "DOGE") {
-    //     console.log(distance);
-    //   }
-    // }
+    let isAnyPlanetHovered = false;
+    for (const planet of this.planets) {
+      const screenPoint = convertCartesianToScreenPoint(
+        this.element,
+        planet.position,
+        this.dpr
+      );
+      const distance = screenPoint.squareDistanceTo(
+        new Vector2(e.clientX, e.clientY)
+      );
+      if (Math.sqrt(distance) < planet.radius) {
+        planet.setIsPopupOpen(true);
+        isAnyPlanetHovered = true;
+        this.hoveredPlanet = planet;
+      } else {
+        planet.setIsPopupOpen(false);
+      }
+    }
+    if (isAnyPlanetHovered) {
+      this.isPopupOpen = true;
+    } else {
+      this.isPopupOpen = false;
+    }
+  }
+
+  drawPopup(drawPosition: Vector2, planet: Planet) {
+    let quadrant = 0b00;
+    console.log(planet.name);
+    if (
+      drawPosition.x > this.element.width / this.dpr / 2 &&
+      drawPosition.y < this.element.height / this.dpr / 2
+    ) {
+      quadrant = 0b00;
+    } else if (
+      drawPosition.x < this.element.width / this.dpr / 2 &&
+      drawPosition.y < this.element.height / this.dpr / 2
+    ) {
+      quadrant = 0b01;
+    } else if (
+      drawPosition.x < this.element.width / this.dpr / 2 &&
+      drawPosition.y > this.element.height / this.dpr / 2
+    ) {
+      quadrant = 0b11;
+    } else {
+      quadrant = 0b10;
+    }
+    const borderRadius = 10;
+    const popupWidth = 100;
+    const popupHeight = 80;
+    const width = quadrant % 2 === 0 ? popupWidth : -popupWidth;
+    const height = (quadrant & 0b10) === 0b10 ? -popupHeight : popupHeight;
+    let topLeftPoint = new Vector2(drawPosition.x, drawPosition.y);
+    if (quadrant === 0b01) {
+      topLeftPoint = topLeftPoint.add(new Vector2(-popupWidth, 0));
+    } else if (quadrant === 0b11) {
+      topLeftPoint = topLeftPoint.add(new Vector2(-popupWidth, -popupHeight));
+    } else if (quadrant === 0b10) {
+      topLeftPoint = topLeftPoint.add(new Vector2(0, -popupHeight));
+    }
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.ctx.moveTo(
+      quadrant % 2 === 0
+        ? drawPosition.x + borderRadius
+        : drawPosition.x - borderRadius,
+      drawPosition.y
+    );
+    this.ctx.arcTo(
+      drawPosition.x + width,
+      drawPosition.y,
+      drawPosition.x + width,
+      drawPosition.y + height,
+      borderRadius
+    );
+    this.ctx.arcTo(
+      drawPosition.x + width,
+      drawPosition.y + height,
+      drawPosition.x,
+      drawPosition.y + height,
+      borderRadius
+    );
+    this.ctx.arcTo(
+      drawPosition.x,
+      drawPosition.y + height,
+      drawPosition.x,
+      drawPosition.y,
+      borderRadius
+    );
+    this.ctx.arcTo(
+      drawPosition.x,
+      drawPosition.y,
+      drawPosition.x + width,
+      drawPosition.y,
+      borderRadius
+    );
+    this.ctx.closePath();
+    this.ctx.stroke();
+    this.ctx.fillStyle = "white";
+    this.ctx.fill();
+    this.ctx.textAlign = "start";
+    this.ctx.textBaseline = "top";
+    this.ctx.fillStyle = "black";
+    this.ctx.font = "12px Noto Sans KR";
+    const popupPadding = 5;
+    this.ctx.fillText(
+      planet.name,
+      topLeftPoint.x + popupPadding,
+      topLeftPoint.y + popupPadding
+    );
+    this.ctx.fillText(
+      "price: ₩" + planet.price,
+      topLeftPoint.x + popupPadding,
+      topLeftPoint.y + popupPadding + 15
+    );
+    this.ctx.fillText(
+      "correlation: " + planet.correlationCoefficient.toFixed(8),
+      topLeftPoint.x + popupPadding,
+      topLeftPoint.y + popupPadding + 30
+    );
+    this.ctx.fillText(
+      "rsi: " + planet.rsi.toFixed(2) + "%",
+      topLeftPoint.x + popupPadding,
+      topLeftPoint.y + popupPadding + 45
+    );
+    this.ctx.restore();
   }
 
   setSun(
     name: string,
     increaseRatio: number,
     foreColor: string,
-    backColor: string
+    backColor: string,
+    logoImg: string
   ) {
     this.sun = new Sun(
       this.element,
@@ -63,7 +177,8 @@ export class GalaxyCanvas {
       increaseRatio,
       foreColor,
       backColor,
-      this.dpr
+      this.dpr,
+      logoImg
     );
   }
 
@@ -77,7 +192,8 @@ export class GalaxyCanvas {
     resistance: Array<number>,
     rsi: number,
     foreColor: string,
-    backColor: string
+    backColor: string,
+    logoImg: string
   ) {
     const size = changeRelativeValueToRealValue(
       volume,
@@ -100,7 +216,8 @@ export class GalaxyCanvas {
       rsi,
       foreColor,
       backColor,
-      this.dpr
+      this.dpr,
+      logoImg
     );
     this.planets.push(planet);
     this.planets.sort((a, b) => b.radius - a.radius);
@@ -115,6 +232,7 @@ export class GalaxyCanvas {
 
   initialize() {
     // this.planets.push(new Planet(this.element, this.sun.radius + 50, 1, 80));
+    this.onMouseMove = this.onMouseMove.bind(this);
     this.element.addEventListener("mousemove", this.onMouseMove);
   }
 
@@ -180,6 +298,7 @@ export class GalaxyCanvas {
     this.clear();
     this.drawBackground();
     this.drawScene();
+
     setTimeout(() => {
       requestAnimationFrame(this.render.bind(this));
     }, 1000 / this.fps);
@@ -187,6 +306,9 @@ export class GalaxyCanvas {
 
   drawScene() {
     this.drawGalaxyComponents();
+    if (this.isPopupOpen && this.hoveredPlanet) {
+      this.drawPopup(this.hoveredPlanet.canvasDrawPosition, this.hoveredPlanet);
+    }
   }
 
   drawDummy() {}

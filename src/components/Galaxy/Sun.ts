@@ -15,14 +15,19 @@ export class Sun {
   backColor: string;
   name: string;
   dpr: number;
+  logoImage: HTMLImageElement;
   constructor(
     canvas: HTMLCanvasElement,
     name: string,
     increaseRatio: number,
     foreColor: string,
     backColor: string,
-    dpr: number
+    dpr: number,
+    logoImg: string
   ) {
+    const logoImage = new Image();
+    logoImage.src = logoImg;
+    this.logoImage = logoImage;
     this.canvas = canvas;
     this.foreColor = foreColor;
     this.backColor = backColor;
@@ -74,6 +79,20 @@ export class Sun {
     ctx.restore();
   }
 
+  drawLogo(drawPosition: Vector2, ctx: CanvasRenderingContext2D) {
+    ctx.save();
+    const imageSize = Sun.radius * 1;
+    ctx.globalAlpha = 0.8;
+    ctx.drawImage(
+      this.logoImage,
+      drawPosition.x - imageSize / 2,
+      drawPosition.y - imageSize / 2,
+      imageSize,
+      imageSize
+    );
+    ctx.restore();
+  }
+
   drawSun(drawPosition: Vector2, ctx: CanvasRenderingContext2D) {
     ctx.save();
     ctx.beginPath();
@@ -89,9 +108,10 @@ export class Sun {
       this.position,
       this.dpr
     );
-    // this.drawBrightnessInner(drawPosition, ctx);
-    // this.drawBrightnessOuter(drawPosition, ctx);
+    this.drawBrightnessInner(drawPosition, ctx);
+    this.drawBrightnessOuter(drawPosition, ctx);
     this.drawSun(drawPosition, ctx);
+    this.drawLogo(drawPosition, ctx);
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = `rgba(255, 255, 255, 0.8)`;

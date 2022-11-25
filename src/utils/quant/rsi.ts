@@ -6,7 +6,7 @@ import { ICandleDayReturnProps } from "node-upbit/lib/@types/quotation";
  * @param candles
  */
 export const calcRSI = (candles: Array<ICandleDayReturnProps>) => {
-  const RSI_PERIOD = 5; // the most common calculation for RSI is 14 days
+  const RSI_PERIOD = 15; // the most common calculation for RSI is 14 days
   if (RSI_PERIOD + 1 > candles.length) {
     throw Error("Not enough data to calculate RSI");
   }

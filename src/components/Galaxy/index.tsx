@@ -1,7 +1,7 @@
 import { CryptoContext } from "context/CryptoContext";
 import React, { useContext, useEffect, useRef } from "react";
 import { GalaxyCanvas } from "./Canvas";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo_final_condensed.png";
 
 interface Props {}
 
@@ -35,7 +35,8 @@ const Galaxy: React.FC<Props> = () => {
           crypto[0].replace("KRW-", ""),
           crypto[1].increaseRatio,
           crypto[1].foreColor,
-          crypto[1].backColor
+          crypto[1].backColor,
+          crypto[1].logoImg
         );
       } else {
         const indexOfPlanet = galaxyCanvasRef.current.planets.findIndex(
@@ -60,7 +61,8 @@ const Galaxy: React.FC<Props> = () => {
               crypto[1].resistance,
               crypto[1].rsi,
               crypto[1].foreColor,
-              crypto[1].backColor
+              crypto[1].backColor,
+              crypto[1].logoImg
             );
           }
         } else {
