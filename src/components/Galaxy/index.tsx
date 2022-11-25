@@ -9,20 +9,20 @@ const Galaxy: React.FC<Props> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const divRef = useRef<HTMLDivElement>(null);
   const galaxyCanvasRef = useRef<GalaxyCanvas | null>(null);
-  const { cryptoData } = useContext(CryptoContext);
+  const { cryptoData, markets } = useContext(CryptoContext);
 
   useEffect(() => {
     if (!canvasRef.current) {
       return () => {};
     }
-    const galaxyCanvas = new GalaxyCanvas(canvasRef.current);
+    const galaxyCanvas = new GalaxyCanvas(canvasRef.current, markets.length);
     galaxyCanvasRef.current = galaxyCanvas;
     return () => {
       if (galaxyCanvasRef.current) {
         galaxyCanvasRef.current.destroy();
       }
     };
-  }, []);
+  }, [markets]);
 
   useEffect(() => {
     if (!cryptoData || !galaxyCanvasRef.current) {

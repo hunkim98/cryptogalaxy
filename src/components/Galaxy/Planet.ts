@@ -59,7 +59,8 @@ export class Planet {
     foreColor: string,
     backColor: string,
     dpr: number,
-    logoImg: string
+    logoImg: string,
+    angleTiltRatio: number
   ) {
     const logoImage = new Image();
     this.logoImage = logoImage;
@@ -68,7 +69,7 @@ export class Planet {
     this.foreColor = foreColor;
     this.backColor = backColor;
     this.canvas = canvas;
-    this.rotator = new Rotator2D(Math.random() * 360);
+    this.rotator = new Rotator2D(angleTiltRatio * 360);
     this.correlationCoefficient = correlationCoefficient;
     this.radius = radius;
     this.spaceShips = [];

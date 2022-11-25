@@ -14,6 +14,7 @@ interface Props {
 
 interface CryptoContextElements {
   cryptoData: Map<string, CryptoDataFields> | undefined;
+  markets: Array<string>;
 }
 
 const CryptoContext = createContext<CryptoContextElements>(
@@ -81,11 +82,11 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       const otherCryptoDayCandles = await getDayCandles(market, dayCount);
       const increaseRatio = calcIncreaseRatioOfMA(
         otherCryptoDayCandles.slice(-btcDayCandles.length),
-        20
+        5
       );
       const coefficient = calcCorrelationCoefficient(
-        btcDayCandles,
-        otherCryptoDayCandles.slice(-btcDayCandles.length)
+        btcDayCandles.slice(-10),
+        otherCryptoDayCandles.slice(-btcDayCandles.length).slice(-10)
       );
       const { support, resistance } = calcSupportResistance(
         otherCryptoDayCandles
@@ -200,7 +201,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   }, [retrieveAllCryptoData, retrieveCurrentPrice]);
 
   return (
-    <CryptoContext.Provider value={{ cryptoData }}>
+    <CryptoContext.Provider value={{ cryptoData, markets }}>
       {children}
     </CryptoContext.Provider>
   );

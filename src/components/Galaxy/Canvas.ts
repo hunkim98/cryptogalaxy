@@ -26,13 +26,15 @@ export class GalaxyCanvas {
   dpr: number = 1;
   hoveredPlanet: Planet | null = null;
   isPopupOpen: boolean = false;
-  constructor(element: HTMLCanvasElement) {
+  totalMarketCount: number = 0;
+  constructor(element: HTMLCanvasElement, totalMarketCount: number) {
     this.element = element;
     this.ctx = element.getContext("2d")!;
     this.sun = null;
     this.render();
     this.requestAnimationFrameId = requestAnimationFrame(this.render);
     this.planets = [];
+    this.totalMarketCount = totalMarketCount;
     this.initialize();
   }
 
@@ -217,7 +219,8 @@ export class GalaxyCanvas {
       foreColor,
       backColor,
       this.dpr,
-      logoImg
+      logoImg,
+      this.planets.length / this.totalMarketCount
     );
     this.planets.push(planet);
     this.planets.sort((a, b) => b.radius - a.radius);
