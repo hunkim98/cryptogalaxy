@@ -1,27 +1,44 @@
 {
   "files": {
     "main.css": "/cryptogalaxy/static/css/main.88b75c41.chunk.css",
-    "main.js": "/cryptogalaxy/static/js/main.941c8e72.chunk.js",
-    "main.js.map": "/cryptogalaxy/static/js/main.941c8e72.chunk.js.map",
+    "main.js": "/cryptogalaxy/static/js/main.0e033643.chunk.js",
+    "main.js.map": "/cryptogalaxy/static/js/main.0e033643.chunk.js.map",
     "runtime-main.js": "/cryptogalaxy/static/js/runtime-main.1098c1e0.js",
     "runtime-main.js.map": "/cryptogalaxy/static/js/runtime-main.1098c1e0.js.map",
-    "static/js/2.aceea442.chunk.js": "/cryptogalaxy/static/js/2.aceea442.chunk.js",
-    "static/js/2.aceea442.chunk.js.map": "/cryptogalaxy/static/js/2.aceea442.chunk.js.map",
+    "static/js/2.90d89098.chunk.js": "/cryptogalaxy/static/js/2.90d89098.chunk.js",
+    "static/js/2.90d89098.chunk.js.map": "/cryptogalaxy/static/js/2.90d89098.chunk.js.map",
     "static/js/3.445d01dd.chunk.js": "/cryptogalaxy/static/js/3.445d01dd.chunk.js",
     "static/js/3.445d01dd.chunk.js.map": "/cryptogalaxy/static/js/3.445d01dd.chunk.js.map",
     "index.html": "/cryptogalaxy/index.html",
     "static/css/main.88b75c41.chunk.css.map": "/cryptogalaxy/static/css/main.88b75c41.chunk.css.map",
-    "static/js/2.aceea442.chunk.js.LICENSE.txt": "/cryptogalaxy/static/js/2.aceea442.chunk.js.LICENSE.txt",
+    "static/js/2.90d89098.chunk.js.LICENSE.txt": "/cryptogalaxy/static/js/2.90d89098.chunk.js.LICENSE.txt",
+    "static/media/aave.f34c2ea3.png": "/cryptogalaxy/static/media/aave.f34c2ea3.png",
+    "static/media/algo.bc7a9a99.png": "/cryptogalaxy/static/media/algo.bc7a9a99.png",
+    "static/media/ankr.1c8b1fdd.png": "/cryptogalaxy/static/media/ankr.1c8b1fdd.png",
+    "static/media/atom.cfe887f0.png": "/cryptogalaxy/static/media/atom.cfe887f0.png",
+    "static/media/bch.1b5abb07.png": "/cryptogalaxy/static/media/bch.1b5abb07.png",
+    "static/media/btc.3383c108.png": "/cryptogalaxy/static/media/btc.3383c108.png",
+    "static/media/celo.2502ce7f.png": "/cryptogalaxy/static/media/celo.2502ce7f.png",
+    "static/media/doge.641f5215.png": "/cryptogalaxy/static/media/doge.641f5215.png",
+    "static/media/etc.f5aa0434.png": "/cryptogalaxy/static/media/etc.f5aa0434.png",
+    "static/media/eth.6fc584d0.png": "/cryptogalaxy/static/media/eth.6fc584d0.png",
     "static/media/ice_2_a.c5f74b68.png": "/cryptogalaxy/static/media/ice_2_a.c5f74b68.png",
     "static/media/ice_2_b.a4e2e359.png": "/cryptogalaxy/static/media/ice_2_b.a4e2e359.png",
     "static/media/ice_3_a.0e60f983.png": "/cryptogalaxy/static/media/ice_3_a.0e60f983.png",
     "static/media/ice_3_b.ca77fbfe.png": "/cryptogalaxy/static/media/ice_3_b.ca77fbfe.png",
-    "static/media/logo.791fbd9b.png": "/cryptogalaxy/static/media/logo.791fbd9b.png"
+    "static/media/knc.c75e25e5.png": "/cryptogalaxy/static/media/knc.c75e25e5.png",
+    "static/media/link.75364210.png": "/cryptogalaxy/static/media/link.75364210.png",
+    "static/media/logo.791fbd9b.png": "/cryptogalaxy/static/media/logo.791fbd9b.png",
+    "static/media/logo_final_condensed.1d939b7d.png": "/cryptogalaxy/static/media/logo_final_condensed.1d939b7d.png",
+    "static/media/nu.729045e9.png": "/cryptogalaxy/static/media/nu.729045e9.png",
+    "static/media/sol.5c349913.png": "/cryptogalaxy/static/media/sol.5c349913.png",
+    "static/media/xrp.58c157e1.png": "/cryptogalaxy/static/media/xrp.58c157e1.png",
+    "static/media/xtz.e4e840ab.png": "/cryptogalaxy/static/media/xtz.e4e840ab.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1098c1e0.js",
-    "static/js/2.aceea442.chunk.js",
+    "static/js/2.90d89098.chunk.js",
     "static/css/main.88b75c41.chunk.css",
-    "static/js/main.941c8e72.chunk.js"
+    "static/js/main.0e033643.chunk.js"
   ]
 }
