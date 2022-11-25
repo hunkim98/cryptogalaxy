@@ -1,3 +1,4 @@
+import { midPointBtw } from "utils/curves";
 import { Vector2 } from "utils/math/Vector2";
 
 export class Continent {
@@ -26,11 +27,22 @@ export class Continent {
       -this.points[0].y * this.scale + origin.y
     );
 
-    for (const point of this.points) {
+    for (let i = 0; i < this.points.length; i++) {
+      const point = this.points[i];
       ctx.lineTo(
         point.x * this.scale + origin.x,
         -point.y * this.scale + origin.y
       );
+      // below is drawing smooth curve
+      // const nextPoint =
+      //   i === this.points.length - 1 ? this.points[0] : this.points[i + 1];
+      // const midPoint = midPointBtw(point, nextPoint);
+      // ctx.quadraticCurveTo(
+      //   point.x * this.scale + origin.x,
+      //   -point.y * this.scale + origin.y,
+      //   midPoint.x * this.scale + origin.x,
+      //   -midPoint.y * this.scale + origin.y
+      // );
     }
 
     if (typeof color === "string") {

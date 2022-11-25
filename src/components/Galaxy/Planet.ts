@@ -111,10 +111,7 @@ export class Planet {
       this.position,
       this.dpr
     );
-    this.continentOrigins = [
-      new Vector2(0, -this.radius),
-      new Vector2(0, this.radius),
-    ];
+
     if (support.length === 0 && resistance.length === 0) {
       this.greenness = 0;
       this.currentPriceRelativeLocation = 0.5;
@@ -166,6 +163,10 @@ export class Planet {
         );
       }
     }
+    this.continentOrigins = [
+      new Vector2(0, -this.radius),
+      new Vector2(0, this.radius),
+    ];
     const leftOriginCount =
       this.continents.length - this.continentOrigins.length;
     for (let i = 0; i < leftOriginCount; i++) {
@@ -173,7 +174,7 @@ export class Planet {
       const origin = new Vector2(
         Math.cos(angle * i),
         Math.sin(angle * i)
-      ).scalarBy(Math.random() * this.radius);
+      ).scalarBy(this.radius - this.radius / 5);
       this.continentOrigins.push(origin);
     }
     setInterval(() => {
@@ -283,7 +284,7 @@ export class Planet {
 
   calcDistanceFromSun(correlationCoefficient: number) {
     const minDistance = Sun.radius + 20 + this.radius;
-    const maxDistance = this.canvas.height / this.dpr / 2 + 200;
+    const maxDistance = this.canvas.height / this.dpr / 2;
 
     const distance = changeRelativeValueToRealValueInversed(
       // the bigger the correlation coefficient
@@ -451,11 +452,12 @@ export class Planet {
     this.ctx.save();
     for (const continentOrigin of this.continentOrigins) {
       const continent = this.continents.shift()!;
-
+      this.ctx.beginPath();
       this.ctx.arc(origin.x, origin.y, this.radius, 0, 2 * Math.PI, false);
+      this.ctx.closePath();
       this.ctx.clip();
-      continent.draw(origin.add(continentOrigin), this.foreColor);
 
+      continent.draw(origin.add(continentOrigin), this.foreColor);
       this.continents.push(continent);
     }
     this.ctx.restore();
@@ -480,24 +482,88 @@ export class Planet {
     this.ctx.restore();
   }
 
-  drawIceAge(drawPosition: Vector2) {
+  drawIceAge(origin: Vector2) {
     this.ctx.save();
-    const imageSize = this.radius * 2 * 1.2;
-    this.ctx.globalAlpha = 0.8;
-    this.ctx.drawImage(
-      this.iceAgeImage,
-      drawPosition.x - imageSize / 2,
-      drawPosition.y - imageSize / 2,
-      imageSize,
-      imageSize
+    this.ctx.beginPath();
+    this.ctx.arc(origin.x, origin.y, this.radius, 0, 2 * Math.PI, false);
+    this.ctx.closePath();
+    this.ctx.clip();
+
+    // const imageSize = this.radius * 2 * 1.2;
+    // this.ctx.globalAlpha = 0.8;
+    // this.ctx.drawImage(
+    //   this.iceAgeImage,
+    //   origin.x - imageSize / 2,
+    //   origin.y - imageSize / 2,
+    //   imageSize,
+    //   imageSize
+    // );
+    // this.ctx.save();
+    const iceInnerRadius = this.radius * 0.6;
+    const glacierRadius = this.radius * 0.8;
+
+    const northPolePosition = new Vector2(
+      origin.x,
+      origin.y - this.radius * 1.5
     );
+    const southPolePosition = new Vector2(
+      origin.x,
+      origin.y + this.radius * 1.5
+    );
+    const gradientUpper = this.ctx.createRadialGradient(
+      northPolePosition.x,
+      northPolePosition.y,
+      iceInnerRadius,
+      northPolePosition.x,
+      northPolePosition.y,
+      glacierRadius
+    );
+    const gradientLower = this.ctx.createRadialGradient(
+      southPolePosition.x,
+      southPolePosition.y,
+      iceInnerRadius,
+      southPolePosition.x,
+      southPolePosition.y,
+      glacierRadius
+    );
+
+    // Add three color stops
+    gradientUpper.addColorStop(0, "rgba(255,255,255,1)");
+    gradientUpper.addColorStop(1, "rgba(255,255,255,0)");
+    gradientLower.addColorStop(0, "rgba(255,255,255,1)");
+    gradientLower.addColorStop(1, "rgba(255,255,255,0)");
+    this.ctx.beginPath();
+    this.ctx.arc(
+      origin.x,
+      origin.y - glacierRadius,
+      this.radius * 1.3,
+      0,
+      2 * Math.PI,
+      false
+    );
+    this.ctx.fillStyle = gradientUpper;
+    this.ctx.fill();
+    this.ctx.closePath();
+    this.ctx.beginPath();
+    this.ctx.arc(
+      origin.x,
+      origin.y + glacierRadius,
+      this.radius * 1.3,
+      0,
+      2 * Math.PI,
+      false
+    );
+    this.ctx.fillStyle = gradientLower;
+    this.ctx.fill();
+    this.ctx.closePath();
+    // this.ctx.restore();
     this.ctx.restore();
   }
 
   drawLogo(drawPosition: Vector2) {
     this.ctx.save();
     const imageSize = this.radius;
-    this.ctx.globalAlpha = 0.8;
+    this.ctx.globalAlpha = 1;
     this.ctx.drawImage(
       this.logoImage,
       drawPosition.x - imageSize / 2,
@@ -518,7 +584,7 @@ export class Planet {
       0,
       1,
       0,
-      0.8
+      0.3
     )})`;
     this.ctx.fill();
     this.ctx.closePath();
@@ -551,7 +617,7 @@ export class Planet {
       2 * Math.PI,
       false
     );
-    this.ctx.fillStyle = this.backColor;
+    this.ctx.fillStyle = `rgba(0, 36, 121, 1)`;
     this.ctx.fill();
     this.ctx.closePath();
     // this.ctx.fillStyle = `rgba(${
@@ -560,6 +626,7 @@ export class Planet {
     this.ctx.restore();
 
     this.drawContinents(this.canvasDrawPosition);
+
     // this.drawOverlay(this.canvasDrawPosition);
 
     this.ctx.save();
@@ -581,7 +648,8 @@ export class Planet {
 
     this.ctx.restore();
     this.drawLogo(this.canvasDrawPosition);
-    // this.drawIceAge(this.canvasDrawPosition);
+    this.drawIceAge(this.canvasDrawPosition);
+
     // if (this.isPopupOpen) {
     //   this.drawPopup(this.canvasDrawPosition);
     // }
