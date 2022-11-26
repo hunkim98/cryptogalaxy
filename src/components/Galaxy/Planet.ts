@@ -290,14 +290,14 @@ export class Planet {
   }
 
   calcDistanceFromSun(correlationCoefficient: number) {
-    const minDistance = Sun.radius + 20 + this.radius;
+    const minDistance = Sun.radius + 30 + this.radius;
     const maxDistance = this.canvas.height / this.dpr / 2;
 
     const relativeToRadian = changeRelativeValueToRealValueInversed(
       // the bigger the correlation coefficient
       // the more similar is it to the sun
       correlationCoefficient,
-      -0.001,
+      -0.00005,
       0.1,
       (Math.PI * 85) / 180,
       (Math.PI * 89.9) / 180

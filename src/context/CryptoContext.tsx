@@ -59,6 +59,8 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
     "KRW-NU",
     "KRW-KNC",
     "KRW-ETC",
+    "KRW-MANA",
+    "KRW-SAND",
   ]);
   const retrieveOtherCryptoData = useCallback(
     async (

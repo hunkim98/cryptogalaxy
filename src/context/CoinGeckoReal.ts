@@ -19,6 +19,8 @@ import sol from "assets/coin_logos/sol.png";
 import stx from "assets/coin_logos/stx.png";
 import xrp from "assets/coin_logos/xrp.png";
 import xtz from "assets/coin_logos/xtz.png";
+import mana from "assets/coin_logos/mana.png";
+import sand from "assets/coin_logos/sand.png";
 
 export const CoinGeckoSimplifiedJson: Array<
   CoinGeckoSingleMarketData & {
@@ -702,5 +704,73 @@ export const CoinGeckoSimplifiedJson: Array<
     backColor: "#338333",
     last_updated: "2022-11-03T10:51:56.063Z",
     logoImg: etc,
+  },
+  {
+    id: "decentraland",
+    symbol: "mana",
+    name: "Decentraland",
+    image:
+      "https://assets.coingecko.com/coins/images/878/large/decentraland-mana.png?1550108745",
+    current_price: 922.4,
+    market_cap: 1679614054802,
+    market_cap_rank: 50,
+    fully_diluted_valuation: 2028930762834,
+    total_volume: 227711451689,
+    high_24h: 926.54,
+    low_24h: 871.61,
+    price_change_24h: 31.2,
+    price_change_percentage_24h: 3.50093,
+    market_cap_change_24h: 63725113283,
+    market_cap_change_percentage_24h: 3.94366,
+    circulating_supply: 1815810373.1054044,
+    total_supply: 2193452427.32015,
+    max_supply: 2193452427.32015,
+    ath: 6965.74,
+    ath_change_percentage: -86.7208,
+    ath_date: "2021-11-25T10:04:18.534Z",
+    atl: 10.33,
+    atl_change_percentage: 8851.17738,
+    atl_date: "2017-10-31T00:00:00.000Z",
+    roi: {
+      times: 31.31404879806548,
+      currency: "usd",
+      percentage: 3131.404879806548,
+    },
+    foreColor: "#ff2d55",
+    backColor: "#FF4556",
+    last_updated: "2022-11-03T10:51:37.739Z",
+    logoImg: mana,
+  },
+  {
+    id: "the-sandbox",
+    symbol: "sand",
+    name: "The Sandbox",
+    image:
+      "https://assets.coingecko.com/coins/images/12129/large/sandbox_logo.jpg?1597397942",
+    current_price: 1188.42,
+    market_cap: 1826353792097,
+    market_cap_rank: 45,
+    fully_diluted_valuation: 3587486580168,
+    total_volume: 418875078470,
+    high_24h: 1205.71,
+    low_24h: 1134.61,
+    price_change_24h: 34.73,
+    price_change_percentage_24h: 3.01039,
+    market_cap_change_24h: 64527883959,
+    market_cap_change_percentage_24h: 3.66256,
+    circulating_supply: 1527270208.2233226,
+    total_supply: 3000000000.0,
+    max_supply: 3000000000.0,
+    ath: 9989.6,
+    ath_change_percentage: -88.05289,
+    ath_date: "2021-11-25T06:04:40.957Z",
+    atl: 32.77,
+    atl_change_percentage: 3541.54851,
+    atl_date: "2020-11-04T15:59:14.441Z",
+    roi: null,
+    foreColor: "#00adef",
+    backColor: "#07ACEE",
+    last_updated: "2022-11-03T10:52:17.049Z",
+    logoImg: sand,
   },
 ];
