@@ -297,7 +297,7 @@ export class Planet {
       // the bigger the correlation coefficient
       // the more similar is it to the sun
       correlationCoefficient,
-      -0.00005,
+      -0.001,
       0.1,
       (Math.PI * 85) / 180,
       (Math.PI * 89.9) / 180

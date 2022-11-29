@@ -1,7 +1,7 @@
 import { CryptoContext } from "context/CryptoContext";
 import React, { useContext, useEffect, useRef } from "react";
 import { GalaxyCanvas } from "./Canvas";
-import logo from "../../assets/logo_final_condensed.png";
+import logo from "../../assets/logo_white_gray.png";
 
 interface Props {}
 
