@@ -66,7 +66,6 @@ export class GalaxyCanvas {
 
   drawPopup(drawPosition: Vector2, planet: Planet) {
     let quadrant = 0b00;
-    console.log(planet.name);
     if (
       drawPosition.x > this.element.width / this.dpr / 2 &&
       drawPosition.y < this.element.height / this.dpr / 2
@@ -86,8 +85,8 @@ export class GalaxyCanvas {
       quadrant = 0b10;
     }
     const borderRadius = 10;
-    const popupWidth = 120;
-    const popupHeight = 80;
+    const popupWidth = 160;
+    const popupHeight = 150;
     const width = quadrant % 2 === 0 ? popupWidth : -popupWidth;
     const height = (quadrant & 0b10) === 0b10 ? -popupHeight : popupHeight;
     let topLeftPoint = new Vector2(drawPosition.x, drawPosition.y);
@@ -141,27 +140,65 @@ export class GalaxyCanvas {
     this.ctx.textAlign = "start";
     this.ctx.textBaseline = "top";
     this.ctx.fillStyle = "black";
-    this.ctx.font = "12px Noto Sans KR";
-    const popupPadding = 5;
+
+    // this.ctx.font = "12px Noto Sans KR";
+    this.ctx.font = "bold 18px Anek Devanagari";
+    this.ctx.fillStyle = planet.foreColor;
+    const popupPadding = 8;
+    const titleYPos = topLeftPoint.y + popupPadding;
+    this.ctx.fillText(planet.name, topLeftPoint.x + popupPadding, titleYPos);
+    this.ctx.fillStyle = "black";
+    this.ctx.textAlign = "end";
+    this.ctx.font = "normal 16px Anek Devanagari";
+    console.log(planet.name, planet.price);
+    // this.ctx.fillText(
     this.ctx.fillText(
-      planet.name,
-      topLeftPoint.x + popupPadding,
-      topLeftPoint.y + popupPadding
+      "₩" + planet.price.toLocaleString(),
+      topLeftPoint.x + Math.abs(width) - popupPadding,
+      titleYPos
     );
+    this.ctx.textAlign = "start";
+    this.ctx.font = "normal 14px Anek Devanagari";
+    //correlation to btc
+    const marketCapYPos = titleYPos + 20 + 2;
     this.ctx.fillText(
-      "price: ₩" + planet.price,
+      "Market Captial: ",
       topLeftPoint.x + popupPadding,
-      topLeftPoint.y + popupPadding + 15
+      marketCapYPos
     );
+    this.ctx.font = "normal 12px Anek Devanagari";
     this.ctx.fillText(
-      "correlation: " + planet.correlationCoefficient.toFixed(5),
+      "₩" + planet.volume.toLocaleString(),
       topLeftPoint.x + popupPadding,
-      topLeftPoint.y + popupPadding + 30
+      marketCapYPos + 15
     );
+    //correlation to btc
+    this.ctx.font = "normal 14px Anek Devanagari";
+    const correlationYPos = marketCapYPos + 40;
     this.ctx.fillText(
-      "rsi: " + planet.rsi.toFixed(2) + "%",
+      "Correlation to BTC: ",
       topLeftPoint.x + popupPadding,
-      topLeftPoint.y + popupPadding + 45
+      correlationYPos
+    );
+    this.ctx.font = "normal 12px Anek Devanagari";
+    this.ctx.fillText(
+      planet.correlationCoefficient.toFixed(5),
+      topLeftPoint.x + popupPadding,
+      correlationYPos + 15
+    );
+    const relativeStrengthYPos = correlationYPos + 40;
+    //Moving average
+    this.ctx.font = "normal 14px Anek Devanagari";
+    this.ctx.fillText(
+      "Relative Strength Index: ",
+      topLeftPoint.x + popupPadding,
+      relativeStrengthYPos
+    );
+    this.ctx.font = "normal 12px Anek Devanagari";
+    this.ctx.fillText(
+      planet.rsi.toFixed(2) + "%",
+      topLeftPoint.x + popupPadding,
+      relativeStrengthYPos + 15
     );
     this.ctx.restore();
   }
@@ -220,7 +257,8 @@ export class GalaxyCanvas {
       backColor,
       this.dpr,
       logoImg,
-      this.planets.length / this.totalMarketCount
+      this.planets.length / this.totalMarketCount,
+      volume
     );
     this.planets.push(planet);
     this.planets.sort((a, b) => b.radius - a.radius);

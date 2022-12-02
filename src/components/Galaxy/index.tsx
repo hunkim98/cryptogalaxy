@@ -2,18 +2,21 @@ import { CryptoContext } from "context/CryptoContext";
 import React, { useContext, useEffect, useRef } from "react";
 import { GalaxyCanvas } from "./Canvas";
 import logo from "../../assets/logo_white_gray.png";
+import "./canvas.css"
+import AboutPopup from "components/AboutPopup/AboutPopup";
 
-interface Props {}
+interface Props { }
 
 const Galaxy: React.FC<Props> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const divRef = useRef<HTMLDivElement>(null);
   const galaxyCanvasRef = useRef<GalaxyCanvas | null>(null);
+  const [isAboutPopupOpen, setIsAboutPopupOpen] = React.useState(false);
   const { cryptoData, markets } = useContext(CryptoContext);
 
   useEffect(() => {
     if (!canvasRef.current) {
-      return () => {};
+      return () => { };
     }
     const galaxyCanvas = new GalaxyCanvas(canvasRef.current, markets.length);
     galaxyCanvasRef.current = galaxyCanvas;
@@ -122,8 +125,10 @@ const Galaxy: React.FC<Props> = () => {
       <div style={{ position: "absolute", width: 200, left: 20, top: 30 }}>
         <img src={logo} style={{ width: "100%", height: "auto" }} alt="logo" />
       </div>
+      <AboutPopup isOpen={isAboutPopupOpen} setIsOpen={setIsAboutPopupOpen} />
+      <div className="question_button" onClick={() => setIsAboutPopupOpen(prev => !prev)}>?</div>
       <canvas ref={canvasRef} />
-    </div>
+    </div >
   );
 };
 

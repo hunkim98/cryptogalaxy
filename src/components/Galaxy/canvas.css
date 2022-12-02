@@ -1,0 +1,21 @@
+.question_button {
+  position: absolute;
+  color: white;
+  bottom: 50px;
+  right: 50px;
+  font-size: 40px;
+  border: 2px solid white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.question_button:hover {
+  opacity: 1;
+}

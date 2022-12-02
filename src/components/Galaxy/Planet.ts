@@ -13,6 +13,7 @@ import { Spaceship, SpaceshipDirection } from "./Spaceship";
 import { Sun } from "./Sun";
 import { iceAgeLevel1, iceAgeLevel2, iceAgeLevel3 } from "assets/iceAge";
 import { returnRandomInRange } from "utils/randomInRange";
+import { time } from "console";
 
 export class Planet {
   name: string;
@@ -39,13 +40,14 @@ export class Planet {
   finalResistancePrice: number | null = null;
   finalSupportPrice: number | null = null;
   foreColor: string;
-  iceAgeImage: HTMLImageElement;
+  // iceAgeImage: HTMLImageElement;
   backColor: string;
   rsi: number;
   dpr: number;
   isPopupOpen: boolean = false;
   canvasDrawPosition: Vector2;
   logoImage: HTMLImageElement;
+  volume: number;
   constructor(
     canvas: HTMLCanvasElement,
     correlationCoefficient: number,
@@ -60,9 +62,11 @@ export class Planet {
     backColor: string,
     dpr: number,
     logoImg: string,
-    angleTiltRatio: number
+    angleTiltRatio: number,
+    volume: number
   ) {
     const logoImage = new Image();
+    this.volume = volume;
     this.logoImage = logoImage;
     logoImage.src = logoImg;
     this.name = name;
@@ -78,8 +82,8 @@ export class Planet {
     this.dpr = dpr;
     this.distanceFromSun = this.calcDistanceFromSun(correlationCoefficient);
 
-    const image = new Image();
-    this.iceAgeImage = image;
+    // const image = new Image();
+    // this.iceAgeImage = image;
 
     this.resistance = resistance;
     this.support = support;
@@ -185,10 +189,18 @@ export class Planet {
       this.continentOrigins.push(origin);
     }
     setInterval(() => {
-      if (this.spaceShips.length < this.spaceShipCount) {
-        this.setSpaceShip();
+      if (this.spaceShips.length === 0) {
+        while (this.spaceShips.length < this.spaceShipCount) {
+          setTimeout(() => {
+            this.setSpaceShip();
+          }, this.spaceShipRegenerationInterval);
+          this.setSpaceShip();
+        }
+        // console.log(this.name, this.spaceShips.length);
+
+        // console.log(this.name, this.spaceShips.length, "setting finished");
       }
-    }, this.spaceShipRegenerationInterval);
+    }, spaceShipRegenerationInterval);
     // this.setSpaceShip();
   }
 
@@ -203,7 +215,6 @@ export class Planet {
       0,
       1
     );
-    console.log(relativeLocation);
     return relativeLocation;
   }
 
@@ -242,31 +253,31 @@ export class Planet {
     if (rsi >= 70) {
       spaceShipCount = 3;
       spaceShipDirection = SpaceshipDirection.IN;
-      spaceShipRegenerationInterval = 5000;
-      this.iceAgeImage.src = "";
+      spaceShipRegenerationInterval = 1000;
+      // this.iceAgeImage.src = "";
     } else if (60 <= rsi && rsi < 70) {
       spaceShipCount = 1;
       spaceShipDirection = SpaceshipDirection.IN;
       spaceShipRegenerationInterval = 10000;
-      this.iceAgeImage.src = "";
+      // this.iceAgeImage.src = "";
     } else if (40 <= rsi && rsi < 60) {
       spaceShipCount = 0;
       spaceShipDirection = SpaceshipDirection.OUT;
       spaceShipRegenerationInterval = 20000;
-      this.iceAgeImage.src =
-        iceAgeLevel1[Math.floor(Math.random() * iceAgeLevel1.length)];
+      // this.iceAgeImage.src =
+      // iceAgeLevel1[Math.floor(Math.random() * iceAgeLevel1.length)];
     } else if (30 <= rsi && rsi < 40) {
       spaceShipCount = 1;
       spaceShipDirection = SpaceshipDirection.OUT;
       spaceShipRegenerationInterval = 10000;
-      this.iceAgeImage.src =
-        iceAgeLevel2[Math.floor(Math.random() * iceAgeLevel2.length)];
+      // this.iceAgeImage.src =
+      // iceAgeLevel2[Math.floor(Math.random() * iceAgeLevel2.length)];
     } else {
       spaceShipCount = 3;
       spaceShipDirection = SpaceshipDirection.OUT;
-      spaceShipRegenerationInterval = 5000;
-      this.iceAgeImage.src =
-        iceAgeLevel3[Math.floor(Math.random() * iceAgeLevel3.length)];
+      spaceShipRegenerationInterval = 1000;
+      // this.iceAgeImage.src =
+      // iceAgeLevel3[Math.floor(Math.random() * iceAgeLevel3.length)];
     }
     return {
       spaceShipCount,
