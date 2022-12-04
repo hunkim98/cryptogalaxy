@@ -90,9 +90,10 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       const volume = coinMarket.market_cap;
       const otherCryptoDayCandles = await getDayCandles(market, dayCount);
       const increaseRatio = calcIncreaseRatioOfMA(
-        otherCryptoDayCandles.slice(-btcDayCandles.length),
+        otherCryptoDayCandles.slice(-10),
         5
       );
+      console.log(increaseRatio, coinMarket.name)
       const coefficient = calcCorrelationCoefficient(
         btcDayCandles.slice(-10),
         otherCryptoDayCandles.slice(-10)
@@ -136,7 +137,8 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       getDayCandles(sunCrypto, 30)
         .then(async (res) => {
           const btcCandles = res;
-          const increaseRatio = calcIncreaseRatioOfMA(btcCandles, 20);
+          const increaseRatio = calcIncreaseRatioOfMA(btcCandles.slice(-10), 5);
+          console.log(increaseRatio, "btc");
           const sunCoinGeckoData = CoinGeckoSimplifiedJson.findIndex(
             (element) =>
               element.symbol === sunCrypto.split("-")[1].toLowerCase()
