@@ -12,7 +12,14 @@ const Galaxy: React.FC<Props> = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const galaxyCanvasRef = useRef<GalaxyCanvas | null>(null);
   const [isAboutPopupOpen, setIsAboutPopupOpen] = React.useState(false);
-  const { cryptoData, markets } = useContext(CryptoContext);
+  const { cryptoData, markets, language } = useContext(CryptoContext);
+
+  useEffect(() => {
+    if (!galaxyCanvasRef.current) {
+      return
+    }
+    galaxyCanvasRef.current.changeLanguage(language)
+  }, [language])
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -39,7 +46,10 @@ const Galaxy: React.FC<Props> = () => {
           crypto[1].increaseRatio,
           crypto[1].foreColor,
           crypto[1].backColor,
-          crypto[1].logoImg
+          crypto[1].logoImg,
+          crypto[1].volume,
+          crypto[1].currentPrice,
+          crypto[1].rsi
         );
       } else {
         const indexOfPlanet = galaxyCanvasRef.current.planets.findIndex(

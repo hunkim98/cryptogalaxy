@@ -8,6 +8,10 @@ import { calcSupportResistance } from "utils/quant/support-resistance";
 import { CoinGeckoSimplifiedJson } from "./CoinGeckoReal";
 import { calcRSI } from "utils/quant/rsi";
 
+export enum Language {
+  KOREAN = "ko",
+  ENGLISH = "en",
+}
 interface Props {
   children: React.ReactNode;
 }
@@ -15,6 +19,8 @@ interface Props {
 interface CryptoContextElements {
   cryptoData: Map<string, CryptoDataFields> | undefined;
   markets: Array<string>;
+  language: Language;
+  setLanguage: React.Dispatch<React.SetStateAction<Language>>;
 }
 
 const CryptoContext = createContext<CryptoContextElements>(
@@ -25,10 +31,10 @@ export type CryptoDataFields = {
   increaseRatio: number;
   support?: Array<number>;
   resistance?: Array<number>;
-  currentPrice?: number;
+  currentPrice: number;
   coefficient?: number;
-  volume?: number;
-  rsi?: number;
+  volume: number;
+  rsi: number;
   logoImg: string;
   foreColor: string;
   backColor: string;
@@ -38,6 +44,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   const [cryptoData, setCryptoData] = useState<Map<string, CryptoDataFields>>(
     new Map()
   );
+  const [language, setLanguage] = useState<Language>(Language.KOREAN);
   const [sunCrypto, setSunCrypto] = useState<string>("KRW-BTC");
   const [markets, setMarkets] = useState<Array<string>>([
     "KRW-ETH",
@@ -134,6 +141,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
             (element) =>
               element.symbol === sunCrypto.split("-")[1].toLowerCase()
           );
+          const rsi = calcRSI(btcCandles);
           if (sunCoinGeckoData === -1) {
             throw Error("no sun data is undefined");
           }
@@ -150,6 +158,9 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
                     backColor:
                       CoinGeckoSimplifiedJson[sunCoinGeckoData].backColor,
                     logoImg: CoinGeckoSimplifiedJson[sunCoinGeckoData].logoImg,
+                    volume: CoinGeckoSimplifiedJson[sunCoinGeckoData].market_cap,
+                    currentPrice: btcCandles[btcCandles.length - 1].trade_price,
+                    rsi
                   },
                 ],
               ])
@@ -203,7 +214,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   }, [retrieveAllCryptoData, retrieveCurrentPrice]);
 
   return (
-    <CryptoContext.Provider value={{ cryptoData, markets }}>
+    <CryptoContext.Provider value={{ cryptoData, markets, language, setLanguage }}>
       {children}
     </CryptoContext.Provider>
   );

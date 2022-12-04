@@ -16,6 +16,10 @@ export class Sun {
   name: string;
   dpr: number;
   logoImage: HTMLImageElement;
+  volume: number;
+  price: number;
+  rsi: number;
+  canvasDrawPosition: Vector2;
   constructor(
     canvas: HTMLCanvasElement,
     name: string,
@@ -23,10 +27,16 @@ export class Sun {
     foreColor: string,
     backColor: string,
     dpr: number,
-    logoImg: string
+    logoImg: string,
+    volume: number,
+    price: number,
+    rsi: number
   ) {
     const logoImage = new Image();
+    this.rsi = rsi;
     logoImage.src = logoImg;
+    this.volume = volume;
+    this.price = price;
     this.logoImage = logoImage;
     this.canvas = canvas;
     this.foreColor = foreColor;
@@ -34,6 +44,11 @@ export class Sun {
     this.name = name;
     this.dpr = dpr;
     this.increaseRatio = increaseRatio;
+    this.canvasDrawPosition = convertCartesianToScreenPoint(
+      this.canvas,
+      this.position,
+      this.dpr
+    );
     this.setBrightness(increaseRatio);
   }
 

@@ -1,6 +1,9 @@
 import React from 'react'
 import "./AboutPopup.css"
 import { IoCloseOutline } from "react-icons/io5";
+import planet_image from 'assets/about/planet.png'
+import sun_image from 'assets/about/sun.png'
+import spaceship_image from 'assets/about/spaceship.png'
 import * as S from './styles'
 
 interface Props {
@@ -55,21 +58,32 @@ const AboutPopup: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                     <S.BigTitle>Visual Aspects</S.BigTitle>
                     <S.NestedContainer>
                         <S.SmallTitle>1. Sun</S.SmallTitle>
-                        <S.NestedDescription>
-                            The sun's brightness is related to the BTC's MA increase ratio
-                        </S.NestedDescription>
+                        <S.NestedDescriptionContainer>
+                            <S.NestedImg src={sun_image} />
+                            <S.NestedDescription>
+                                The sun's brightness is related to the BTC's MA increase ratio
+                            </S.NestedDescription>
+                        </S.NestedDescriptionContainer>
                     </S.NestedContainer>
                     <S.NestedContainer>
                         <S.SmallTitle>2. Planet</S.SmallTitle>
-                        <S.NestedDescription>
-                            The planet's size is related to the Market Cap. The planet's ice age degree is related to MFI.
-                        </S.NestedDescription>
+                        <S.NestedDescriptionContainer>
+                            <S.NestedImg src={planet_image} />
+                            <S.NestedDescription>
+                                The planet's size is related to the Market Cap. The planet's ice age degree is related to MFI.
+                            </S.NestedDescription>
+                        </S.NestedDescriptionContainer>
+
                     </S.NestedContainer>
                     <S.NestedContainer>
                         <S.SmallTitle>3. Spaceships</S.SmallTitle>
-                        <S.NestedDescription>
-                            A planet's spaceship is related to the planets' RSI.
-                        </S.NestedDescription>
+                        <S.NestedDescriptionContainer>
+                            <S.NestedImg src={spaceship_image} />
+                            <S.NestedDescription>
+                                A planet's spaceship is related to the planets' RSI.
+                            </S.NestedDescription>
+                        </S.NestedDescriptionContainer>
+
                     </S.NestedContainer>
                 </div>
             </div>
