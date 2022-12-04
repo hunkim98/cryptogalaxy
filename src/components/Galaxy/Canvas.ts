@@ -56,7 +56,6 @@ export class GalaxyCanvas {
       const distanceToSun = screenPoint.squareDistanceTo(
         new Vector2(e.clientX, e.clientY)
       );
-      console.log(Math.sqrt(distanceToSun));
       if (Math.sqrt(distanceToSun) < Sun.radius) {
         this.isSunHovered = true;
       } else {
@@ -87,7 +86,6 @@ export class GalaxyCanvas {
     }
     if (this.isSunHovered) {
       this.hoveredPlanet = null;
-      console.log("is sun hovered");
       this.isPopupOpen = true;
     }
   }
@@ -179,7 +177,6 @@ export class GalaxyCanvas {
     this.ctx.fillStyle = "black";
     this.ctx.textAlign = "end";
     this.ctx.font = "bold 15px Noto Sans KR";
-    console.log(component.name, component.price);
     // this.ctx.fillText(
     this.ctx.fillText(
       "₩" + component.price.toLocaleString(),
@@ -431,7 +428,6 @@ export class GalaxyCanvas {
       } else {
         //sun popup
         if (this.sun) {
-          console.log("sn");
           this.drawPopup(this.sun.canvasDrawPosition, this.sun);
         }
       }

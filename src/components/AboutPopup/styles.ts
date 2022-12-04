@@ -1,9 +1,19 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  font-family: "Nanum Gothic", sans-serif;
+`;
+
+export const MainTitle = styled.div`
+  align-self: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+  font-weight: bold;
+`;
 
 export const DescriptionContainer = styled.div`
-  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BigTitle = styled.div`
@@ -14,7 +24,11 @@ export const BigTitle = styled.div`
 
 export const Description = styled.div`
   font-size: 14px;
-  line-height: 20px;
+  background-color: #d9d9d9;
+  margin: 0 -20px;
+  padding: 10px 20px;
+  line-height: 25px;
+  text-indent: 10px;
   font-weight: medium;
 `;
 
@@ -29,25 +43,40 @@ export const ComponentImage = styled.img`
 `;
 
 export const SmallTitle = styled.div`
-  font-size: 15px;
+  font-size: 20px;
+  margin-top: 15px;
   font-weight: bold;
   min-width: 120px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+`;
+
+export const VisualAspectContainer = styled.div`
+  color: white;
+  background-color: #0a0a0a;
+  margin: 0 -20px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const NestedContainer = styled.div`
   font-size: 12px;
-  margin-bottom: 20px;
-`;
-
-export const NestedImg = styled.img`
-  width: 120px;
-  margin-right: 10px;
-  height: auto;
-`;
-
-export const NestedDescriptionContainer = styled.div`
+  margin-bottom: 30px;
   display: flex;
 `;
 
-export const NestedDescription = styled.div``;
+export const NestedImg = styled.img`
+  width: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  height: auto;
+`;
+
+export const NestedDescriptionContainer = styled.div``;
+
+export const NestedDescription = styled.div`
+  line-height: 20px;
+  font-size: 12px;
+`;
+
+export const Contact = styled.div``;

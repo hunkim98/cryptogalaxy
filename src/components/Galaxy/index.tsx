@@ -135,7 +135,7 @@ const Galaxy: React.FC<Props> = () => {
       <div style={{ position: "absolute", width: 200, left: 20, top: 30 }}>
         <img src={logo} style={{ width: "100%", height: "auto" }} alt="logo" />
       </div>
-      <AboutPopup isOpen={isAboutPopupOpen} setIsOpen={setIsAboutPopupOpen} />
+      <AboutPopup isOpen={isAboutPopupOpen} setIsOpen={setIsAboutPopupOpen} language={language} />
       <div className="question_button" onClick={() => setIsAboutPopupOpen(prev => !prev)}>?</div>
       <canvas ref={canvasRef} />
     </div >

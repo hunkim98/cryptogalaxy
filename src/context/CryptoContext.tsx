@@ -101,15 +101,15 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
         otherCryptoDayCandles
       );
       const rsi = calcRSI(otherCryptoDayCandles);
-      console.log(
-        "increase",
-        increaseRatio,
-        "relation",
-        Math.abs(coefficient),
-        "rsi",
-        rsi,
-        symbol
-      );
+      // console.log(
+      //   "increase",
+      //   increaseRatio,
+      //   "relation",
+      //   Math.abs(coefficient),
+      //   "rsi",
+      //   rsi,
+      //   symbol
+      // );
       const ticker = await getTicker(market);
       setCryptoData((prev) => {
         const newMap = new Map(prev);
