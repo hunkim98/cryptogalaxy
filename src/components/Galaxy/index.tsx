@@ -1,9 +1,10 @@
-import { CryptoContext } from "context/CryptoContext";
+import { CryptoContext, Language } from "context/CryptoContext";
 import React, { useContext, useEffect, useRef } from "react";
 import { GalaxyCanvas } from "./Canvas";
 import logo from "../../assets/logo_white_gray.png";
 import "./canvas.css";
 import AboutPopup from "components/AboutPopup/AboutPopup";
+import useHandleClickOutside from "hooks/useHandleClickOutside";
 
 interface Props {}
 
@@ -12,7 +13,13 @@ const Galaxy: React.FC<Props> = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const galaxyCanvasRef = useRef<GalaxyCanvas | null>(null);
   const [isAboutPopupOpen, setIsAboutPopupOpen] = React.useState(false);
-  const { cryptoData, markets, language } = useContext(CryptoContext);
+  const aboutPopupRef = useRef<any>(null);
+  useHandleClickOutside({
+    wrapperRef: aboutPopupRef,
+    setOpenBooleanState: setIsAboutPopupOpen,
+  });
+  const { cryptoData, markets, language, setLanguage } =
+    useContext(CryptoContext);
 
   useEffect(() => {
     if (!galaxyCanvasRef.current) {
@@ -136,6 +143,44 @@ const Galaxy: React.FC<Props> = () => {
     >
       <div style={{ position: "absolute", width: 200, left: 20, top: 30 }}>
         <img src={logo} style={{ width: "100%", height: "auto" }} alt="logo" />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          display: "flex",
+
+          right: 50,
+          top: 50,
+          fontSize: 11,
+          color: "white",
+          fontFamily: "Noto Sans KR",
+        }}
+      >
+        <div
+          onClick={() => {
+            setLanguage(Language.KOREAN);
+          }}
+          style={{
+            padding: "0px 5px",
+            opacity: language === Language.KOREAN ? 0.6 : 0.3,
+            cursor: "pointer",
+          }}
+        >
+          KOR
+        </div>
+        <div style={{ opacity: 0.3 }}> | </div>
+        <div
+          onClick={() => {
+            setLanguage(Language.ENGLISH);
+          }}
+          style={{
+            padding: "0px 5px",
+            opacity: language === Language.ENGLISH ? 0.6 : 0.3,
+            cursor: "pointer",
+          }}
+        >
+          ENG
+        </div>
       </div>
       <AboutPopup
         isOpen={isAboutPopupOpen}

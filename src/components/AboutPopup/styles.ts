@@ -25,6 +25,7 @@ export const BigTitle = styled.div`
 export const Description = styled.div`
   font-size: 14px;
   background-color: #d9d9d9;
+  word-break: keep-all;
   margin: 0 -20px;
   padding: 10px 20px;
   line-height: 25px;
@@ -62,6 +63,7 @@ export const VisualAspectContainer = styled.div`
 export const NestedContainer = styled.div`
   font-size: 12px;
   margin-bottom: 30px;
+  word-break: keep-all;
   display: flex;
 `;
 

@@ -120,7 +120,7 @@ export class GalaxyCanvas {
     }
     const isSunHovered = component instanceof Sun;
     const borderRadius = 10;
-    const popupWidth = 192;
+    const popupWidth = 210;
     const popupHeight = headerHeight + dataCountToShow * rectHeight;
     //isSunHovered ? 135 : 175;
     const width = quadrant % 2 === 0 ? popupWidth : -popupWidth;
@@ -210,7 +210,7 @@ export class GalaxyCanvas {
       this.ctx.font = "normal 10px Noto Sans KR";
       this.ctx.fillText(
         this.language === Language.ENGLISH
-          ? "Correlation with BTC (Distance from Sun)"
+          ? "Correlation to BTC (Distance from Sun)"
           : "BTC와의 가격 변동 유사성 (태양과의 거리)",
         topLeftPoint.x + popupPadding,
         correlationYPos + rectPadding
@@ -238,7 +238,7 @@ export class GalaxyCanvas {
     this.ctx.font = "normal 10px Noto Sans KR";
     const rsiText =
       this.language === Language.ENGLISH
-        ? "RSI (Spaceship in/out)"
+        ? "Relative Strength Index (Spaceship in/out)"
         : "RSI 과매수 정도 (우주선 유입/출입)";
     this.ctx.fillText(
       isSunHovered ? rsiText.split("(")[0] : rsiText,
@@ -313,7 +313,7 @@ export class GalaxyCanvas {
     this.ctx.font = "normal 10px Noto Sans KR";
     const increaseRatioText =
       this.language === Language.ENGLISH
-        ? "Moving Average Increase Rate (Orbit Speed)"
+        ? "MA Increase Rate (Orbit Speed)"
         : "가격 이동평균선 증가율 (행성 공전속도)";
     this.ctx.fillText(
       isSunHovered ? increaseRatioText.split("(")[0] : increaseRatioText,
