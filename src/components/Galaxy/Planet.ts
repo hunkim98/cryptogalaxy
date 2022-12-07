@@ -247,6 +247,9 @@ export class Planet {
       this.spaceShipRegenerationInterval = spaceShipRegenerationInterval;
       this.spaceShipDirection = spaceShipDirection;
     }
+    if (data.mfi) {
+      this.mfi = data.mfi;
+    }
   }
 
   setSpaceshipInformation(rsi: number) {
@@ -468,11 +471,11 @@ export class Planet {
     const iceInnerRadius =
       //  this.radius * 0.6;
       this.radius *
-      changeRelativeValueToRealValueInversed(this.rsi, 0, 100, 0, 0.9);
+      changeRelativeValueToRealValueInversed(this.mfi, 0, 100, 0, 0.9);
     const glacierRadius =
       //  this.radius * 0.8;
       this.radius *
-      changeRelativeValueToRealValueInversed(this.rsi, 0, 100, 0, 1.1);
+      changeRelativeValueToRealValueInversed(this.mfi, 0, 100, 0, 1.1);
     const northPolePosition = new Vector2(
       origin.x,
       origin.y - this.radius * 1.5

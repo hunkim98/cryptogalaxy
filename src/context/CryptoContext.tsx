@@ -96,7 +96,6 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
         otherCryptoDayCandles.slice(-10),
         5
       );
-      console.log(increaseRatio, coinMarket.name);
       const coefficient = calcCorrelationCoefficient(
         btcDayCandles.slice(-10),
         otherCryptoDayCandles.slice(-10)
@@ -138,11 +137,9 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   );
   const retrieveAllCryptoData = useCallback(
     async (sunCrypto: string) => {
-      console.log("retrieving");
       getDayCandles(sunCrypto, 30)
         .then(async (res) => {
           const btcCandles = res;
-          console.log(btcCandles[0], btcCandles[btcCandles.length - 1]);
           btcCandles.pop(); // we don't care the last candle(today candle)
           const increaseRatio = calcIncreaseRatioOfMA(btcCandles.slice(-10), 5);
           console.log(increaseRatio, "btc");

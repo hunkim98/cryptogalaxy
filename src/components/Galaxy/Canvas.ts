@@ -145,7 +145,7 @@ export class GalaxyCanvas {
       height
     );
     // this.ctx.stroke();
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = component.foreColor;
     this.ctx.fill();
     this.ctx.textAlign = "start";
     this.ctx.textBaseline = "top";
@@ -153,11 +153,11 @@ export class GalaxyCanvas {
 
     // this.ctx.font = "12px Noto Sans KR";
     this.ctx.font = "bold 20px Anek Devanagari";
-    this.ctx.fillStyle = component.foreColor;
+    this.ctx.fillStyle = "white";
 
     const titleYPos = topLeftPoint.y + popupPadding + 5;
     this.ctx.fillText(component.name, topLeftPoint.x + popupPadding, titleYPos);
-    this.ctx.fillStyle = "black";
+    this.ctx.fillStyle = "white";
     this.ctx.textAlign = "end";
     this.ctx.font = "bold 15px Noto Sans KR";
     // this.ctx.fillText(
@@ -170,6 +170,8 @@ export class GalaxyCanvas {
     this.ctx.font = "normal 10px Noto Sans KR";
     //correlation to btc
     const marketCapYPos = titleYPos + 20 + 2;
+
+    this.ctx.fillStyle = "black";
 
     this.ctx.save();
     this.ctx.fillStyle = dataIndex % 2 === 0 ? "#D9D9D9" : "#BCBCBC";
