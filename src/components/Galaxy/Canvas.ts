@@ -1,9 +1,8 @@
-import { CryptoDataFields, Language } from "context/CryptoContext";
+import { Language } from "context/CryptoContext";
 import { convertCartesianToScreenPoint } from "utils/cartesian";
 import {
   changeRelativeValueToRealValue,
   changeRelativeValueToRealValueInversed,
-  clamp,
 } from "utils/clamp";
 import { drawRoundRect } from "utils/drawShape";
 import { Vector2 } from "utils/math/Vector2";
@@ -410,12 +409,18 @@ export class GalaxyCanvas {
     this.planets.sort((a, b) => b.radius - a.radius);
   }
 
-  updatePlanet(planetName: string, data: Partial<CryptoDataFields>) {
-    const planet = this.planets.find((planet) => planet.name === planetName);
-    if (planet) {
-      planet.update(data);
-    }
-  }
+  // updateSun(data: Partial<CryptoDataFields>) {
+  //   if (this.sun) {
+  //     this.sun.update(data);
+  //   }
+  // }
+
+  // updatePlanet(planetName: string, data: Partial<CryptoDataFields>) {
+  //   const planet = this.planets.find((planet) => planet.name === planetName);
+  //   if (planet) {
+  //     planet.update(data);
+  //   }
+  // }
 
   initialize() {
     // this.planets.push(new Planet(this.element, this.sun.radius + 50, 1, 80));

@@ -48,17 +48,26 @@ const Galaxy: React.FC<Props> = () => {
     for (const crypto of cryptoData) {
       if (crypto[0] === "KRW-BTC") {
         //krw-btc is sun
-        galaxyCanvasRef.current.setSun(
-          crypto[0].replace("KRW-", ""),
-          crypto[1].increaseRatio,
-          crypto[1].foreColor,
-          crypto[1].backColor,
-          crypto[1].logoImg,
-          crypto[1].volume,
-          crypto[1].currentPrice,
-          crypto[1].rsi,
-          crypto[1].mfi
-        );
+        if (!galaxyCanvasRef.current.sun) {
+          galaxyCanvasRef.current.setSun(
+            crypto[0].replace("KRW-", ""),
+            crypto[1].increaseRatio,
+            crypto[1].foreColor,
+            crypto[1].backColor,
+            crypto[1].logoImg,
+            crypto[1].volume,
+            crypto[1].currentPrice,
+            crypto[1].rsi,
+            crypto[1].mfi
+          );
+        } else {
+          galaxyCanvasRef.current.sun.update({
+            increaseRatio: crypto[1].increaseRatio,
+            rsi: crypto[1].rsi,
+            currentPrice: crypto[1].currentPrice,
+            mfi: crypto[1].mfi,
+          });
+        }
       } else {
         const indexOfPlanet = galaxyCanvasRef.current.planets.findIndex(
           (element) => element.name === crypto[0].replace("KRW-", "")
@@ -94,17 +103,6 @@ const Galaxy: React.FC<Props> = () => {
             rsi: crypto[1].rsi,
             currentPrice: crypto[1].currentPrice,
           });
-          // the planet already exists
-          // galaxyCanvasRef.current.updatePlanet(
-          //   crypto[0].replace("KRW-", ""),
-          //   crypto[1].increaseRatio,
-          //   crypto[1].coefficient,
-          //   crypto[1].volume,
-          //   crypto[1].currentPrice,
-          //   crypto[1].support,
-          //   crypto[1].resistance,
-          //   crypto[1].rsi
-          // );
         }
       }
     }

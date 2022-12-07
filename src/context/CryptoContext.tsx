@@ -190,6 +190,20 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   );
 
   const retrieveCurrentPrice = useCallback(async () => {
+    const sunTicker = await getTicker(sunCrypto);
+    const previousSunTicker = cryptoData.get(sunCrypto.replace("KRW-", ""));
+
+    if (previousSunTicker) {
+      setCryptoData((prev) => {
+        const newMap = new Map(prev);
+        newMap.set(sunCrypto.replace("KRW-", ""), {
+          ...previousSunTicker,
+          currentPrice: sunTicker.trade_price,
+        });
+        return newMap;
+      });
+    }
+
     markets.forEach(async (market) => {
       const ticker = await getTicker(market);
       const previousData = cryptoData.get(market.replace("KRW-", ""));
@@ -204,24 +218,24 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
         });
       }
     });
-  }, [markets, cryptoData]);
+  }, [markets, cryptoData, sunCrypto]);
 
   useEffect(() => {
     retrieveAllCryptoData(sunCrypto);
-  }, []);
+  }, [sunCrypto, retrieveAllCryptoData]);
 
   useEffect(() => {
     const longInterval = setInterval(() => {
       retrieveAllCryptoData(sunCrypto);
-    }, 1000 * 60 * 60);
+    }, 1000 * 60 * 30);
     const shortInterval = setInterval(() => {
       retrieveCurrentPrice();
-    }, 1000 * 60 * 5);
+    }, 1000 * 60 * 2);
     return () => {
       clearInterval(longInterval);
       clearInterval(shortInterval);
     };
-  }, [retrieveAllCryptoData, retrieveCurrentPrice]);
+  }, [retrieveAllCryptoData, retrieveCurrentPrice, sunCrypto]);
 
   return (
     <CryptoContext.Provider

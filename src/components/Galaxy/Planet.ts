@@ -11,9 +11,7 @@ import { Continent } from "./Continent";
 import { ContinentSamples } from "./Continents/Examples";
 import { Spaceship, SpaceshipDirection } from "./Spaceship";
 import { Sun } from "./Sun";
-import { iceAgeLevel1, iceAgeLevel2, iceAgeLevel3 } from "assets/iceAge";
 import { returnRandomInRange } from "utils/randomInRange";
-import { time } from "console";
 
 export class Planet {
   name: string;

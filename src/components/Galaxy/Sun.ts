@@ -1,3 +1,4 @@
+import { CryptoDataFields } from "context/CryptoContext";
 import { changeRelativeValueToRealValue } from "utils/clamp";
 import { convertCartesianToScreenPoint } from "../../utils/cartesian";
 import { Vector2 } from "../../utils/math/Vector2";
@@ -80,6 +81,22 @@ export class Sun {
     ctx.globalAlpha = 0.4;
     ctx.fill();
     ctx.restore();
+  }
+
+  update(data: Partial<CryptoDataFields>) {
+    if (data.increaseRatio) {
+      this.increaseRatio = data.increaseRatio;
+      this.setBrightness(data.increaseRatio);
+    }
+    if (data.currentPrice) {
+      this.price = data.currentPrice;
+    }
+    if (data.rsi) {
+      this.rsi = data.rsi;
+    }
+    if (data.mfi) {
+      this.mfi = data.mfi;
+    }
   }
 
   drawBrightnessOuter(drawPosition: Vector2, ctx: CanvasRenderingContext2D) {
