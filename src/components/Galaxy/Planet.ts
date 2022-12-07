@@ -48,6 +48,7 @@ export class Planet {
   canvasDrawPosition: Vector2;
   logoImage: HTMLImageElement;
   volume: number;
+  mfi: number;
   constructor(
     canvas: HTMLCanvasElement,
     correlationCoefficient: number,
@@ -63,8 +64,10 @@ export class Planet {
     dpr: number,
     logoImg: string,
     angleTiltRatio: number,
-    volume: number
+    volume: number,
+    mfi: number
   ) {
+    this.mfi = mfi;
     const logoImage = new Image();
     this.volume = volume;
     this.logoImage = logoImage;

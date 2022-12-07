@@ -20,6 +20,7 @@ export class Sun {
   price: number;
   rsi: number;
   canvasDrawPosition: Vector2;
+  mfi: number;
   constructor(
     canvas: HTMLCanvasElement,
     name: string,
@@ -30,7 +31,8 @@ export class Sun {
     logoImg: string,
     volume: number,
     price: number,
-    rsi: number
+    rsi: number,
+    mfi: number
   ) {
     const logoImage = new Image();
     this.rsi = rsi;
@@ -49,6 +51,7 @@ export class Sun {
       this.position,
       this.dpr
     );
+    this.mfi = mfi;
     this.setBrightness(increaseRatio);
   }
 

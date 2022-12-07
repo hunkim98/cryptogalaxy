@@ -5,6 +5,7 @@ import {
   changeRelativeValueToRealValueInversed,
   clamp,
 } from "utils/clamp";
+import { drawRoundRect } from "utils/drawShape";
 import { Vector2 } from "utils/math/Vector2";
 import { Planet } from "./Planet";
 import { Sun } from "./Sun";
@@ -91,6 +92,13 @@ export class GalaxyCanvas {
   }
 
   drawPopup(drawPosition: Vector2, component: Planet | Sun) {
+    const rectPadding = 8;
+    const rectHeight = 43;
+    const popupPadding = 8;
+    const titleMarginTop = popupPadding + 5;
+    const headerHeight = titleMarginTop + 22;
+    const dataCountToShow = component instanceof Planet ? 5 : 4;
+    let dataIndex = 0;
     let quadrant = 0b00;
     if (
       drawPosition.x > this.element.width / this.dpr / 2 &&
@@ -113,7 +121,8 @@ export class GalaxyCanvas {
     const isSunHovered = component instanceof Sun;
     const borderRadius = 10;
     const popupWidth = 192;
-    const popupHeight = isSunHovered ? 135 : 175;
+    const popupHeight = headerHeight + dataCountToShow * rectHeight;
+    //isSunHovered ? 135 : 175;
     const width = quadrant % 2 === 0 ? popupWidth : -popupWidth;
     const height = (quadrant & 0b10) === 0b10 ? -popupHeight : popupHeight;
     let topLeftPoint = new Vector2(drawPosition.x, drawPosition.y);
@@ -125,42 +134,16 @@ export class GalaxyCanvas {
       topLeftPoint = topLeftPoint.add(new Vector2(0, -popupHeight));
     }
     this.ctx.save();
-    this.ctx.beginPath();
-    this.ctx.moveTo(
+    drawRoundRect(
+      this.ctx,
       quadrant % 2 === 0
-        ? drawPosition.x + borderRadius
-        : drawPosition.x - borderRadius,
-      drawPosition.y
+        ? drawPosition.add(new Vector2(borderRadius, 0))
+        : drawPosition.subtract(new Vector2(borderRadius, 0)),
+      drawPosition,
+      borderRadius,
+      width,
+      height
     );
-    this.ctx.arcTo(
-      drawPosition.x + width,
-      drawPosition.y,
-      drawPosition.x + width,
-      drawPosition.y + height,
-      borderRadius
-    );
-    this.ctx.arcTo(
-      drawPosition.x + width,
-      drawPosition.y + height,
-      drawPosition.x,
-      drawPosition.y + height,
-      borderRadius
-    );
-    this.ctx.arcTo(
-      drawPosition.x,
-      drawPosition.y + height,
-      drawPosition.x,
-      drawPosition.y,
-      borderRadius
-    );
-    this.ctx.arcTo(
-      drawPosition.x,
-      drawPosition.y,
-      drawPosition.x + width,
-      drawPosition.y,
-      borderRadius
-    );
-    this.ctx.closePath();
     // this.ctx.stroke();
     this.ctx.fillStyle = "white";
     this.ctx.fill();
@@ -171,7 +154,7 @@ export class GalaxyCanvas {
     // this.ctx.font = "12px Noto Sans KR";
     this.ctx.font = "bold 20px Anek Devanagari";
     this.ctx.fillStyle = component.foreColor;
-    const popupPadding = 8;
+
     const titleYPos = topLeftPoint.y + popupPadding + 5;
     this.ctx.fillText(component.name, topLeftPoint.x + popupPadding, titleYPos);
     this.ctx.fillStyle = "black";
@@ -187,10 +170,10 @@ export class GalaxyCanvas {
     this.ctx.font = "normal 10px Noto Sans KR";
     //correlation to btc
     const marketCapYPos = titleYPos + 20 + 2;
-    const rectPadding = 8;
-    const rectHeight = 43;
+
     this.ctx.save();
-    this.ctx.fillStyle = "#D9D9D9";
+    this.ctx.fillStyle = dataIndex % 2 === 0 ? "#D9D9D9" : "#BCBCBC";
+    dataIndex++;
     this.ctx.fillRect(topLeftPoint.x, marketCapYPos, popupWidth, rectHeight);
     this.ctx.restore();
     const marketCaptialText =
@@ -213,7 +196,8 @@ export class GalaxyCanvas {
     if (!isSunHovered) {
       correlationYPos = correlationYPos + rectHeight;
       this.ctx.save();
-      this.ctx.fillStyle = "#BCBCBC";
+      this.ctx.fillStyle = dataIndex % 2 === 0 ? "#D9D9D9" : "#BCBCBC";
+      dataIndex++;
       this.ctx.fillRect(
         topLeftPoint.x,
         correlationYPos,
@@ -239,7 +223,8 @@ export class GalaxyCanvas {
 
     const relativeStrengthYPos = correlationYPos + rectHeight;
     this.ctx.save();
-    this.ctx.fillStyle = isSunHovered ? "#BCBCBC" : "#D9D9D9";
+    this.ctx.fillStyle = dataIndex % 2 === 0 ? "#D9D9D9" : "#BCBCBC";
+    dataIndex++;
     this.ctx.fillRect(
       topLeftPoint.x,
       relativeStrengthYPos,
@@ -258,14 +243,97 @@ export class GalaxyCanvas {
       topLeftPoint.x + popupPadding,
       relativeStrengthYPos + rectPadding
     );
+    this.ctx.save();
     this.ctx.font = "bold 14px Noto Sans KR";
     this.ctx.fillStyle =
-      component.rsi > 60 ? "#DD3B31" : component.rsi < 40 ? "#3195DD" : "black";
+      component.rsi > 60 ? "#DD3B31" : component.rsi < 40 ? "#1874B7" : "black";
     this.ctx.fillText(
       component.rsi.toFixed(2) + "%",
       topLeftPoint.x + popupPadding,
       relativeStrengthYPos + rectPadding + 15
     );
+    this.ctx.restore();
+
+    const mfiYPos = relativeStrengthYPos + rectHeight;
+    this.ctx.save();
+    this.ctx.fillStyle = dataIndex % 2 === 0 ? "#D9D9D9" : "#BCBCBC";
+    dataIndex++;
+    this.ctx.fillRect(topLeftPoint.x, mfiYPos, popupWidth, rectHeight);
+    this.ctx.restore();
+
+    this.ctx.font = "normal 10px Noto Sans KR";
+    const mfiText =
+      this.language === Language.ENGLISH
+        ? "Money Flow Index (Planet Ice Age)"
+        : "MFI 과매수 정도 (행성 빙하기 정도)";
+    this.ctx.fillText(
+      isSunHovered ? mfiText.split("(")[0] : mfiText,
+      topLeftPoint.x + popupPadding,
+      mfiYPos + rectPadding
+    );
+
+    this.ctx.save();
+    this.ctx.font = "bold 14px Noto Sans KR";
+    this.ctx.fillStyle =
+      component.rsi > 60 ? "#DD3B31" : component.rsi < 40 ? "#1874B7" : "black";
+    this.ctx.fillText(
+      component.mfi.toFixed(2) + "%",
+      topLeftPoint.x + popupPadding,
+      mfiYPos + rectPadding + 15
+    );
+    this.ctx.restore();
+
+    //clip
+    drawRoundRect(
+      this.ctx,
+      quadrant % 2 === 0
+        ? drawPosition.add(new Vector2(borderRadius, 0))
+        : drawPosition.subtract(new Vector2(borderRadius, 0)),
+      drawPosition,
+      borderRadius,
+      width,
+      height
+    );
+    this.ctx.clip();
+
+    const increaseRatioYPos = mfiYPos + rectHeight;
+    this.ctx.save();
+    this.ctx.fillStyle = dataIndex % 2 === 0 ? "#D9D9D9" : "#BCBCBC";
+    dataIndex++;
+    this.ctx.fillRect(
+      topLeftPoint.x,
+      increaseRatioYPos,
+      popupWidth,
+      rectHeight
+    );
+    this.ctx.restore();
+
+    this.ctx.font = "normal 10px Noto Sans KR";
+    const increaseRatioText =
+      this.language === Language.ENGLISH
+        ? "Moving Average Increase Rate (Orbit Speed)"
+        : "가격 이동평균선 증가율 (행성 공전속도)";
+    this.ctx.fillText(
+      isSunHovered ? increaseRatioText.split("(")[0] : increaseRatioText,
+      topLeftPoint.x + popupPadding,
+      increaseRatioYPos + rectPadding
+    );
+
+    this.ctx.save();
+    this.ctx.font = "bold 14px Noto Sans KR";
+    this.ctx.fillStyle =
+      component.increaseRatio > 0.1
+        ? "#DD3B31"
+        : component.increaseRatio < 0
+        ? "#1874B7"
+        : "black";
+    this.ctx.fillText(
+      component.increaseRatio.toFixed(6) + "%",
+      topLeftPoint.x + popupPadding,
+      increaseRatioYPos + rectPadding + 15
+    );
+    this.ctx.restore();
+
     this.ctx.restore();
   }
 
@@ -277,7 +345,8 @@ export class GalaxyCanvas {
     logoImg: string,
     volume: number,
     price: number,
-    rsi: number
+    rsi: number,
+    mfi: number
   ) {
     this.sun = new Sun(
       this.element,
@@ -289,7 +358,8 @@ export class GalaxyCanvas {
       logoImg,
       volume,
       price,
-      rsi
+      rsi,
+      mfi
     );
   }
 
@@ -304,7 +374,8 @@ export class GalaxyCanvas {
     rsi: number,
     foreColor: string,
     backColor: string,
-    logoImg: string
+    logoImg: string,
+    mfi: number
   ) {
     const size = changeRelativeValueToRealValue(
       volume,
@@ -330,7 +401,8 @@ export class GalaxyCanvas {
       this.dpr,
       logoImg,
       this.planets.length / this.totalMarketCount,
-      volume
+      volume,
+      mfi
     );
     this.planets.push(planet);
     this.planets.sort((a, b) => b.radius - a.radius);

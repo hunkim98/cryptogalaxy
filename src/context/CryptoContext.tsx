@@ -7,6 +7,7 @@ import { CoinGeckoSingleMarketData } from "types/coingecko.res";
 import { calcSupportResistance } from "utils/quant/support-resistance";
 import { CoinGeckoSimplifiedJson } from "./CoinGeckoReal";
 import { calcRSI } from "utils/quant/rsi";
+import { calcMFI } from "utils/quant/mfi";
 
 export enum Language {
   KOREAN = "ko",
@@ -35,6 +36,7 @@ export type CryptoDataFields = {
   coefficient?: number;
   volume: number;
   rsi: number;
+  mfi: number;
   logoImg: string;
   foreColor: string;
   backColor: string;
@@ -89,11 +91,12 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       if (!coinMarket) return;
       const volume = coinMarket.market_cap;
       const otherCryptoDayCandles = await getDayCandles(market, dayCount);
+      otherCryptoDayCandles.pop();
       const increaseRatio = calcIncreaseRatioOfMA(
         otherCryptoDayCandles.slice(-10),
         5
       );
-      console.log(increaseRatio, coinMarket.name)
+      console.log(increaseRatio, coinMarket.name);
       const coefficient = calcCorrelationCoefficient(
         btcDayCandles.slice(-10),
         otherCryptoDayCandles.slice(-10)
@@ -111,6 +114,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       //   rsi,
       //   symbol
       // );
+      const mfi = calcMFI(otherCryptoDayCandles);
       const ticker = await getTicker(market);
       setCryptoData((prev) => {
         const newMap = new Map(prev);
@@ -125,6 +129,7 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
           foreColor: coinMarket.foreColor,
           backColor: coinMarket.backColor,
           logoImg: coinMarket.logoImg,
+          mfi,
         });
         return newMap;
       });
@@ -137,6 +142,8 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
       getDayCandles(sunCrypto, 30)
         .then(async (res) => {
           const btcCandles = res;
+          console.log(btcCandles[0], btcCandles[btcCandles.length - 1]);
+          btcCandles.pop(); // we don't care the last candle(today candle)
           const increaseRatio = calcIncreaseRatioOfMA(btcCandles.slice(-10), 5);
           console.log(increaseRatio, "btc");
           const sunCoinGeckoData = CoinGeckoSimplifiedJson.findIndex(
@@ -147,6 +154,8 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
           if (sunCoinGeckoData === -1) {
             throw Error("no sun data is undefined");
           }
+          const mfi = calcMFI(btcCandles);
+          const ticker = await getTicker(sunCrypto);
           setCryptoData(
             (prev) =>
               new Map([
@@ -160,9 +169,11 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
                     backColor:
                       CoinGeckoSimplifiedJson[sunCoinGeckoData].backColor,
                     logoImg: CoinGeckoSimplifiedJson[sunCoinGeckoData].logoImg,
-                    volume: CoinGeckoSimplifiedJson[sunCoinGeckoData].market_cap,
-                    currentPrice: btcCandles[btcCandles.length - 1].trade_price,
-                    rsi
+                    volume:
+                      CoinGeckoSimplifiedJson[sunCoinGeckoData].market_cap,
+                    currentPrice: ticker.trade_price,
+                    rsi,
+                    mfi,
                   },
                 ],
               ])
@@ -216,7 +227,9 @@ const CryptoContextProvider: React.FC<Props> = ({ children }) => {
   }, [retrieveAllCryptoData, retrieveCurrentPrice]);
 
   return (
-    <CryptoContext.Provider value={{ cryptoData, markets, language, setLanguage }}>
+    <CryptoContext.Provider
+      value={{ cryptoData, markets, language, setLanguage }}
+    >
       {children}
     </CryptoContext.Provider>
   );

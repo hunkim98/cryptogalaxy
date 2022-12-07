@@ -16,7 +16,7 @@ export const calcSupportResistance = (
     0
       ? [...candles].reverse()
       : candles;
-  dateAscendingCandle.pop(); // we do not need today's candle (the last one)
+  // dateAscendingCandle.pop(); // we do not need today's candle (the last one)
   const trade_volume = dateAscendingCandle.map(
     (el) => el.candle_acc_trade_volume
   );

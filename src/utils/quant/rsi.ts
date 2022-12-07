@@ -23,8 +23,7 @@ export const calcRSI = (candles: Array<ICandleDayReturnProps>) => {
   consideredCandles.forEach((candle, index) => {
     if (index !== consideredCandles.length - 1) {
       const amount =
-        consideredCandles[index + 1].prev_closing_price -
-        candle.prev_closing_price;
+        consideredCandles[index + 1].trade_price - candle.trade_price;
       if (amount > 0) {
         candleUpChanges.push(Math.abs(amount));
       } else {

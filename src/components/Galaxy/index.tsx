@@ -2,10 +2,10 @@ import { CryptoContext } from "context/CryptoContext";
 import React, { useContext, useEffect, useRef } from "react";
 import { GalaxyCanvas } from "./Canvas";
 import logo from "../../assets/logo_white_gray.png";
-import "./canvas.css"
+import "./canvas.css";
 import AboutPopup from "components/AboutPopup/AboutPopup";
 
-interface Props { }
+interface Props {}
 
 const Galaxy: React.FC<Props> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,14 +16,14 @@ const Galaxy: React.FC<Props> = () => {
 
   useEffect(() => {
     if (!galaxyCanvasRef.current) {
-      return
+      return;
     }
-    galaxyCanvasRef.current.changeLanguage(language)
-  }, [language])
+    galaxyCanvasRef.current.changeLanguage(language);
+  }, [language]);
 
   useEffect(() => {
     if (!canvasRef.current) {
-      return () => { };
+      return () => {};
     }
     const galaxyCanvas = new GalaxyCanvas(canvasRef.current, markets.length);
     galaxyCanvasRef.current = galaxyCanvas;
@@ -49,7 +49,8 @@ const Galaxy: React.FC<Props> = () => {
           crypto[1].logoImg,
           crypto[1].volume,
           crypto[1].currentPrice,
-          crypto[1].rsi
+          crypto[1].rsi,
+          crypto[1].mfi
         );
       } else {
         const indexOfPlanet = galaxyCanvasRef.current.planets.findIndex(
@@ -75,7 +76,8 @@ const Galaxy: React.FC<Props> = () => {
               crypto[1].rsi,
               crypto[1].foreColor,
               crypto[1].backColor,
-              crypto[1].logoImg
+              crypto[1].logoImg,
+              crypto[1].mfi
             );
           }
         } else {
@@ -135,10 +137,19 @@ const Galaxy: React.FC<Props> = () => {
       <div style={{ position: "absolute", width: 200, left: 20, top: 30 }}>
         <img src={logo} style={{ width: "100%", height: "auto" }} alt="logo" />
       </div>
-      <AboutPopup isOpen={isAboutPopupOpen} setIsOpen={setIsAboutPopupOpen} language={language} />
-      <div className="question_button" onClick={() => setIsAboutPopupOpen(prev => !prev)}>?</div>
+      <AboutPopup
+        isOpen={isAboutPopupOpen}
+        setIsOpen={setIsAboutPopupOpen}
+        language={language}
+      />
+      <div
+        className="question_button"
+        onClick={() => setIsAboutPopupOpen((prev) => !prev)}
+      >
+        ?
+      </div>
       <canvas ref={canvasRef} />
-    </div >
+    </div>
   );
 };
 

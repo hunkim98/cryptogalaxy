@@ -25,12 +25,16 @@ export const calcCorrelationCoefficient = (
       : candlesA;
 
   const prevClosingPricesA = dateAscendingCandlesA
+    // .slice(0, dateAscendingCandlesA.length - 1) // we don't need today data
     // .slice(-10)
     .map((el) => el.prev_closing_price);
 
   const prevClosingPricesB = dateAscendingCandlesB
+    // .slice(0, dateAscendingCandlesB.length - 1) // we don't need today data
     // .slice(-10)
     .map((el) => el.prev_closing_price);
+
+  console.log(prevClosingPricesA);
 
   const prevClosingPricesMeanA =
     prevClosingPricesA.reduce((a, b) => a + b, 0) / prevClosingPricesA.length;
